@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Meridian™ — AL Session Journal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #e8e2d8;
+    --parchment: #16130f;
+    --gold: #c9a84c;
+    --gold-light: #dfc278;
+    --muted: #8a8278;
+    --rule: #2e2a24;
+    --card-bg: #1e1a15;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    line-height: 1.8;
+    font-size: 16px;
+  }
+
+  /* ── Nav ── */
+  .site-nav {
+    width: 100%;
+    border-bottom: 1px solid var(--rule);
+    background: rgba(22, 19, 15, 0.96);
+    position: relative;
+    z-index: 10;
+  }
+  .nav-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    text-decoration: none;
+    opacity: 0.85;
+  }
+  .nav-links { display: flex; align-items: center; }
+  .nav-links a {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 16px 10px;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--gold); }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .nav-toggle span { display: block; width: 22px; height: 1px; background: var(--muted); }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+  .nav-dropdown > a::after { content: '▾'; font-size: 0.6rem; opacity: 0.6; transition: transform 0.2s; }
+  .nav-dropdown:hover > a::after { transform: rotate(180deg); }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; left: 0;
+    background: rgba(22, 19, 15, 0.98);
+    border: 1px solid var(--rule);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    min-width: 210px;
+    z-index: 200;
+  }
+  .nav-dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu a {
+    display: block;
+    padding: 12px 18px !important;
+    border-top: 1px solid var(--rule);
+    font-size: 0.68rem !important;
+    letter-spacing: 0.12em;
+    color: var(--muted) !important;
+    white-space: nowrap;
+  }
+  .dropdown-menu a:hover { color: var(--ink) !important; }
+  @media (max-width: 600px) {
+    .nav-toggle { display: flex; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 52px; left: 0; right: 0;
+      background: rgba(22, 19, 15, 0.98);
+      border-bottom: 1px solid var(--rule);
+      flex-direction: column;
+      align-items: stretch;
+      z-index: 100;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 14px 24px; border-top: 1px solid var(--rule); font-size: 0.75rem; }
+    .nav-dropdown > a::after { display: none; }
+    .dropdown-menu { display: block; position: static; border: none; border-radius: 0; min-width: unset; background: transparent; }
+    .dropdown-menu a { padding-left: 40px !important; font-size: 0.72rem !important; background: rgba(0,0,0,0.15); }
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 600px) { .page { padding: 40px 24px 80px; } }
+
+  /* ── Header ── */
+  header {
+    text-align: center;
+    margin-bottom: 52px;
+    animation: fadeUp 1s ease both;
+  }
+  .wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+  }
+  .wordmark em { font-style: italic; color: var(--gold); }
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .rule-ornament {
+    display: flex; align-items: center; gap: 16px;
+    margin: 20px auto 0; width: fit-content;
+  }
+  .rule-ornament span { display: block; height: 1px; width: 50px; background: var(--gold); opacity: 0.4; }
+  .rule-ornament i { color: var(--gold); font-style: normal; font-size: 0.8rem; opacity: 0.6; }
+
+  /* ── Form sections ── */
+  .form-section {
+    margin-bottom: 44px;
+    animation: fadeUp 1s ease both;
+  }
+  .form-section:nth-child(2) { animation-delay: 0.08s; }
+  .form-section:nth-child(3) { animation-delay: 0.16s; }
+  .form-section:nth-child(4) { animation-delay: 0.24s; }
+  .form-section:nth-child(5) { animation-delay: 0.32s; }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+    display: block;
+  }
+
+  .field-group { margin-bottom: 22px; }
+  .field-label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .field-note {
+    font-size: 0.76rem;
+    font-style: italic;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  /* ── Inputs ── */
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.9rem;
+    padding: 10px 14px;
+    transition: border-color 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+  input[type="text"]:focus,
+  input[type="date"]:focus,
+  input[type="time"]:focus,
+  input[type="number"]:focus,
+  textarea:focus { border-color: var(--gold); }
+  textarea { resize: vertical; min-height: 100px; line-height: 1.7; }
+  textarea.tall { min-height: 180px; }
+
+  .dt-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .dt-row { grid-template-columns: 1fr; } }
+
+  /* ── Checkboxes ── */
+  .protocol-checks { display: flex; flex-direction: column; gap: 8px; }
+  .check-item {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    font-size: 0.84rem;
+    color: #9a9288;
+    user-select: none;
+  }
+  .check-item:hover { border-color: #4a4035; }
+  .check-item input[type="checkbox"] { display: none; }
+  .check-box {
+    width: 16px; height: 16px;
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .check-item input:checked ~ .check-box { background: var(--gold); border-color: var(--gold); }
+  .check-item input:checked ~ .check-box::after { content: '✓'; font-size: 0.65rem; color: #16130f; font-weight: 700; }
+  .check-item input:checked ~ span { color: var(--ink); }
+
+  /* ── Rating ── */
+  .rating-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 480px) { .rating-row { grid-template-columns: 1fr; } }
+  input[type="number"] { width: 80px; }
+
+  .radio-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .radio-item {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 0.84rem;
+    color: #9a9288;
+    transition: border-color 0.2s;
+    user-select: none;
+  }
+  .radio-item input[type="radio"] { display: none; }
+  .radio-dot {
+    width: 14px; height: 14px;
+    border: 1px solid var(--muted);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .radio-item input:checked ~ .radio-dot { border-color: var(--gold); background: var(--gold); }
+  .radio-item input:checked ~ .radio-dot::after { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #16130f; }
+  .radio-item input:checked ~ span { color: var(--ink); }
+
+  /* ── Print bar ── */
+  .print-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(22, 19, 15, 0.97);
+    border-top: 1px solid var(--rule);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    z-index: 50;
+  }
+  .btn {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border-radius: 6px;
+    padding: 10px 24px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+  .btn-primary { background: var(--gold); color: #16130f; font-weight: 500; }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--rule); }
+  .btn-ghost:hover { color: var(--ink); border-color: #4a4035; }
+
+  .closing { text-align: center; padding: 24px 0 0; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--muted); font-size: 0.95rem; }
+
+  footer { margin-top: 48px; padding-top: 20px; text-align: center; font-size: 0.72rem; color: #4a4640; letter-spacing: 0.06em; }
+  footer a { color: #4a4640; text-decoration: none; border-bottom: 1px solid #2e2a24; }
+  footer a:hover { color: var(--gold); }
+
+  @media print {
+    body { background: #fff; color: #1a1610; }
+    body::before { display: none; }
+    .site-nav, .print-bar { display: none !important; }
+    .page { padding: 24px 32px; }
+    input, textarea { border: none !important; border-bottom: 1px solid #ccc !important; border-radius: 0 !important; background: transparent !important; color: #1a1610 !important; }
+    .check-item, .radio-item { background: transparent !important; border: none !important; padding: 4px 0 !important; }
+    .check-box { border-color: #888 !important; background: transparent !important; }
+    .section-label { color: #b8963e !important; border-color: #d8d0c0 !important; }
+    .field-label { color: #1a1610 !important; }
+    .field-note { color: #7a7468 !important; }
+    .wordmark { color: #1a1610 !important; }
+    .wordmark em { color: #b8963e !important; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Meridian™</a>
+    <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="meridian-origin.html">Origin</a>
+      <div class="nav-dropdown">
+        <a href="meridian-protocols.html">Protocols</a>
+        <div class="dropdown-menu">
+          <a href="meridian-protocols-al.html" class="active">Active Listening (AL)</a>
+          <a href="meridian-protocols-rl.html">Relaxed Listening (RL)</a>
+        </div>
+      </div>
+      <a href="meridian-ethics.html">Ethics</a>
+      <a href="meridian-license.html">License</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <header>
+    <div class="wordmark">The <em>Meridian</em>™</div>
+    <div class="subtitle">Active Listening — Session Journal</div>
+    <div class="rule-ornament">
+      <span></span><i>◆</i><span></span>
+    </div>
+  </header>
+
+  <!-- Session Info -->
+  <div class="form-section">
+    <span class="section-label">Session Information</span>
+    <div class="dt-row" style="margin-bottom:18px;">
+      <div class="field-group" style="margin-bottom:0;">
+        <label class="field-label" for="date">Date</label>
+        <input type="date" id="date">
+      </div>
+      <div class="field-group" style="margin-bottom:0;">
+        <label class="field-label" for="time">Time</label>
+        <input type="time" id="time">
+      </div>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Protocol Used</label>
+      <div class="protocol-checks">
+        <label class="check-item"><input type="checkbox"><div class="check-box"></div><span>AL-001 — Reading &amp; Focus (14 Hz)</span></label>
+        <label class="check-item"><input type="checkbox"><div class="check-box"></div><span>AL-002 — Journaling &amp; Inner Dialogue (9 Hz)</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pre-Session -->
+  <div class="form-section">
+    <span class="section-label">Pre-Session</span>
+
+    <div class="field-group">
+      <label class="field-label" for="intention">Intention for This Session</label>
+      <span class="field-note">What do I want to accomplish or focus on?</span>
+      <textarea id="intention" placeholder="Write freely…"></textarea>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" for="task">Specific Task or Topic</label>
+      <span class="field-note">What will I read, write, or create during this session?</span>
+      <textarea id="task" class="short" style="min-height:70px;" placeholder="Write freely…"></textarea>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" for="checkin">Current State Check-In</label>
+      <span class="field-note">Energy level, mental clarity, mood — where are you starting from?</span>
+      <textarea id="checkin" style="min-height:70px;" placeholder="Write freely…"></textarea>
+    </div>
+  </div>
+
+  <!-- Post-Session -->
+  <div class="form-section">
+    <span class="section-label">Post-Session Reflection</span>
+
+    <div class="field-group">
+      <label class="field-label" for="reflection">Reflection Notes</label>
+      <span class="field-note">What did you notice? What shifted? What was produced?</span>
+      <textarea id="reflection" class="tall" placeholder="Write freely…"></textarea>
+    </div>
+  </div>
+
+  <!-- Rating -->
+  <div class="form-section">
+    <span class="section-label">Session Rating</span>
+    <div class="rating-row">
+      <div class="field-group" style="margin-bottom:0;">
+        <label class="field-label" for="rating">Overall Rating (1–10)</label>
+        <input type="number" id="rating" min="1" max="10" placeholder="—">
+      </div>
+      <div class="field-group" style="margin-bottom:0;">
+        <label class="field-label">Would use again for this purpose?</label>
+        <div class="radio-row">
+          <label class="radio-item"><input type="radio" name="again"><div class="radio-dot"></div><span>Yes</span></label>
+          <label class="radio-item"><input type="radio" name="again"><div class="radio-dot"></div><span>No</span></label>
+          <label class="radio-item"><input type="radio" name="again"><div class="radio-dot"></div><span>Maybe</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closing">✨ 🌊</div>
+
+  <footer>
+    <p>© 2026 The Meridian™ · M.J. Cooper, LLC · All rights reserved · Personal, non-commercial use only</p>
+  </footer>
+
+</div>
+
+<div class="print-bar">
+  <button class="btn btn-ghost" onclick="clearForm()">Clear</button>
+  <button class="btn btn-primary" onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+<script>
+  const now = new Date();
+  document.getElementById('date').value = now.toISOString().split('T')[0];
+  const hh = String(now.getHours()).padStart(2,'0');
+  const mm = String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('time').value = `${hh}:${mm}`;
+
+  function clearForm() {
+    if (!confirm('Clear all entries and start fresh?')) return;
+    document.querySelectorAll('textarea').forEach(el => el.value = '');
+    document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(el => el.checked = false);
+    document.getElementById('rating').value = '';
+    const now2 = new Date();
+    document.getElementById('date').value = now2.toISOString().split('T')[0];
+    const h = String(now2.getHours()).padStart(2,'0');
+    const m = String(now2.getMinutes()).padStart(2,'0');
+    document.getElementById('time').value = `${h}:${m}`;
+  }
+</script>
+</body>
+</html>
