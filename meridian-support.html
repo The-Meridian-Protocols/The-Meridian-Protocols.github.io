@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon-apple.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Meridian™ — Support the Work</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#e8e2d8;--parchment:#16130f;--gold:#c9a84c;--gold-light:#dfc278;--muted:#8a8278;--rule:#2e2a24;--card-bg:#1e1a15}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--parchment);color:var(--ink);font-family:'Jost',sans-serif;font-weight:400;line-height:1.8;font-size:16px}
+  .site-nav{width:100%;border-bottom:1px solid var(--rule);background:rgba(22,19,15,.96);position:relative;z-index:10}
+  .nav-inner{max-width:720px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--gold);letter-spacing:.06em;white-space:nowrap;text-decoration:none;opacity:.85}
+  .nav-links{display:flex;align-items:center}
+  .nav-links a{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:16px 10px;transition:color .2s;white-space:nowrap}
+  .nav-links a:hover{color:var(--ink)}.nav-links a.active{color:var(--gold)}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+  .nav-toggle span{display:block;width:22px;height:1px;background:var(--muted)}
+  .nav-dropdown{position:relative}.nav-dropdown>a{display:flex;align-items:center;gap:4px}
+  .nav-dropdown>a::after{content:'▾';font-size:.6rem;opacity:.6;transition:transform .2s}
+  .nav-dropdown:hover>a::after{transform:rotate(180deg)}
+  .dropdown-menu{display:none;position:absolute;top:100%;left:0;background:rgba(22,19,15,.98);border:1px solid var(--rule);border-top:none;border-radius:0 0 6px 6px;min-width:210px;z-index:200}
+  .nav-dropdown:hover .dropdown-menu{display:block}
+  .dropdown-menu a{display:block;padding:12px 18px!important;border-top:1px solid var(--rule);font-size:.68rem!important;letter-spacing:.12em;color:var(--muted)!important;white-space:nowrap}
+  .dropdown-menu a:hover{color:var(--ink)!important}
+  @media(max-width:600px){
+    .nav-toggle{display:flex}
+    .nav-links{display:none;position:absolute;top:52px;left:0;right:0;background:rgba(22,19,15,.98);border-bottom:1px solid var(--rule);flex-direction:column;align-items:stretch;z-index:100}
+    .nav-links.open{display:flex}.nav-links a{padding:14px 24px;border-top:1px solid var(--rule);font-size:.75rem}
+    .nav-dropdown>a::after{display:none}
+    .dropdown-menu{display:block;position:static;border:none;border-radius:0;min-width:unset;background:transparent}
+    .dropdown-menu a{padding-left:40px!important;font-size:.72rem!important;background:rgba(0,0,0,.15)}
+  }
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
+  .page{max-width:680px;margin:0 auto;padding:60px 40px 80px;position:relative;z-index:1}
+  @media(max-width:600px){.page{padding:40px 24px 80px}}
+
+  header{text-align:center;margin-bottom:64px;animation:fadeUp 1s ease both}
+  .wordmark{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:300;letter-spacing:.12em;line-height:1.2}
+  .wordmark em{font-style:italic;color:var(--gold)}
+  .subtitle{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--muted);margin-top:10px}
+  .rule-ornament{display:flex;align-items:center;gap:16px;margin:24px auto 0;width:fit-content}
+  .rule-ornament span{display:block;height:1px;width:60px;background:var(--gold);opacity:.4}
+  .rule-ornament i{color:var(--gold);font-style:normal;font-size:.85rem;opacity:.6}
+
+  /* ── Core statement ── */
+  .statement{animation:fadeUp 1s ease .08s both;margin-bottom:52px}
+  .statement p{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.12rem;
+    font-style:italic;
+    color:#a09890;
+    line-height:2;
+    margin-bottom:20px;
+  }
+  .statement p strong{font-style:normal;color:var(--ink);font-weight:400}
+
+  /* ── Divider ── */
+  .divider{
+    display:flex;align-items:center;gap:16px;
+    margin:40px 0;
+    animation:fadeUp 1s ease .14s both;
+  }
+  .divider span{flex:1;height:1px;background:var(--rule)}
+  .divider i{color:var(--gold);font-style:normal;font-size:.8rem;opacity:.5}
+
+  /* ── Support card ── */
+  .support-card{
+    background:var(--card-bg);
+    border:1px solid rgba(201,168,76,.2);
+    border-radius:12px;
+    padding:40px 36px;
+    text-align:center;
+    animation:fadeUp 1s ease .2s both;
+  }
+
+  .support-glyph{
+    font-size:2rem;
+    opacity:.35;
+    display:block;
+    margin-bottom:20px;
+  }
+
+  .support-heading{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.5rem;
+    font-weight:300;
+    letter-spacing:.06em;
+    color:var(--ink);
+    margin-bottom:14px;
+  }
+
+  .support-body{
+    font-size:.9rem;
+    color:#9a9288;
+    line-height:1.8;
+    max-width:480px;
+    margin:0 auto 32px;
+  }
+
+  .support-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Jost',sans-serif;
+    font-size:.75rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    background:rgba(201,168,76,.1);
+    border:1px solid rgba(201,168,76,.35);
+    border-radius:8px;
+    padding:16px 36px;
+    color:var(--gold);
+    text-decoration:none;
+    transition:all .25s;
+    cursor:pointer;
+  }
+  .support-btn:hover{
+    background:rgba(201,168,76,.18);
+    border-color:rgba(201,168,76,.6);
+    transform:translateY(-1px);
+  }
+  .support-btn .arrow{font-size:.9rem;opacity:.7}
+
+  /* ── No pressure note ── */
+  .no-pressure{
+    margin-top:24px;
+    font-size:.78rem;
+    font-style:italic;
+    color:var(--muted);
+    opacity:.8;
+  }
+
+  /* ── What it sustains ── */
+  .sustains{
+    margin-top:52px;
+    animation:fadeUp 1s ease .28s both;
+  }
+  .sustains-label{
+    font-size:.68rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+    opacity:.7;
+    margin-bottom:20px;
+    display:block;
+  }
+  .sustains-list{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+  .sustains-list li{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    padding:14px 0;
+    border-bottom:1px solid var(--rule);
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.05rem;
+    font-style:italic;
+    color:#a09890;
+    line-height:1.6;
+  }
+  .sustains-list li:last-child{border-bottom:none}
+  .sustains-list li::before{
+    content:'◆';
+    font-size:.45rem;
+    color:var(--gold);
+    opacity:.45;
+    flex-shrink:0;
+    position:relative;
+    top:-1px;
+  }
+
+  /* ── Closing ── */
+  .closing{
+    text-align:center;
+    padding:48px 0 8px;
+    animation:fadeUp 1s ease .36s both;
+  }
+  .closing p{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1rem;
+    font-style:italic;
+    color:#7a7268;
+    line-height:1.9;
+  }
+  .closing .glyph{font-size:1.4rem;opacity:.3;display:block;margin-top:16px}
+
+  footer{margin-top:64px;padding-top:20px;text-align:center;font-size:.72rem;color:#4a4640;letter-spacing:.06em}
+  footer a{color:#4a4640;text-decoration:none;border-bottom:1px solid #2e2a24}
+  footer a:hover{color:var(--gold)}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Meridian™</a>
+    <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="meridian-origin.html">Origin</a>
+      <div class="nav-dropdown">
+        <a href="meridian-protocols.html">Protocols</a>
+        <div class="dropdown-menu">
+          <a href="meridian-protocols-al.html">Active Listening (AL)</a>
+          <a href="meridian-protocols-rl.html">Relaxed Listening (RL)</a>
+        </div>
+      </div>
+      <a href="meridian-ethics.html">Ethics</a>
+      <a href="meridian-license.html">License</a>
+      <a href="meridian-community.html">Community</a>
+      <a href="meridian-discussions.html">Discussions</a>
+      <a href="meridian-writings.html">Writings</a>
+      <a href="meridian-support.html" class="active">Support</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <header>
+    <div class="wordmark">The <em>Meridian</em></div>
+    <div class="subtitle">Support the Work</div>
+    <div class="rule-ornament"><span></span><i>◆</i><span></span></div>
+  </header>
+
+  <div class="statement">
+    <p>
+      This work is offered freely and will remain so.
+      The protocols, the guides, the journals, the community —
+      <strong>none of it sits behind a paywall and none of it ever will.</strong>
+    </p>
+    <p>
+      If something here has touched you — if a session shifted something,
+      if a piece of writing landed somewhere it needed to —
+      and you feel genuinely moved to help sustain what this is becoming,
+      that contribution is welcomed with gratitude.
+    </p>
+    <p>
+      There is no obligation. No tier. No reward beyond knowing
+      you helped keep this available for the next person
+      who finds their way here.
+    </p>
+  </div>
+
+  <div class="divider"><span></span><i>◆</i><span></span></div>
+
+  <div class="support-card">
+    <span class="support-glyph">🌊</span>
+    <div class="support-heading">Sustain the Journey</div>
+    <p class="support-body">
+      Any amount. Any time. Only if it feels right.
+      This is not a transaction — it is an extension of the same
+      intention that built this work in the first place.
+    </p>
+
+    <!-- ── REPLACE href WITH YOUR PAYMENT LINK ── -->
+    <a class="support-btn" href="#" target="_blank" rel="noopener">
+      <span>Support the Work</span>
+      <span class="arrow">↗</span>
+    </a>
+    <!-- ─────────────────────────────────────────── -->
+
+    <p class="no-pressure">
+      No account required. No recurring charges unless you choose them.
+      You may leave at any time.
+    </p>
+  </div>
+
+  <div class="sustains">
+    <span class="sustains-label">What your support sustains</span>
+    <ul class="sustains-list">
+      <li>The continued development of new protocols and listening experiences</li>
+      <li>The time and care required to research, test, and refine each one</li>
+      <li>Keeping the community space moderated, intentional, and free of noise</li>
+      <li>New writings, research, and reflections shared openly</li>
+      <li>The infrastructure that keeps all of this freely accessible</li>
+      <li>The space to continue building something that has never quite existed before</li>
+    </ul>
+  </div>
+
+  <div class="closing">
+    <p>
+      Thank you for being here.<br>
+      However you arrived, whatever brought you —<br>
+      it matters that you came.
+    </p>
+    <span class="glyph">🌌</span>
+  </div>
+
+  <footer>
+    <p>© 2026 The Meridian™ · M.J. Cooper, LLC · All rights reserved · Personal, non-commercial use only</p>
+    <p style="margin-top:6px"><a href="/cdn-cgi/l/email-protection#6f0e1d0c07061b0a0c1b020a1d060b060e012f001a1b03000004410c0002"><span class="__cf_emai

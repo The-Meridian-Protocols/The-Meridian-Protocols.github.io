@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Meridian™ — Discussions</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon-apple.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#e8e2d8;--parchment:#16130f;--gold:#c9a84c;--gold-light:#dfc278;--muted:#8a8278;--rule:#2e2a24;--card-bg:#1e1a15}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--parchment);color:var(--ink);font-family:'Jost',sans-serif;font-weight:400;line-height:1.8;font-size:16px}
+  .site-nav{width:100%;border-bottom:1px solid var(--rule);background:rgba(22,19,15,.96);position:relative;z-index:10}
+  .nav-inner{max-width:720px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--gold);letter-spacing:.06em;white-space:nowrap;text-decoration:none;opacity:.85}
+  .nav-links{display:flex;align-items:center}
+  .nav-links a{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:16px 10px;transition:color .2s;white-space:nowrap}
+  .nav-links a:hover{color:var(--ink)}.nav-links a.active{color:var(--gold)}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+  .nav-toggle span{display:block;width:22px;height:1px;background:var(--muted)}
+  .nav-dropdown{position:relative}.nav-dropdown>a{display:flex;align-items:center;gap:4px}
+  .nav-dropdown>a::after{content:'▾';font-size:.6rem;opacity:.6;transition:transform .2s}
+  .nav-dropdown:hover>a::after{transform:rotate(180deg)}
+  .dropdown-menu{display:none;position:absolute;top:100%;left:0;background:rgba(22,19,15,.98);border:1px solid var(--rule);border-top:none;border-radius:0 0 6px 6px;min-width:210px;z-index:200}
+  .nav-dropdown:hover .dropdown-menu{display:block}
+  .dropdown-menu a{display:block;padding:12px 18px!important;border-top:1px solid var(--rule);font-size:.68rem!important;letter-spacing:.12em;color:var(--muted)!important;white-space:nowrap}
+  .dropdown-menu a:hover{color:var(--ink)!important}
+  @media(max-width:600px){
+    .nav-toggle{display:flex}
+    .nav-links{display:none;position:absolute;top:52px;left:0;right:0;background:rgba(22,19,15,.98);border-bottom:1px solid var(--rule);flex-direction:column;align-items:stretch;z-index:100}
+    .nav-links.open{display:flex}.nav-links a{padding:14px 24px;border-top:1px solid var(--rule);font-size:.75rem}
+    .nav-dropdown>a::after{display:none}
+    .dropdown-menu{display:block;position:static;border:none;border-radius:0;min-width:unset;background:transparent}
+    .dropdown-menu a{padding-left:40px!important;font-size:.72rem!important;background:rgba(0,0,0,.15)}
+  }
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
+  .page{max-width:720px;margin:0 auto;padding:60px 40px 80px;position:relative;z-index:1}
+  @media(max-width:600px){.page{padding:40px 24px 80px}}
+  header{text-align:center;margin-bottom:56px;animation:fadeUp 1s ease both}
+  .wordmark{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:300;letter-spacing:.12em;line-height:1.2}
+  .wordmark em{font-style:italic;color:var(--gold)}
+  .subtitle{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--muted);margin-top:10px}
+  .rule-ornament{display:flex;align-items:center;gap:16px;margin:24px auto 0;width:fit-content}
+  .rule-ornament span{display:block;height:1px;width:60px;background:var(--gold);opacity:.4}
+  .rule-ornament i{color:var(--gold);font-style:normal;font-size:.85rem;opacity:.6}
+  p{margin-bottom:14px;color:#ccc6bc}
+  .lead{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:#a09890;line-height:1.9;margin-bottom:32px;animation:fadeUp 1s ease .08s both}
+  h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;letter-spacing:.04em;color:var(--ink);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+
+  .mewmews-main{display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:24px 28px;text-decoration:none;margin-bottom:40px;transition:all .2s;animation:fadeUp 1s ease .1s both}
+  .mewmews-main:hover{background:rgba(201,168,76,.1);transform:translateY(-1px)}
+  .mm-label{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+  .mm-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--ink);margin-bottom:4px}
+  .mm-desc{font-size:.84rem;color:var(--muted)}
+  .mm-arrow{font-size:1.2rem;color:var(--gold);opacity:.6;flex-shrink:0}
+
+  .protocol-group{margin-bottom:36px;animation:fadeUp 1s ease both}
+  .protocol-group:nth-child(3){animation-delay:.12s}
+  .protocol-group:nth-child(4){animation-delay:.2s}
+  .group-label{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);opacity:.8;margin-bottom:14px;display:block}
+  .discussion-list{display:flex;flex-direction:column;gap:10px}
+
+  .discussion-card{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--card-bg);border:1px solid var(--rule);border-radius:8px;padding:18px 22px;text-decoration:none;transition:all .2s}
+  .discussion-card:hover{border-color:#4a4035;transform:translateX(3px)}
+  .dc-id{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.8;margin-bottom:4px}
+  .dc-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:3px}
+  .dc-desc{font-size:.8rem;color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif}
+  .dc-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+  .freq-pill{font-size:.7rem;letter-spacing:.08em;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:3px 12px;color:var(--gold);white-space:nowrap}
+  .dc-arrow{color:var(--gold);opacity:.4;font-size:.9rem;transition:opacity .2s}
+  .discussion-card:hover .dc-arrow{opacity:.8}
+
+  footer{margin-top:60px;padding-top:20px;text-align:center;font-size:.72rem;color:#4a4640;letter-spacing:.06em}
+  footer a{color:#4a4640;text-decoration:none;border-bottom:1px solid #2e2a24}
+  footer a:hover{color:var(--gold)}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Meridian™</a>
+    <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="meridian-origin.html">Origin</a>
+      <div class="nav-dropdown">
+        <a href="meridian-protocols.html">Protocols</a>
+        <div class="dropdown-menu">
+          <a href="meridian-protocols-al.html">Active Listening (AL)</a>
+          <a href="meridian-protocols-rl.html">Relaxed Listening (RL)</a>
+        </div>
+      </div>
+      <a href="meridian-ethics.html">Ethics</a>
+      <a href="meridian-license.html">License</a>
+      <a href="meridian-community.html">Community</a>
+      <a href="meridian-discussions.html" class="active">Discussions</a>
+      <a href="meridian-writings.html">Writings</a>
+      <a href="meridian-support.html">Support</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+  <header>
+    <div class="wordmark">The <em>Meridian</em></div>
+    <div class="subtitle">Discussions</div>
+    <div class="rule-ornament"><span></span><i>◆</i><span></span></div>
+  </header>
+
+  <p class="lead">Every space here is a MewMews — a place to share what arose, what shifted, what surprised you. Your community agreement covers all of them.</p>
+
+  <a class="mewmews-main" href="meridian-community.html">
+    <div>
+      <div class="mm-label">The MewMews — Main Space</div>
+      <div class="mm-title">Open Discussion</div>
+      <div class="mm-desc">General reflections, questions, and community exchange — not tied to a specific protocol</div>
+    </div>
+    <div class="mm-arrow">→</div>
+  </a>
+
+  <h2>Protocol MewMews</h2>
+
+  <div class="protocol-group">
+    <span class="group-label">Active Listening</span>
+    <div class="discussion-list">
+      <a class="discussion-card" href="mewmews-al001.html">
+        <div>
+          <div class="dc-id">AL-001</div>
+          <div class="dc-name">Reading &amp; Focus</div>
+          <div class="dc-desc">Experiences with sustained concentration and study sessions</div>
+        </div>
+        <div class="dc-right">
+          <div class="freq-pill">14 Hz · Beta</div>
+          <div class="dc-arrow">→</div>
+        </div>
+      </a>
+      <a class="discussion-card" href="mewmews-al002.html">
+        <div>
+          <div class="dc-id">AL-002</div>
+          <div class="dc-name">Journaling &amp; Inner Dialogue</div>
+          <div class="dc-desc">What arose when writing met listening</div>
+        </div>
+        <div class="dc-right">
+          <div class="freq-pill">9 Hz · Alpha–Theta</div>
+          <div class="dc-arrow">→</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="protocol-group">
+    <span class="group-label">Relaxed Listening</span>
+    <div class="discussion-list">
+      <a class="discussion-card" href="mewmews-rl001.html">
+        <div>
+          <div class="dc-id">RL-001</div>
+          <div class="dc-name">Heart Coherence &amp; Creation</div>
+          <div class="dc-desc">Creating from a unified, coherent inner field</div>
+        </div>
+        <div class="dc-right">
+          <div class="freq-pill">7.83 Hz · Earth Resonance</div>
+          <div class="dc-arrow">→</div>
+        </div>
+      </a>
+      <a class="discussion-card" href="mewmews-rl002.html">
+        <div>
+          <div class="dc-id">RL-002</div>
+          <div class="dc-name">Theta Portal</div>
+          <div class="dc-desc">The threshold between waking and dreaming</div>
+        </div>
+        <div class="dc-right">
+          <div class="freq-pill">6.5 Hz · Theta</div>
+          <div class="dc-arrow">→</div>
+        </div>
+      </a>
+      <a class="discussion-card" href="mewmews-rl003.html">
+        <div>
+          <div class="dc-id">RL-003</div>
+          <div class="dc-name">Multi-Layered Theta Harmonics</div>
+          <div class="dc-desc">Expanded and grounded — integration experiences</div>
+        </div>
+        <div class="dc-right">
+          <div class="freq-pill">6.82 Hz · Theta</div>
+          <div class="dc-arrow">→</div>
+        </div>
+      </a>
+      <a class="discussion-card" href="mewmews-rl004.html">
+        <div>
+          <div class="dc-id">RL-004</div>
+          <div class="dc-name">Oxygen — Breath of Life</div>
+          <div class="dc-desc">Clarity, vitality, and presence through breath-aligned frequency</div>
+        </div>
+        <div class="dc-right">
+          <div class="freq-pill">42.37 Hz · Gamma</div>
+          <div class="dc-arrow">→</div>
+        </div>
+      </a>
+      <a class="discussion-card" href="mewmews-rl005.html">
+        <div>
+          <div class="dc-id">RL-005</div>
+          <div class="dc-name">Delta–Theta Bridge</div>
+          <div class="dc-desc">Deep rest, restoration, and nervous system reset</div>
+        </div>
+        <div class="dc-right">
+          <div class="freq-pill">2.5 Hz · Delta</div>
+          <div class="dc-arrow">→</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 The Meridian™ · M.J. Cooper, LLC · All rights reserved · Personal, non-commercial use only</p>
+    <p style="margin-top:6px"><a href="/cdn-cgi/l/email-protection#cdacbfaea5a4b9a8aeb9a0a8bfa4a9a4aca38da2b8b9a1a2a2a6e3aea2a0"><span class="__cf_ema

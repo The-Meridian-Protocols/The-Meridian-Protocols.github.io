@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon-apple.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Meridian™ — An Origin Story</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #e8e2d8;
+    --parchment: #16130f;
+    --gold: #c9a84c;
+    --gold-light: #dfc278;
+    --muted: #8a8278;
+    --rule: #2e2a24;
+    --card-bg: #1e1a15;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    line-height: 1.8;
+    font-size: 16px;
+  }
+
+  /* ── Nav ── */
+  .site-nav {
+    width: 100%;
+    border-bottom: 1px solid var(--rule);
+    background: rgba(22, 19, 15, 0.96);
+    position: relative;
+    z-index: 10;
+  }
+  .nav-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    text-decoration: none;
+    opacity: 0.85;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 16px 10px;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--gold); }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: var(--muted);
+    transition: all 0.25s;
+  }
+  /* ── Dropdown ── */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+  .nav-dropdown > a::after {
+    content: '▾';
+    font-size: 0.6rem;
+    opacity: 0.6;
+    transition: transform 0.2s;
+  }
+  .nav-dropdown:hover > a::after { transform: rotate(180deg); }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(22, 19, 15, 0.98);
+    border: 1px solid var(--rule);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    min-width: 210px;
+    z-index: 200;
+  }
+  .nav-dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu a {
+    display: block;
+    padding: 12px 18px !important;
+    border-top: 1px solid var(--rule);
+    font-size: 0.68rem !important;
+    letter-spacing: 0.12em;
+    color: var(--muted) !important;
+    white-space: nowrap;
+  }
+  .dropdown-menu a:hover { color: var(--ink) !important; }
+  @media (max-width: 600px) {
+    .nav-toggle { display: flex; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 52px;
+      left: 0;
+      right: 0;
+      background: rgba(22, 19, 15, 0.98);
+      border-bottom: 1px solid var(--rule);
+      flex-direction: column;
+      align-items: stretch;
+      z-index: 100;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a {
+      padding: 14px 24px;
+      border-top: 1px solid var(--rule);
+      font-size: 0.75rem;
+    }
+    .nav-dropdown > a::after { display: none; }
+    .dropdown-menu {
+      display: block;
+      position: static;
+      border: none;
+      border-radius: 0;
+      min-width: unset;
+      background: transparent;
+    }
+    .dropdown-menu a {
+      padding-left: 40px !important;
+      font-size: 0.72rem !important;
+      background: rgba(0,0,0,0.15);
+    }
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 40px 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Header ── */
+  header {
+    text-align: center;
+    margin-bottom: 72px;
+    animation: fadeUp 1s ease both;
+  }
+
+  .wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .wordmark em { font-style: italic; color: var(--gold); }
+
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-top: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .rule-ornament {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 28px auto 0;
+    width: fit-content;
+  }
+  .rule-ornament span { display: block; height: 1px; width: 80px; background: var(--gold); opacity: 0.4; }
+  .rule-ornament i { color: var(--gold); font-style: normal; font-size: 0.9rem; opacity: 0.6; }
+
+  /* ── Sections ── */
+  section {
+    margin-bottom: 56px;
+    animation: fadeUp 1s ease both;
+  }
+  section:nth-child(2) { animation-delay: 0.1s; }
+  section:nth-child(3) { animation-delay: 0.2s; }
+  section:nth-child(4) { animation-delay: 0.3s; }
+  section:nth-child(5) { animation-delay: 0.4s; }
+  section:nth-child(6) { animation-delay: 0.5s; }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  p {
+    margin-bottom: 16px;
+    color: #cec8be;
+  }
+
+  strong { font-weight: 500; color: var(--ink); }
+
+  /* ── Lead paragraph ── */
+  .lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.12rem;
+    font-style: italic;
+    color: #a09890;
+    line-height: 1.9;
+    margin-bottom: 18px;
+  }
+
+  /* ── Inquiry list ── */
+  .inquiry-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+
+  .inquiry-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 520px) {
+    .inquiry-list { grid-template-columns: 1fr; }
+  }
+
+  .inquiry-list li {
+    font-size: 0.85rem;
+    color: #9a9288;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .inquiry-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    opacity: 0.5;
+  }
+
+  /* ── Listening experiment callout ── */
+  .callout {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    padding: 22px 28px;
+    margin: 24px 0;
+  }
+
+  .callout p {
+    margin-bottom: 10px;
+    font-size: 0.92rem;
+  }
+
+  .callout p:last-child { margin-bottom: 0; }
+
+  .callout .aside {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  /* ── Convergence block ── */
+  .convergence {
+    text-align: center;
+    padding: 36px 0 28px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin: 8px 0 28px;
+  }
+
+  .convergence .threads {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: #a09890;
+    line-height: 2.1;
+    margin-bottom: 20px;
+  }
+
+  .convergence .threads strong {
+    color: var(--gold-light);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  .not-belief {
+    display: inline-block;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    border-radius: 20px;
+    padding: 6px 20px;
+    margin-top: 8px;
+  }
+
+  /* ── Closing ── */
+  .closing {
+    text-align: center;
+    padding: 12px 0 0;
+  }
+
+  .closing p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: #a09890;
+    line-height: 1.9;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .closing .glyph {
+    font-size: 1.6rem;
+    opacity: 0.4;
+    display: block;
+    margin-top: 16px;
+  }
+
+  /* ── Footer ── */
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 0.72rem;
+    color: #4a4640;
+    letter-spacing: 0.06em;
+  }
+  footer a { color: #4a4640; text-decoration: none; border-bottom: 1px solid #2e2a24; }
+  footer a:hover { color: var(--gold); border-color: var(--gold); transition: color 0.2s, border-color 0.2s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Meridian™</a>
+    <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="meridian-origin.html" class="active">Origin</a>
+      <div class="nav-dropdown">
+        <a href="meridian-protocols.html">Protocols</a>
+        <div class="dropdown-menu">
+          <a href="meridian-protocols-al.html">Active Listening (AL)</a>
+          <a href="meridian-protocols-rl.html">Relaxed Listening (RL)</a>
+        </div>
+      </div>
+      <a href="meridian-ethics.html">Ethics</a>
+      <a href="meridian-license.html">License</a>
+      <a href="meridian-community.html">Community</a>
+      <a href="meridian-discussions.html">Discussions</a>
+      <a href="meridian-writings.html">Writings</a>
+      <a href="meridian-support.html">Support</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <header>
+    <div class="wordmark">The <em>Meridian</em></div>
+    <div class="subtitle">An Origin Story</div>
+    <div class="rule-ornament">
+      <span></span>
+      <i>◆</i>
+      <span></span>
+    </div>
+  </header>
+
+  <!-- A Personal Experiment -->
+  <section>
+    <h2>A Personal Experiment</h2>
+    <p class="lead">The Meridian began as a personal project.</p>
+    <p>For several years, I intentionally stripped down and rebuilt my own belief system. During that time, I explored many traditions and ideas — religious practices, meditation systems, early scientific theories, and concepts from physics. This included studying the ideas, inventions, and writings of <strong>Nikola Tesla</strong>, along with the scientists who influenced him and those who helped shape early electromagnetic theory.</p>
+    <p>While reading texts from different periods of history, I became fascinated by the <strong>rhythm of language</strong> — noticing how word choice, tone, and structure shifted across centuries.</p>
+  </section>
+
+  <!-- Lines of Inquiry -->
+  <section>
+    <h2>Lines of Inquiry</h2>
+    <p>Over time, my research weaved through many disciplines.</p>
+    <div class="inquiry-label">Areas explored</div>
+    <ul class="inquiry-list">
+      <li>Early sound and frequency traditions</li>
+      <li>Numerology and symbolic systems</li>
+      <li>Breathwork and meditation techniques</li>
+      <li>Historical texts from the 1500s–1900s</li>
+      <li>Modern consciousness research</li>
+      <li>The Fibonacci sequence and natural patterns</li>
+      <li>The Law of Polarity</li>
+      <li>Freemasonry and institutional language shifts</li>
+      <li>The electromagnetic spectrum</li>
+      <li>The heart's intrinsic nervous system</li>
+      <li>The double-slit experiment</li>
+      <li>Modern algorithms and attention systems</li>
+    </ul>
+  </section>
+
+  <!-- Listening Experiment -->
+  <section>
+    <h2>The Listening Experiment</h2>
+    <p>Beginning in <strong>January 2025</strong>, I started a long-term listening experiment.</p>
+    <div class="callout">
+      <p>During my commute — Monday through Thursday — I listen only to <strong>instrumental music with no lyrics</strong>. Sound that has never carried language.</p>
+      <p>Eventually, I removed social media, app by app, from my daily life.</p>
+      <p>Stepping away from algorithm-driven attention systems created an unexpected sense of clarity. Because of that experience, it would feel dishonest to rely on those same systems to promote this work.</p>
+      <p class="aside">You got here how you got here, now didn't ya.</p>
+    </div>
+  </section>
+
+  <!-- The Realization -->
+  <section>
+    <h2>The Realization</h2>
+    <p>Eventually, I noticed something curious.</p>
+    <div class="convergence">
+      <div class="threads">
+        Many of the systems I had been studying —<br>
+        <strong>science</strong>, <strong>spirituality</strong>, <strong>sound</strong>, <strong>breath</strong>, and <strong>attention</strong> —<br>
+        appeared to be describing similar internal experiences<br>
+        using different terminology.
+      </div>
+      <p style="color: #a09890; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; margin-bottom: 16px;">That realization became <strong style="color: var(--gold-light); font-style: normal;">The Meridian</strong>.<br>A meeting place between disciplines.<br>A practical tool for exploring consciousness through sound.</p>
+      <span class="not-belief">The Meridian is not a belief system</span>
+    </div>
+  </section>
+
+  <!-- A Simple Idea -->
+  <section>
+    <h2>A Simple Idea</h2>
+    <div class="closing">
+      <p>Most of life happens automatically.<br>Attention is the doorway to experiencing it more clearly.</p>
+      <p>The Meridian does not claim answers —<br>it simply invites attention.</p>
+      <span class="glyph">🌌</span>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 The Meridian™ · M.J. Cooper, LLC · All rights reserved · Personal, non-commercial use only</p>
+    <p style="margin-top:6px;"><a href="/cdn-cgi/l/email-protection#8aebf8e9e2e3feefe9fee7eff8e3eee3ebe4cae5fffee6e5e5e1a4e9e5e7"><span class="__cf_emai

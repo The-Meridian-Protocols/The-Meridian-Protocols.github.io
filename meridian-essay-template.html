@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon-apple.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Meridian — [Essay Title Here]</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#e8e2d8;--parchment:#16130f;--gold:#c9a84c;--gold-light:#dfc278;--muted:#8a8278;--rule:#2e2a24;--card-bg:#1e1a15}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--parchment);color:var(--ink);font-family:'Jost',sans-serif;font-weight:400;line-height:1.8;font-size:16px}
+  .site-nav{width:100%;border-bottom:1px solid var(--rule);background:rgba(22,19,15,.96);position:relative;z-index:10}
+  .nav-inner{max-width:720px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--gold);letter-spacing:.06em;white-space:nowrap;text-decoration:none;opacity:.85}
+  .nav-links{display:flex;align-items:center}
+  .nav-links a{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:16px 10px;transition:color .2s;white-space:nowrap}
+  .nav-links a:hover{color:var(--ink)}.nav-links a.active{color:var(--gold)}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+  .nav-toggle span{display:block;width:22px;height:1px;background:var(--muted)}
+  .nav-dropdown{position:relative}.nav-dropdown>a{display:flex;align-items:center;gap:4px}
+  .nav-dropdown>a::after{content:'▾';font-size:.6rem;opacity:.6;transition:transform .2s}
+  .nav-dropdown:hover>a::after{transform:rotate(180deg)}
+  .dropdown-menu{display:none;position:absolute;top:100%;left:0;background:rgba(22,19,15,.98);border:1px solid var(--rule);border-top:none;border-radius:0 0 6px 6px;min-width:210px;z-index:200}
+  .nav-dropdown:hover .dropdown-menu{display:block}
+  .dropdown-menu a{display:block;padding:12px 18px!important;border-top:1px solid var(--rule);font-size:.68rem!important;letter-spacing:.12em;color:var(--muted)!important;white-space:nowrap}
+  .dropdown-menu a:hover{color:var(--ink)!important}
+  @media(max-width:600px){
+    .nav-toggle{display:flex}
+    .nav-links{display:none;position:absolute;top:52px;left:0;right:0;background:rgba(22,19,15,.98);border-bottom:1px solid var(--rule);flex-direction:column;align-items:stretch;z-index:100}
+    .nav-links.open{display:flex}.nav-links a{padding:14px 24px;border-top:1px solid var(--rule);font-size:.75rem}
+    .nav-dropdown>a::after{display:none}
+    .dropdown-menu{display:block;position:static;border:none;border-radius:0;min-width:unset;background:transparent}
+    .dropdown-menu a{padding-left:40px!important;font-size:.72rem!important;background:rgba(0,0,0,.15)}
+  }
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
+  .page{max-width:680px;margin:0 auto;padding:60px 40px 80px;position:relative;z-index:1}
+  @media(max-width:600px){.page{padding:40px 24px 80px}}
+
+  /* ── Back link ── */
+  .back-link{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);text-decoration:none;
+    margin-bottom:48px;transition:color .2s;
+    animation:fadeUp .8s ease both;
+  }
+  .back-link:hover{color:var(--gold)}
+  .back-link::before{content:'←';font-size:.9rem}
+
+  /* ── Essay header ── */
+  .essay-header{margin-bottom:52px;animation:fadeUp .9s ease both}
+  .essay-meta{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+  .essay-date{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .essay-tag{
+    font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+    background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);
+    border-radius:12px;padding:2px 10px;color:var(--gold);opacity:.85;
+  }
+  .essay-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(2rem,5vw,3rem);
+    font-weight:300;
+    letter-spacing:.04em;
+    line-height:1.2;
+    color:var(--ink);
+    margin-bottom:18px;
+  }
+  .essay-desc{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.1rem;
+    font-style:italic;
+    color:#a09890;
+    line-height:1.85;
+    padding-bottom:28px;
+    border-bottom:1px solid var(--rule);
+  }
+
+  /* ── Essay body ── */
+  .essay-body{animation:fadeUp 1s ease .1s both}
+
+  .essay-body p{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.08rem;
+    line-height:1.95;
+    color:#ccc6bc;
+    margin-bottom:26px;
+  }
+
+  .essay-body h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.45rem;
+    font-weight:400;
+    color:var(--ink);
+    margin:44px 0 16px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--rule);
+  }
+
+  .essay-body h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.15rem;
+    font-weight:600;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:32px 0 12px;
+  }
+
+  .essay-body blockquote{
+    border-left:3px solid rgba(201,168,76,.4);
+    padding:14px 22px;
+    margin:28px 0;
+    background:rgba(201,168,76,.04);
+    border-radius:0 6px 6px 0;
+  }
+  .essay-body blockquote p{
+    font-style:italic;
+    color:#a09890;
+    margin-bottom:0;
+  }
+
+  .essay-body strong{font-weight:500;color:var(--ink)}
+  .essay-body em{font-style:italic;color:#b8b0a4}
+
+  .essay-body ul,.essay-body ol{
+    padding-left:24px;
+    margin-bottom:24px;
+  }
+  .essay-body ul li,.essay-body ol li{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.05rem;
+    line-height:1.85;
+    color:#ccc6bc;
+    margin-bottom:6px;
+  }
+
+  /* ── Closing ornament ── */
+  .essay-close{
+    text-align:center;
+    margin-top:56px;
+    padding-top:28px;
+    border-top:1px solid var(--rule);
+  }
+  .essay-close .ornament{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:.9rem;
+    color:var(--muted);
+    letter-spacing:.06em;
+  }
+  .essay-close .glyph{font-size:1.4rem;opacity:.3;display:block;margin-bottom:10px}
+
+  /* ── Back to writings ── */
+  .back-bottom{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);text-decoration:none;
+    margin-top:32px;transition:color .2s;
+  }
+  .back-bottom:hover{color:var(--gold)}
+  .back-bottom::before{content:'←';font-size:.9rem}
+
+  footer{margin-top:64px;padding-top:20px;text-align:center;font-size:.72rem;color:#4a4640;letter-spacing:.06em}
+  footer a{color:#4a4640;text-decoration:none;border-bottom:1px solid #2e2a24}
+  footer a:hover{color:var(--gold)}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Meridian™</a>
+    <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="meridian-origin.html">Origin</a>
+      <div class="nav-dropdown">
+        <a href="meridian-protocols.html">Protocols</a>
+        <div class="dropdown-menu">
+          <a href="meridian-protocols-al.html">Active Listening (AL)</a>
+          <a href="meridian-protocols-rl.html">Relaxed Listening (RL)</a>
+        </div>
+      </div>
+      <a href="meridian-ethics.html">Ethics</a>
+      <a href="meridian-license.html">License</a>
+      <a href="meridian-community.html">Community</a>
+      <a href="meridian-writings.html" class="active">Writings</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <a class="back-link" href="meridian-writings.html">Back to Writings</a>
+
+  <!-- ════════════════════════════════════════════════════
+       ESSAY HEADER — edit these fields for each new piece
+       ═════════════════════════════════════════════════ -->
+  <div class="essay-header">
+    <div class="essay-meta">
+      <span class="essay-date">2026</span>                    <!-- ← change date -->
+      <span class="essay-tag">Consciousness</span>            <!-- ← change tag -->
+    </div>
+    <div class="essay-title">
+      The Space Between Knowing and Understanding             <!-- ← change title -->
+    </div>
+    <div class="essay-desc">
+      An exploration of why information alone rarely changes anything —
+      and what it takes for knowledge to become lived experience.  <!-- ← change description -->
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════
+       ESSAY BODY — write your piece here
+
+       Available elements:
+         <p>           — paragraph
+         <h2>          — section heading
+         <h3>          — subheading (gold, uppercase)
+         <blockquote>  — pull quote
+         <ul> / <ol>   — lists
+         <strong>      — bold emphasis
+         <em>          — italic emphasis
+       ═════════════════════════════════════════════════ -->
+  <div class="essay-body">
+
+    <p>
+      There is a difference between knowing something and understanding it.
+      We collect knowledge the way we collect objects — it fills our shelves,
+      our hard drives, our conversations. We can recite it, cite it, reference it
+      in argument. And yet it doesn't always change us.
+    </p>
+
+    <p>
+      Understanding is something else. It arrives quietly, often uninvited,
+      and it rearranges the furniture. You cannot force it. You can only
+      create the conditions in which it becomes possible.
+    </p>
+
+    <h2>The Gap</h2>
+
+    <p>
+      Most systems of education confuse the two. They deliver information
+      and measure its retention, assuming that retention equals comprehension.
+      But comprehension is embodied. It lives in the body, not the notes.
+    </p>
+
+    <blockquote>
+      <p>The map is not the territory. But we spend most of our lives studying maps.</p>
+    </blockquote>
+
+    <p>
+      This is not a criticism of knowledge. Knowledge matters enormously.
+      But there is a threshold it must cross — a translation from concept
+      to lived reality — and that translation requires something knowledge alone
+      cannot provide.
+    </p>
+
+    <h2>What Closes the Gap</h2>
+
+    <p>
+      Experience. Silence. Attention. Repetition. The willingness to sit
+      with something long enough for it to settle below the surface
+      of conscious thought and become part of the operating system.
+    </p>
+
+    <p>
+      This is what practice is. Not performance of knowledge,
+      but the patient translation of it into being.
+    </p>
+
+  </div>
+  <!-- ════════════════════════════════════════════════════
+       END OF ESSAY BODY
+       ═════════════════════════════════════════════════ -->
+
+  <div class="essay-close">
+    <span class="glyph">✦</span>
+    <div class="ornament">M.J. Cooper · 2026</div>
+  </div>
+
+  <a class="back-bottom" href="meridian-writings.html">Back to Writings</a>
+
+  <footer>
+    <p>© 2026 The Meridian™ · M.J. Cooper, LLC · All rights reserved · Personal, non-commercial use only</p>
+    <p style="margin-top:6px"><a href="/cdn-cgi/l/email-protection#eb8a998883829f8e889f868e99828f828a85ab849e9f87848480c5888486"><span class="__cf_emai
