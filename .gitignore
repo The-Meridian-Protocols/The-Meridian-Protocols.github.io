@@ -1,0 +1,19 @@
+# ── The Meridian — .gitignore ──────────────────────────────
+#
+# IMPORTANT: meridian-firebase.js contains your API credentials.
+# Never push it to GitHub. Keep your real credentials only locally.
+# Upload the placeholder version (with PASTE_YOUR_..._HERE values) to GitHub.
+
+# Firebase credentials — keep local only
+meridian-firebase.js
+
+# Cloudflare Worker secrets (use wrangler secret instead)
+wrangler.toml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
