@@ -292,7 +292,14 @@ async function unbanUser(uid){
 function v(id){return document.getElementById(id).value.trim();}
 function el(id){return document.getElementById(id);}
 function showErr(e,m){e.textContent=m;e.classList.add('show');}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function esc(s){
+  return String(s || '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
 
 // Expose to global scope for onclick attributes
 window._admin = { restorePost, deletePost, banUser, banUserById, unbanUser };
