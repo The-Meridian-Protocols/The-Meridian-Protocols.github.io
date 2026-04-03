@@ -272,9 +272,10 @@
     <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
-    <div class="nav-links">
+        <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="meridian-origin.html">Origin</a>
+      <a href="meridian-ethics.html">Ethics</a>
       <div class="nav-dropdown">
         <a href="meridian-protocols.html" class="active">Protocols</a>
         <div class="dropdown-menu">
@@ -282,12 +283,15 @@
           <a href="meridian-protocols-rl.html">Relaxed Listening (RL)</a>
         </div>
       </div>
-      <a href="meridian-ethics.html">Ethics</a>
+      <div class="nav-dropdown">
+        <a href="meridian-community.html">Community</a>
+        <div class="dropdown-menu">
+          <a href="meridian-discussions.html">Discussion</a>
+          <a href="meridian-writings.html">Writings</a>
+          <a href="meridian-support.html">Support</a>
+        </div>
+      </div>
       <a href="meridian-license.html">License</a>
-      <a href="meridian-community.html">Community</a>
-      <a href="meridian-discussions.html">Discussions</a>
-      <a href="meridian-writings.html">Writings</a>
-      <a href="meridian-support.html">Support</a>
     </div>
   </div>
 </nav>
@@ -994,7 +998,7 @@ const firebaseConfig = {
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 
 // ── Worker URL — replace with your deployed Worker URL ────
-const WORKER_URL = 'YOUR_WORKER_URL_HERE';
+const WORKER_URL = 'https://meridian-worker.architectmeridian.workers.dev';
 
 // ── Auth state — show/hide audio player ────────────
 firebase.auth().onAuthStateChanged(function(user) {

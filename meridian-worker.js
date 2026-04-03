@@ -36,7 +36,7 @@ export default {
       const idToken = authHeader.replace('Bearer ', '').trim();
 
       // ── 2. Verify Firebase ID token ──────────────────────
-      const verified = await verifyFirebaseToken(idToken, env.meridian-caf0d);
+      const verified = await verifyFirebaseToken(idToken, env.FIREBASE_PROJECT_ID);
       if (!verified) {
         return new Response('Invalid token', { status: 403, headers: corsHeaders });
       }
@@ -55,10 +55,10 @@ export default {
         return new Response('Invalid track name', { status: 400, headers: corsHeaders });
       }
 
-      // ── 5. Generate signed Supabase URL (60 min expiry) ──
+      // ── 5. Generate signed Supabase URL (2 hr expiry) ────
       const signedUrl = await getSupabaseSignedUrl(
-        env.https://xcunrbdtanmdkfavmabi.supabase.co,
-        env.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhjdW5yYmR0YW5tZGtmYXZtYWJpIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDI2MzQ3MywiZXhwIjoyMDg5ODM5NDczfQ.As0Iyrbvq_P9dUlMnF_MDoDxP284dWExfLcy6uPhTds,
+        env.SUPABASE_URL,
+        env.SUPABASE_SERVICE_KEY,
         track
       );
 
@@ -155,7 +155,7 @@ async function getSupabaseSignedUrl(supabaseUrl, serviceKey, track) {
   try {
     const bucket = 'meridian-audio';
     const path   = `full/${track}`;
-    const expiresIn = 5400; // 90 minutes
+    const expiresIn = 7200; // 2 hours
 
     const res = await fetch(
       `${supabaseUrl}/storage/v1/object/sign/${bucket}/${path}`,
