@@ -417,9 +417,6 @@
               </div>
             </div>
           </div>
-          <a class="full-track-signin" href="meridian-community.html">
-            <span class="lock">🎧</span> Free to access — <strong>create a free account</strong> or sign in to listen
-          </a>
         </div>
       </div>
     </div>
@@ -520,9 +517,6 @@
               </div>
             </div>
           </div>
-          <a class="full-track-signin" href="meridian-community.html">
-            <span class="lock">🎧</span> Free to access — <strong>create a free account</strong> or sign in to listen
-          </a>
         </div>
       </div>
     </div>
@@ -618,9 +612,6 @@
               </div>
             </div>
           </div>
-          <a class="full-track-signin" href="meridian-community.html">
-            <span class="lock">🎧</span> Free to access — <strong>create a free account</strong> or sign in to listen
-          </a>
         </div>
       </div>
     </div>
@@ -714,9 +705,6 @@
               </div>
             </div>
           </div>
-          <a class="full-track-signin" href="meridian-community.html">
-            <span class="lock">🎧</span> Free to access — <strong>create a free account</strong> or sign in to listen
-          </a>
         </div>
       </div>
     </div>
@@ -814,9 +802,6 @@
               </div>
             </div>
           </div>
-          <a class="full-track-signin" href="meridian-community.html">
-            <span class="lock">🎧</span> Free to access — <strong>create a free account</strong> or sign in to listen
-          </a>
         </div>
       </div>
     </div>
@@ -951,9 +936,6 @@ firebase.auth().onAuthStateChanged(function(user) {
   document.querySelectorAll('.full-track-link').forEach(function(el) {
     el.style.display = user ? 'inline-flex' : 'none';
   });
-  document.querySelectorAll('.full-track-signin').forEach(function(el) {
-    el.style.display = user ? 'none' : 'flex';
-  });
 });
 
 // ── Audio player (auth required) ────────────────────
@@ -981,7 +963,7 @@ async function playFull(trackFile, protocolName, protocolId) {
   try {
     // Get Firebase ID token
     var user = firebase.auth().currentUser;
-    if (!user) { if (btn) btn.textContent = 'Create a free account to listen'; return; }
+    if (!user) { window.location.href = 'meridian-community.html?return=meridian-protocols-rl.html'; return; }
     var token = await user.getIdToken();
 
     // Request signed URL from Worker

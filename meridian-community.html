@@ -288,6 +288,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, on
 import { collection, addDoc, getDocs, doc, setDoc, getDoc, query, orderBy, where, serverTimestamp, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 let cu=null, cd=null;
+const returnTo=new URLSearchParams(window.location.search).get('return');
 
 onAuthStateChanged(auth, async u => {
   if(u){ cu=u; const s=await getDoc(doc(db,'users',u.uid)); cd=s.exists()?s.data():{};  showIn(); }
@@ -331,6 +332,8 @@ window.doRegister=async()=>{
   try{
     const c=await createUserWithEmailAndPassword(auth,em,pw);
     await setDoc(doc(db,'users',c.user.uid),{firstName:fn,lastName:ln,email:em,passion:pa,joinedAt:serverTimestamp(),banned:false});
+    cu=c.user; cd={firstName:fn,lastName:ln,email:em,passion:pa}; showIn();
+    if(returnTo) window.location.href=returnTo;
   }catch(e){showErr(err,friendlyErr(e.code));}
 };
 
@@ -338,7 +341,10 @@ window.doSignIn=async()=>{
   const em=v('l-email'),pw=v('l-pass'),err=el('login-err');
   err.classList.remove('show');
   if(!em||!pw) return showErr(err,'Please enter your email and password.');
-  try{ await signInWithEmailAndPassword(auth,em,pw); }
+  try{
+    await signInWithEmailAndPassword(auth,em,pw);
+    if(returnTo) window.location.href=returnTo;
+  }
   catch(e){ showErr(err,friendlyErr(e.code)); }
 };
 

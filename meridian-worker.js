@@ -14,8 +14,15 @@ export default {
   async fetch(request, env) {
 
     // ── CORS headers ─────────────────────────────────────
+    const origin = request.headers.get('Origin') || '';
+    const allowedOrigin =
+      origin === 'https://the-meridian-protocols.github.io' ||
+      /^https:\/\/[a-z0-9\-]+\.pages\.dev$/.test(origin) ||
+      /^https:\/\/[a-z0-9\-]+\.workers\.dev$/.test(origin)
+        ? origin
+        : 'https://the-meridian-protocols.github.io';
     const corsHeaders = {
-      'Access-Control-Allow-Origin':  'https://the-meridian-protocols.github.io',
+      'Access-Control-Allow-Origin':  allowedOrigin,
       'Access-Control-Allow-Methods': 'GET, OPTIONS',
       'Access-Control-Allow-Headers': 'Authorization, Content-Type',
     };
