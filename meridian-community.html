@@ -395,7 +395,7 @@ window.doPost=async()=>{
     el('p-body').value=''; el('p-protocol').value='';
     el('composer').classList.remove('open');
     loadPosts();
-  }catch(){ showErr(el('post-err'),'Could not submit. Please try again.'); }
+  }catch(e){ showErr(el('post-err'),'Could not submit. Please try again.'); }
 };
 
 window.doReport=async(id,btn)=>{
