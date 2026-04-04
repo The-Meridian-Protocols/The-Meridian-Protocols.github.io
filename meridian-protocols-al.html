@@ -662,8 +662,14 @@ if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
 // ── Worker URL — replace with your deployed Worker URL ────
 const WORKER_URL = 'https://meridian-worker.architectmeridian.workers.dev';
 
-// ── Auth state — show/hide audio player ────────────
+// ── Auth state — wait for Firebase to restore session ──
+var currentUser = null;
+var authReadyResolve;
+var authReady = new Promise(function(resolve) { authReadyResolve = resolve; });
+
 firebase.auth().onAuthStateChanged(function(user) {
+  currentUser = user;
+  authReadyResolve();
   document.querySelectorAll('.full-track-link').forEach(function(el) {
     el.style.display = user ? 'inline-flex' : 'none';
   });
@@ -692,8 +698,9 @@ async function playFull(trackFile, protocolName, protocolId) {
   if (btn) btn.textContent = 'Loading...';
 
   try {
-    // Get Firebase ID token
-    var user = firebase.auth().currentUser;
+    // Wait for Firebase to restore session, then check auth
+    await authReady;
+    var user = currentUser;
     if (!user) { window.location.href = 'meridian-community.html?return=meridian-protocols-al.html'; return; }
     var token = await user.getIdToken();
 
