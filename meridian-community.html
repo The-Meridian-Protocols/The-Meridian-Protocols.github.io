@@ -291,7 +291,12 @@ let cu=null, cd=null;
 const returnTo=new URLSearchParams(window.location.search).get('return');
 
 onAuthStateChanged(auth, async u => {
-  if(u){ cu=u; const s=await getDoc(doc(db,'users',u.uid)); cd=s.exists()?s.data():{};  showIn(); }
+  if(u){
+    cu=u;
+    try { const s=await getDoc(doc(db,'users',u.uid)); cd=s.exists()?s.data():{};  }
+    catch(_){ cd={}; }
+    showIn();
+  }
   else { cu=null; cd=null; showOut(); }
   loadPosts();
 });
@@ -432,7 +437,16 @@ function el(id){return document.getElementById(id);}
 function showErr(e,m){e.textContent=m;e.classList.add('show');}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function friendlyErr(code){
-  const m={'auth/email-already-in-use':'That email is already registered. Please sign in instead.','auth/invalid-email':'Please enter a valid email address.','auth/weak-password':'Password must be at least 8 characters.','auth/user-not-found':'No account found with that email.','auth/wrong-password':'Incorrect password. Please try again.','auth/too-many-requests':'Too many attempts. Please wait a moment and try again.'};
+  const m={
+    'auth/email-already-in-use':'That email is already registered. Please sign in instead.',
+    'auth/invalid-email':'Please enter a valid email address.',
+    'auth/weak-password':'Password must be at least 8 characters.',
+    'auth/user-not-found':'No account found with that email.',
+    'auth/wrong-password':'Incorrect password. Please try again.',
+    'auth/invalid-credential':'Incorrect email or password. Please try again.',
+    'auth/too-many-requests':'Too many attempts. Please wait a moment and try again.',
+    'auth/network-request-failed':'Network error. Please check your connection and try again.'
+  };
   return m[code]||'Something went wrong. Please try again.';
 }
 </script>
