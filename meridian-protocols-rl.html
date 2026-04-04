@@ -248,13 +248,14 @@
     margin-top: 4px;
   }
   .full-track-link:hover { color: var(--gold); border-color: rgba(201,168,76,0.4); }
-  .full-track-link .ftl-icon { font-size: 0.8rem; opacity: 0.7; }   .full-track-signin {     display: inline-flex;     align-items: center;     gap: 8px;     font-size: 0.72rem;     letter-spacing: 0.14em;     text-transform: uppercase;     color: var(--gold);     text-decoration: none;     border: 1px solid rgba(201,168,76,0.3);     border-radius: 6px;     padding: 8px 16px;     background: rgba(201,168,76,0.05);     transition: color 0.2s, border-color 0.2s, background 0.2s;     width: fit-content;     margin-top: 4px;   }   .full-track-signin:hover {     color: var(--gold-light);     border-color: rgba(201,168,76,0.55);     background: rgba(201,168,76,0.1);   }
+  .full-track-link .ftl-icon { font-size: 0.8rem; opacity: 0.7; }
 
   @media (max-width: 520px) {
-    .preview-summary { padding: 18px 20px; gap: 10px; }
+    .preview-summary { padding: 16px 18px; gap: 8px; flex-direction: column; align-items: flex-start; }
     .preview-desc { display: none; }
-    .preview-right { flex-direction: row; align-items: center; gap: 12px; }
-    .preview-title { font-size: 1.15rem; }
+    .preview-meta { width: 100%; }
+    .preview-right { flex-direction: row; align-items: center; gap: 10px; width: 100%; justify-content: space-between; }
+    .preview-title { font-size: 1.05rem; }
     .freq-badge { font-size: 0.68rem; padding: 4px 10px; }
     .open-btn { font-size: 0.62rem; opacity: 1; }
     .protocol-body-inner { padding: 18px 20px 22px; }
@@ -267,12 +268,12 @@
 <body>
 
 <nav class="site-nav">
-  <div class="nav-inner">
+    <div class="nav-inner">
     <a class="nav-logo" href="index.html">The Meridian™</a>
     <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
-        <div class="nav-links">
+    <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="meridian-origin.html">Origin</a>
       <a href="meridian-ethics.html">Ethics</a>
@@ -288,9 +289,9 @@
         <div class="dropdown-menu">
           <a href="meridian-discussions.html">Discussion</a>
           <a href="meridian-writings.html">Writings</a>
-          <a href="meridian-support.html">Support</a>
         </div>
       </div>
+      <a href="meridian-support.html">Support</a>
       <a href="meridian-license.html">License</a>
     </div>
   </div>
@@ -837,7 +838,7 @@
 
   <footer>
     <p>© 2026 The Meridian™ · M.J. Cooper, LLC · All rights reserved · Personal, non-commercial use only</p>
-    <p style="margin-top:6px;"><a href="/cdn-cgi/l/email-protection#4c2d3e2f242538292f3821293e2528252d220c23393820232327622f2321"><span class="__cf_email__" data-cfemail="dcbdaebfb4b5a8b9bfa8b1b9aeb5b8b5bdb29cb3a9a8b0b3b3b7f2bfb3b1">[email&#160;protected]</span></a></p>
+    <p style="margin-top:6px;"><a href="mailto:architectmeridian@outlook.com">architectmeridian@outlook.com</a></p>
   </footer>
 
 </div>

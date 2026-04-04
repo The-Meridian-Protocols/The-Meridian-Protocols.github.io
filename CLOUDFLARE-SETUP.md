@@ -11,7 +11,7 @@ you — I'll explain what everything actually *means* as we go.
 Your site has three services talking to each other:
 
 - **Firebase** — handles your user accounts (sign up, sign in, sign out)
-- **Supabase** — stores your actual audio track files
+- **Cloudflare R2** — stores your audio track files (10 GB free, no bandwidth fees)
 - **Cloudflare Worker** — acts as a secure "gatekeeper" between the two
 
 Here's how it works when someone wants to listen to a track:
@@ -19,8 +19,8 @@ Here's how it works when someone wants to listen to a track:
 1. The listener signs in on your site (Firebase handles this)
 2. Their browser asks your Cloudflare Worker: *"Can I have this audio file?"*
 3. The Worker checks: *"Is this person actually signed in? Yes? OK."*
-4. The Worker asks Supabase for a **temporary link** to the audio file
-5. Supabase hands back a link that automatically expires after **2 hours**
+4. The Worker creates a **temporary link** directly to the audio file in R2
+5. The link automatically expires after **2 hours**
 6. The listener can play the track — but the link dies after 2 hours
 
 This means your audio files are never publicly accessible. No account = no access.
@@ -30,20 +30,21 @@ This means your audio files are never publicly accessible. No account = no acces
 ## What are "secrets" and why do they matter?
 
 Think of secrets like the keys to your house. You wouldn't tape them to the
-front door for everyone to see. Your Supabase key is especially sensitive —
-it's a master key that can access everything in your Supabase account.
+front door for everyone to see. Your R2 access keys are especially sensitive —
+they can read, write, and delete files in your storage.
 
 The safe way to handle this: Cloudflare has a locked vault where you store your
 keys privately. Your worker code simply says *"go get the key from the vault"*
 — the actual key value never appears in your code or on GitHub.
 
-You have three keys to store in that vault:
+You have four keys to store in that vault:
 
-| What it's called       | What it actually is |
-|------------------------|---------------------|
-| `FIREBASE_PROJECT_ID`  | The name of your Firebase project — `meridian-caf0d` |
-| `SUPABASE_URL`         | The web address of your Supabase project |
-| `SUPABASE_SERVICE_KEY` | Your Supabase master key (the long string of letters and numbers) |
+| What it's called        | What it actually is |
+|-------------------------|---------------------|
+| `FIREBASE_PROJECT_ID`   | The name of your Firebase project — `meridian-caf0d` |
+| `R2_ACCOUNT_ID`         | Your Cloudflare account ID |
+| `R2_ACCESS_KEY_ID`      | The Access Key ID from your R2 API token |
+| `R2_SECRET_ACCESS_KEY`  | The Secret from your R2 API token (the long string) |
 
 ---
 
@@ -73,6 +74,11 @@ In your terminal, type this and press Enter:
 npm install -g wrangler
 ```
 
+If you get a "permission denied" error, use this instead:
+```
+sudo npm install -g wrangler
+```
+
 You'll see a bunch of text scroll by — that's normal. When it stops, type:
 ```
 wrangler --version
@@ -94,7 +100,44 @@ for permission. Your terminal will confirm you're logged in.
 
 ---
 
-## Step 3 — Navigate to your website folder
+## Step 3 — Find your Cloudflare Account ID
+
+You'll need this for one of the secrets below.
+
+1. Go to **dash.cloudflare.com** and log in
+2. Click on any domain in your account (or just go to the main dashboard)
+3. On the right side of the page you'll see **Account ID** — it's a long string
+   of letters and numbers like `b0af59d37fa2ba8753ae0f65860807dc`
+4. Copy it and keep it somewhere handy
+
+---
+
+## Step 4 — Create your R2 API Token
+
+This gives the Worker permission to access your audio files. Think of it as
+creating a special key that only opens the audio storage cabinet.
+
+1. Go to **dash.cloudflare.com** and log in
+2. Click **R2** in the left sidebar
+3. Click **Manage R2 API Tokens** (top right of the R2 page)
+4. Click **Create API Token**
+5. Give it a name — something like `meridian-audio-reader`
+6. Under **Permissions**, select **Object Read Only**
+   (the Worker only needs to *read* files, not write or delete them)
+7. Under **Specify bucket(s)**, select your `meridian-audio` bucket
+8. Click **Create API Token**
+
+You'll see a page with two values — **this is the only time you'll see them**,
+so copy them right now before clicking away:
+
+- **Access Key ID** — looks like a short string of letters and numbers
+- **Secret Access Key** — a much longer string
+
+Paste both into a notes app or password manager before proceeding.
+
+---
+
+## Step 5 — Navigate to your website folder
 
 You need to tell your terminal where your website files live. Type `cd ` (with
 a space after it), then drag your website folder directly into the terminal
@@ -107,7 +150,7 @@ cd /Users/Jaci/Documents/The-Meridian-Protocols.github.io-main
 
 ---
 
-## Step 4 — Create your wrangler.toml file
+## Step 6 — Create your wrangler.toml file
 
 This file tells Cloudflare basic information about your worker. In your
 website folder, create a new text file called `wrangler.toml` and paste
@@ -125,9 +168,9 @@ ignore list).
 
 ---
 
-## Step 5 — Store your three secrets safely
+## Step 7 — Store your four secrets safely
 
-Now you'll put your three keys into Cloudflare's secure vault, one at a time.
+Now you'll put your four keys into Cloudflare's secure vault, one at a time.
 For each command below: type it in your terminal, press Enter, then paste the
 value when it asks you. You won't see what you paste (that's intentional,
 for security) — just paste and press Enter.
@@ -140,28 +183,31 @@ When prompted, paste: `meridian-caf0d`
 
 ---
 
-**Secret 2 — Supabase URL:**
+**Secret 2 — Cloudflare Account ID:**
 ```
-wrangler secret put SUPABASE_URL
+wrangler secret put R2_ACCOUNT_ID
 ```
-When prompted, paste: `https://xcunrbdtanmdkfavmabi.supabase.co`
+When prompted, paste the Account ID you found in Step 3.
 
 ---
 
-**Secret 3 — Supabase Service Key:**
+**Secret 3 — R2 Access Key ID:**
 ```
-wrangler secret put SUPABASE_SERVICE_KEY
+wrangler secret put R2_ACCESS_KEY_ID
 ```
-When prompted, paste your Supabase service role key. To find it:
-1. Go to **supabase.com** and open your project
-2. Click **Project Settings** (the gear icon in the left sidebar)
-3. Click **API**
-4. Under "Project API keys", find the row that says **service_role**
-5. Click the eye icon to reveal it, then copy and paste it into your terminal
+When prompted, paste the **Access Key ID** you got in Step 4.
 
 ---
 
-## Step 6 — Deploy your worker
+**Secret 4 — R2 Secret Access Key:**
+```
+wrangler secret put R2_SECRET_ACCESS_KEY
+```
+When prompted, paste the **Secret Access Key** you got in Step 4.
+
+---
+
+## Step 8 — Deploy your worker
 
 This is the final step — it sends your worker code up to Cloudflare's servers.
 Type this and press Enter:
@@ -173,10 +219,28 @@ wrangler deploy
 When it finishes, it will show you a URL that looks something like:
 `https://meridian-worker.YOUR-NAME.workers.dev`
 
-Copy that URL and keep it somewhere — you may need it later if you ever
-want to check that the worker is running.
+Your worker URL is: `https://meridian-worker.architectmeridian.workers.dev`
 
 **That's it! Your worker is live.** 🎉
+
+---
+
+## Uploading audio files to R2
+
+Your audio files need to be uploaded to your R2 bucket (`meridian-audio`)
+before the worker can serve them. Here's how:
+
+1. Go to **dash.cloudflare.com** and log in
+2. Click **R2** in the left sidebar
+3. Click on your `meridian-audio` bucket
+4. Click **Upload** and upload your MP3 files
+
+Your files need to be in a folder called `full` inside the bucket. So an
+audio file called `RL001.mp3` should be uploaded so its path inside the
+bucket is `full/RL001.mp3`.
+
+To create the folder structure: when uploading, in the destination path field,
+type `full/` before the filename.
 
 ---
 
@@ -205,19 +269,24 @@ The most common issues and what they mean:
 - **"error: not authenticated"** — Run `wrangler login` again.
 
 - **"no such file or directory"** — You're in the wrong folder.
-  Make sure you did Step 3 and navigated to your website folder first.
+  Make sure you did Step 5 and navigated to your website folder first.
+
+- **Audio won't play / "Could not generate audio URL"** — The R2 secrets
+  may not be set correctly. Re-run the `wrangler secret put` commands
+  from Step 7 to re-enter the values.
 
 - **Anything else** — Feel free to share the exact error message and I can
   help you work through it.
 
 ---
 
-## Quick reference — the three secrets
+## Quick reference — the four secrets
 
 Keep these somewhere safe (like a password manager), as you may need them again:
 
-| Secret name            | Where to find it |
-|------------------------|------------------|
-| `FIREBASE_PROJECT_ID`  | Always: `meridian-caf0d` |
-| `SUPABASE_URL`         | Supabase → Project Settings → API → Project URL |
-| `SUPABASE_SERVICE_KEY` | Supabase → Project Settings → API → service_role key |
+| Secret name             | Where to find it |
+|-------------------------|------------------|
+| `FIREBASE_PROJECT_ID`   | Always: `meridian-caf0d` |
+| `R2_ACCOUNT_ID`         | Cloudflare Dashboard → right sidebar → Account ID |
+| `R2_ACCESS_KEY_ID`      | Cloudflare → R2 → Manage R2 API Tokens |
+| `R2_SECRET_ACCESS_KEY`  | Cloudflare → R2 → Manage R2 API Tokens (only shown once!) |
