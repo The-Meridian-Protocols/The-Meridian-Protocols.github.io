@@ -98,27 +98,25 @@ export default {
 // ── Verify Firebase ID token using Google's public keys ────
 async function verifyFirebaseToken(idToken, projectId) {
   try {
-    // Fetch Google's public keys for Firebase
+    // Fetch Google's public keys for Firebase in JWK format
     const keysRes = await fetch(
-      'https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com'
+      'https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com'
     );
-    const keys = await keysRes.json();
+    const { keys } = await keysRes.json();
 
     // Decode token header to get key ID
     const [headerB64] = idToken.split('.');
     const header = JSON.parse(atob(headerB64.replace(/-/g,'+').replace(/_/g,'/')));
     const kid = header.kid;
 
-    if (!keys[kid]) return false;
+    // Find the matching JWK
+    const jwk = keys.find(k => k.kid === kid);
+    if (!jwk) return false;
 
-    // Import the public key
-    const pemKey = keys[kid];
-    const pemBody = pemKey.replace(/-----[^-]+-----/g,'').replace(/\s/g,'');
-    const derBuffer = Uint8Array.from(atob(pemBody), c => c.charCodeAt(0));
-
+    // Import the public key using JWK format (works correctly in Workers)
     const cryptoKey = await crypto.subtle.importKey(
-      'spki',
-      derBuffer.buffer,
+      'jwk',
+      jwk,
       { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
       false,
       ['verify']
