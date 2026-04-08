@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon-apple.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Meridian™ — Active Listening Protocols</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #e8e2d8;
+    --parchment: #16130f;
+    --gold: #c9a84c;
+    --gold-light: #dfc278;
+    --muted: #8a8278;
+    --rule: #2e2a24;
+    --card-bg: #1e1a15;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    line-height: 1.8;
+    font-size: 16px;
+  }
+
+  /* ── Nav ── */
+  .site-nav {
+    width: 100%;
+    border-bottom: 1px solid var(--rule);
+    background: rgba(22, 19, 15, 0.96);
+    position: relative;
+    z-index: 10;
+  }
+  .nav-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--gold); letter-spacing: 0.06em; white-space: nowrap; text-decoration: none; opacity: 0.85; }
+  .nav-links { display: flex; align-items: center; }
+  .nav-links a { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 16px 10px; transition: color 0.2s; white-space: nowrap; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--gold); }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+  .nav-toggle span { display: block; width: 22px; height: 1px; background: var(--muted); }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown > a { display: flex; align-items: center; gap: 4px; }
+  .nav-dropdown > a::after { content: '▾'; font-size: 0.6rem; opacity: 0.6; transition: transform 0.2s; }
+  .nav-dropdown:hover > a::after { transform: rotate(180deg); }
+  .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: rgba(22, 19, 15, 0.98); border: 1px solid var(--rule); border-top: none; border-radius: 0 0 6px 6px; min-width: 210px; z-index: 200; }
+  .nav-dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu a { display: block; padding: 12px 18px !important; border-top: 1px solid var(--rule); font-size: 0.68rem !important; letter-spacing: 0.12em; color: var(--muted) !important; white-space: nowrap; }
+  .dropdown-menu a:hover { color: var(--ink) !important; }
+  @media (max-width: 600px) {
+    .nav-toggle { display: flex; }
+    .nav-links { display: none; position: absolute; top: 52px; left: 0; right: 0; background: rgba(22, 19, 15, 0.98); border-bottom: 1px solid var(--rule); flex-direction: column; align-items: stretch; z-index: 100; }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 14px 24px; border-top: 1px solid var(--rule); font-size: 0.75rem; }
+    .nav-dropdown > a::after { display: none; }
+    .dropdown-menu { display: block; position: static; border: none; border-radius: 0; min-width: unset; background: transparent; }
+    .dropdown-menu a { padding-left: 40px !important; font-size: 0.72rem !important; background: rgba(0,0,0,0.15); }
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; padding: 60px 40px 60px; position: relative; z-index: 1; }
+  @media (max-width: 600px) { .page { padding: 40px 24px 60px; } }
+
+  /* ── Header ── */
+  header { text-align: center; margin-bottom: 64px; animation: fadeUp 1s ease both; }
+  .wordmark { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 300; letter-spacing: 0.12em; line-height: 1.2; }
+  .wordmark em { font-style: italic; color: var(--gold); }
+  .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--muted); margin-top: 10px; }
+  .rule-ornament { display: flex; align-items: center; gap: 16px; margin: 24px auto 0; width: fit-content; }
+  .rule-ornament span { display: block; height: 1px; width: 60px; background: var(--gold); opacity: 0.4; }
+  .rule-ornament i { color: var(--gold); font-style: normal; font-size: 0.85rem; opacity: 0.6; }
+
+  section { margin-bottom: 56px; animation: fadeUp 1s ease both; }
+  section:nth-child(2) { animation-delay: 0.08s; }
+  section:nth-child(3) { animation-delay: 0.16s; }
+  section:nth-child(4) { animation-delay: 0.24s; }
+
+  h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; letter-spacing: 0.04em; color: var(--ink); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+  h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); margin: 26px 0 10px; }
+  p { margin-bottom: 14px; color: #ccc6bc; }
+  strong { font-weight: 500; color: var(--ink); }
+  .lead { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: #a09890; line-height: 1.9; margin-bottom: 24px; }
+
+  /* Overview */
+  .overview-card { background: var(--card-bg); border: 1px solid var(--rule); border-radius: 8px; padding: 24px 28px; margin-bottom: 20px; }
+  .overview-card .tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: #a09890; margin-bottom: 14px; }
+  .req-list { list-style: none; font-size: 0.85rem; color: #9a9288; }
+  .req-list li { padding: 4px 0 4px 18px; position: relative; }
+  .req-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); opacity: 0.5; }
+
+  /* Safety */
+  .safety-box { background: var(--card-bg); border: 1px solid #3a2a1a; border-left: 3px solid #8a6030; border-radius: 0 6px 6px 0; padding: 18px 22px; margin-bottom: 32px; }
+  .safety-box .safety-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: #8a6030; margin-bottom: 10px; font-weight: 500; }
+  .safety-box ul { list-style: none; font-size: 0.83rem; color: #9a9288; }
+  .safety-box ul li { padding: 3px 0 3px 18px; position: relative; line-height: 1.5; }
+  .safety-box ul li::before { content: '⚠'; position: absolute; left: 0; font-size: 0.65rem; color: #8a6030; opacity: 0.7; top: 5px; }
+
+  /* ── Preview card ── */
+  .protocol-preview { background: var(--card-bg); border: 1px solid var(--rule); border-radius: 10px; margin-bottom: 16px; overflow: hidden; transition: border-color 0.25s; }
+  .protocol-preview:hover { border-color: #4a4035; }
+  .protocol-preview.open { border-color: rgba(201,168,76,0.35); }
+
+  .preview-summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 28px; cursor: pointer; user-select: none; flex-wrap: wrap; }
+  .preview-meta { flex: 1; min-width: 0; }
+  .preview-id { font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 5px; }
+  .preview-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: var(--ink); line-height: 1.2; margin-bottom: 5px; }
+  .preview-desc { font-family: 'Cormorant Garamond', serif; font-size: 0.92rem; font-style: italic; color: var(--muted); }
+  .preview-right { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; flex-shrink: 0; }
+  .freq-badge { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); border-radius: 20px; padding: 5px 14px; font-size: 0.74rem; color: var(--gold); letter-spacing: 0.08em; white-space: nowrap; }
+  .open-btn { font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); opacity: 0.6; display: flex; align-items: center; gap: 5px; transition: opacity 0.2s; white-space: nowrap; }
+  .open-btn .arrow { display: inline-block; transition: transform 0.35s ease; }
+  .protocol-preview.open .open-btn .arrow { transform: rotate(180deg); }
+  .protocol-preview.open .open-btn { opacity: 1; }
+  .preview-summary:hover .open-btn { opacity: 1; }
+
+  /* Reveal */
+  .protocol-body { max-height: 0; overflow: hidden; transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1); }
+  .protocol-body-inner { border-top: 1px solid var(--rule); padding: 26px 28px 28px; }
+
+  /* Inner content */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0 20px; }
+  @media (max-width: 520px) { .two-col { grid-template-columns: 1fr; } }
+  .mini-card { background: rgba(0,0,0,0.2); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; }
+  .mini-card .mini-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; font-weight: 500; }
+  .mini-card.yes .mini-label { color: var(--gold); }
+  .mini-card.no  .mini-label { color: #7a5a3a; }
+  .mini-card ul { list-style: none; font-size: 0.82rem; color: #9a9288; }
+  .mini-card ul li { padding: 3px 0 3px 16px; position: relative; line-height: 1.5; }
+  .mini-card.yes ul li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); opacity: 0.5; font-size: 0.5rem; top: 6px; }
+  .mini-card.no  ul li::before { content: '—'; position: absolute; left: 0; color: #7a5a3a; opacity: 0.6; }
+
+  .steps { list-style: none; counter-reset: steps; margin: 10px 0 20px; }
+  .steps li { counter-increment: steps; padding: 10px 0 10px 38px; position: relative; border-bottom: 1px solid var(--rule); font-size: 0.87rem; color: #9a9288; line-height: 1.6; }
+  .steps li:last-child { border-bottom: none; }
+  .steps li::before { content: counter(steps); position: absolute; left: 0; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold); opacity: 0.6; top: 8px; }
+
+  .dash-list { list-style: none; font-size: 0.87rem; color: #9a9288; margin: 8px 0 16px; }
+  .dash-list li { padding: 4px 0 4px 20px; position: relative; line-height: 1.6; }
+  .dash-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); opacity: 0.4; }
+
+  .notice-block { background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.18); border-radius: 8px; padding: 16px 20px; margin: 14px 0; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: #a09890; line-height: 1.9; }
+
+  .time-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0 20px; }
+  @media (max-width: 520px) { .time-grid { grid-template-columns: 1fr; } }
+  .time-card { background: rgba(0,0,0,0.2); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; }
+  .time-card .time-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 500; }
+  .time-card ul { list-style: none; font-size: 0.82rem; color: #9a9288; }
+  .time-card ul li { padding: 2px 0 2px 16px; position: relative; }
+  .time-card ul li::before { content: '—'; position: absolute; left: 0; color: var(--gold); opacity: 0.4; }
+
+  /* Journal link */
+  .journal-link { display: flex; align-items: center; justify-content: space-between; gap: 16px; background: var(--card-bg); border: 1px solid var(--rule); border-radius: 8px; padding: 20px 24px; text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
+  .journal-link:hover { border-color: #4a4035; transform: translateY(-1px); }
+  .jl-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 4px; }
+  .jl-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ink); }
+
+  footer { margin-top: 60px; padding-top: 20px; text-align: center; font-size: 0.72rem; color: #4a4640; letter-spacing: 0.06em; }
+  footer a { color: #4a4640; text-decoration: none; border-bottom: 1px solid #2e2a24; }
+  footer a:hover { color: var(--gold); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+  
+  .audio-player {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 20px 0 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .audio-player .ap-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .ap-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .play-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s, transform 0.15s;
+    font-size: 0.85rem;
+    padding: 0;
+  }
+  .play-btn:hover { background: rgba(201,168,76,0.22); transform: scale(1.05); }
+  .play-btn:active { transform: scale(0.97); }
+  .ap-progress {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .progress-bar-wrap {
+    width: 100%;
+    height: 3px;
+    background: var(--rule);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+    opacity: 0.7;
+  }
+  .ap-time {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .full-track-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 8px 16px;
+    transition: color 0.2s, border-color 0.2s;
+    width: fit-content;
+    margin-top: 4px;
+  }
+  .full-track-link:hover { color: var(--gold); border-color: rgba(201,168,76,0.4); }
+  .full-track-link .ftl-icon { font-size: 0.8rem; opacity: 0.7; }
+
+  @media (max-width: 520px) {
+    .preview-summary { padding: 16px 18px; gap: 8px; flex-direction: column; align-items: flex-start; }
+    .preview-desc { display: none; }
+    .preview-meta { width: 100%; }
+    .preview-right { flex-direction: row; align-items: center; gap: 10px; width: 100%; justify-content: space-between; }
+    .preview-title { font-size: 1.05rem; }
+    .freq-badge { font-size: 0.68rem; padding: 4px 10px; }
+    .open-btn { font-size: 0.62rem; opacity: 1; }
+    .protocol-body-inner { padding: 18px 20px 22px; }
+    .two-col { grid-template-columns: 1fr; }
+    .three-col { grid-template-columns: 1fr; }
+    .time-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+    <div class="nav-inner">
+    <a class="nav-logo" href="index.html">The Meridian™</a>
+    <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="meridian-origin.html">Origin</a>
+      <a href="meridian-ethics.html">Ethics</a>
+      <div class="nav-dropdown">
+        <a href="meridian-protocols.html" class="active">Protocols</a>
+        <div class="dropdown-menu">
+          <a href="meridian-protocols-al.html">Active Listening (AL)</a>
+          <a href="meridian-protocols-rl.html">Relaxed Listening (RL)</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="meridian-community.html">Community</a>
+        <div class="dropdown-menu">
+          <a href="meridian-discussions.html">Discussion</a>
+          <a href="meridian-writings.html">Writings</a>
+        </div>
+      </div>
+      <a href="meridian-support.html">Support</a>
+      <a href="meridian-license.html">License</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <header>
+    <div class="wordmark">The <em>Meridian</em></div>
+    <div class="subtitle">Active Listening Protocols</div>
+    <div class="rule-ornament"><span></span><i>◆</i><span></span></div>
+  </header>
+
+  <!-- Overview -->
+  <section>
+    <h2>About Active Listening</h2>
+    <p class="lead">For focused, upright activity — use these while actively doing something.</p>
+    <div class="overview-card">
+      <p class="tagline">Reading, writing, journaling, working. Your body is upright, your mind is engaged, and the protocol supports sustained attention and creative flow.</p>
+      <ul class="req-list">
+        <li>Seated or standing posture</li>
+        <li>Eyes open</li>
+        <li>Active mental engagement</li>
+        <li>Stereo headphones recommended</li>
+      </ul>
+    </div>
+    <div class="safety-box">
+      <div class="safety-label">Do not use while</div>
+      <ul>
+        <li>Driving or operating machinery</li>
+        <li>If you have epilepsy or a seizure disorder</li>
+        <li>If you are pregnant — consult your physician first</li>
+        <li>If you use a pacemaker or implanted medical device</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Protocols -->
+  <section>
+    <h2>AL Protocols</h2>
+    <p style="color:var(--muted); font-size:0.85rem; margin-bottom:20px;">Select a protocol to open its full guide.</p>
+
+    <!-- AL-001 -->
+    <div class="protocol-preview" id="al001">
+      <div class="preview-summary" onclick="toggleProtocol('al001')">
+        <div class="preview-meta">
+          <div class="preview-id">AL-001</div>
+          <div class="preview-title">Reading &amp; Focus</div>
+          <div class="preview-desc">Sustained concentration and mental clarity while studying or working</div>
+        </div>
+        <div class="preview-right">
+          <div class="freq-badge">14 Hz · Beta</div>
+          <div class="open-btn">Open Guide <span class="arrow">↓</span></div>
+        </div>
+      </div>
+      <div class="protocol-body" id="al001-body">
+        <div class="protocol-body-inner">
+          <h3>Purpose</h3>
+          <div class="two-col">
+            <div class="mini-card yes">
+              <div class="mini-label">Designed for</div>
+              <ul>
+                <li>Reading and studying</li>
+                <li>Learning new material</li>
+                <li>Sustained concentration</li>
+                <li>Mental clarity while processing information</li>
+              </ul>
+            </div>
+            <div class="mini-card no">
+              <div class="mini-label">Not intended for</div>
+              <ul>
+                <li>Meditation</li>
+                <li>Sleep</li>
+                <li>Creative brainstorming</li>
+                <li>Physical or movement-based tasks</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>How It Works</h3>
+          <p>Each ear receives a slightly different tone. Your brain perceives the difference as a steady rhythm — a process called entrainment — which can support attention and alertness. At 14 Hz, the target falls within the <strong>beta range</strong>, commonly associated with active thinking, information processing, and calm alertness.</p>
+
+          <h3>How to Use</h3>
+          <ol class="steps">
+            <li>Use stereo headphones</li>
+            <li>Set volume low and comfortable</li>
+            <li>Begin audio before starting to read</li>
+            <li>Read normally while the tones play in the background</li>
+          </ol>
+          <div class="notice-block">You do not need to concentrate on the sound. Let it remain subtle while you focus on your material.</div>
+
+          <h3>Session Length</h3>
+          <ul class="dash-list">
+            <li>25–30 minutes for short study sessions</li>
+            <li>45–60 minutes for deeper focus</li>
+            <li>Up to 90 minutes for extended reading</li>
+            <li>Avoid continuous use for several hours without breaks</li>
+            <li>Do not use close to bedtime</li>
+          </ul>
+
+          <h3>Best Times to Use</h3>
+          <div class="time-grid">
+            <div class="time-card">
+              <div class="time-label">Helpful during</div>
+              <ul>
+                <li>Morning or afternoon study</li>
+                <li>Reading sessions</li>
+                <li>Focused work periods</li>
+              </ul>
+            </div>
+            <div class="time-card">
+              <div class="time-label">Avoid during</div>
+              <ul>
+                <li>Late at night</li>
+                <li>When feeling overstimulated</li>
+                <li>Creative or reflective practices</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>What You May Notice</h3>
+          <p>Effects may be subtle at first and vary by person. Some experience easier focus, less mental wandering, improved comprehension, and a smoother flow of attention. Regular use may help your mind associate this sound environment with a focused state.</p>
+          <div class="audio-player" style="margin-top:8px;background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.15);">
+            <div class="ap-label" style="color:var(--gold);opacity:.7;">🎧 Listen</div>
+            <a class="full-track-link" href="meridian-community.html?return=meridian-protocols-al.html"><span class="ftl-icon">🔒</span> Sign in to listen</a>
+            <div class="ap-controls">
+              <button class="play-btn" id="al001-full-btn"
+                onclick="playFull('al001-14hz.mp3', 'AL-001 — Reading & Focus', 'al001')"
+                style="background:rgba(201,168,76,0.08);">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 1.5L12 7L3 12.5V1.5Z" fill="currentColor"/></svg>
+              </button>
+              <div class="ap-progress">
+                <div class="progress-bar-wrap" onclick="seekFull(event,'al001')">
+                  <div class="progress-bar-fill" id="al001-full-fill"></div>
+                </div>
+                <div class="ap-time" id="al001-full-time">0:00 / —:——</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AL-002 -->
+    <div class="protocol-preview" id="al002">
+      <div class="preview-summary" onclick="toggleProtocol('al002')">
+        <div class="preview-meta">
+          <div class="preview-id">AL-002</div>
+          <div class="preview-title">Journaling &amp; Inner Dialogue</div>
+          <div class="preview-desc">Where awareness meets intuition — writing as a path to inner knowing</div>
+        </div>
+        <div class="preview-right">
+          <div class="freq-badge">9 Hz · Alpha–Theta</div>
+          <div class="open-btn">Open Guide <span class="arrow">↓</span></div>
+        </div>
+      </div>
+      <div class="protocol-body" id="al002-body">
+        <div class="protocol-body-inner">
+          <h3>Purpose</h3>
+          <div class="two-col">
+            <div class="mini-card yes">
+              <div class="mini-label">Designed for</div>
+              <ul>
+                <li>Journaling and self-reflection</li>
+                <li>Inner dialogue and guidance</li>
+                <li>Emotional processing</li>
+                <li>Creative expression</li>
+                <li>Receiving intuitive insight</li>
+              </ul>
+            </div>
+            <div class="mini-card no">
+              <div class="mini-label">Not intended for</div>
+              <ul>
+                <li>Focused analytical work</li>
+                <li>Deep sleep</li>
+                <li>Silent meditation</li>
+              </ul>
+            </div>
+          </div>
+          <div class="notice-block">This protocol supports the space where awareness meets intuition — where questions meet answers — where the conscious and subconscious can speak together.</div>
+
+          <h3>Why 9 Hz?</h3>
+          <p>At 9 Hz, sitting between Alpha and Theta brainwaves, this state allows relaxed awareness, creative flow, and subconscious access — while maintaining clear motor function for writing. You remain awake and present, while becoming more receptive to inner knowing.</p>
+          <ul class="dash-list">
+            <li>Writing while listening</li>
+            <li>Asking while receiving</li>
+            <li>Thinking while feeling</li>
+          </ul>
+
+          <h3>How to Use</h3>
+          <ol class="steps">
+            <li>Sit comfortably — not lying down</li>
+            <li>Have your journal and pen ready</li>
+            <li>Use headphones, volume low and gentle</li>
+            <li>Before starting, write your opening intention</li>
+            <li>Begin writing anything that comes — do not judge or edit</li>
+            <li>Let words move ahead of thought</li>
+          </ol>
+          <div class="notice-block">
+            <span style="display:block; margin-bottom:6px; font-size:0.75rem; color:#7a7268; font-family:'Jost',sans-serif; font-style:normal; letter-spacing:0.12em; text-transform:uppercase;">Opening intention</span>
+            "I open myself to receive guidance from within. I trust what arises. Let the dialogue begin."
+          </div>
+
+          <h3>What to Expect</h3>
+          <ul class="dash-list">
+            <li>At first — subtle effects, easier flow, occasional insight</li>
+            <li>With regular use — faster entry into flow, clearer inner voice</li>
+            <li>Over time — writing becomes a form of meditation, insight becomes more consistent</li>
+          </ul>
+          <div class="notice-block">Let the sound hold the space while the truth writes itself.</div>
+          <div class="audio-player" style="margin-top:8px;background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.15);">
+            <div class="ap-label" style="color:var(--gold);opacity:.7;">🎧 Listen</div>
+            <a class="full-track-link" href="meridian-community.html?return=meridian-protocols-al.html"><span class="ftl-icon">🔒</span> Sign in to listen</a>
+            <div class="ap-controls">
+              <button class="play-btn" id="al002-full-btn"
+                onclick="playFull('al002-9hz.mp3', 'AL-002 — Journaling & Inner Dialogue', 'al002')"
+                style="background:rgba(201,168,76,0.08);">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 1.5L12 7L3 12.5V1.5Z" fill="currentColor"/></svg>
+              </button>
+              <div class="ap-progress">
+                <div class="progress-bar-wrap" onclick="seekFull(event,'al002')">
+                  <div class="progress-bar-fill" id="al002-full-fill"></div>
+                </div>
+                <div class="ap-time" id="al002-full-time">0:00 / —:——</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journal -->
+  <section>
+    <h2>Session Journal</h2>
+    <p>Each AL session is paired with a journal template for tracking your intention, task, and reflections. Fill it out on screen or print it.</p>
+    <a class="journal-link" href="meridian-journal-al.html">
+      <div>
+        <div class="jl-label">Active Listening</div>
+        <div class="jl-title">Open Session Journal</div>
+      </div>
+      <span style="color:var(--gold); opacity:0.6; font-size:1.2rem;">→</span>
+    </a>
+  </section>
+
+  <footer>
+    <p>© 2026 The Meridian™ · M.J. Cooper, LLC · All rights reserved · Personal, non-commercial use only</p>
+    <p style="margin-top:6px;"><a href="mailto:architectmeridian@outlook.com">architectmeridian@outlook.com</a></p>
+  </footer>
+
+</div>
+
+<script>
+window.MERIDIAN_PROTOCOLS = [
+  { file: 'al001-14hz',  btnId: 'al001-audio-btn', fillId: 'al001-audio-fill', timeId: 'al001-audio-time' },
+  { file: 'al002-9hz',   btnId: 'al002-audio-btn', fillId: 'al002-audio-fill', timeId: 'al002-audio-time' },
+];
+</script>
+
+<script>
+// ── Audio player ──────────────────────────────────────────
+var players = {};
+
+function togglePlay(id) {
+  var btn = document.getElementById(id + '-btn');
+  var src = btn ? btn.dataset.src : null;
+
+  if (!players[id]) {
+    var audio = new Audio(src);
+    players[id] = { audio: audio, playing: false };
+    audio.addEventListener('timeupdate', function() {
+      var fill = document.getElementById(id + '-fill');
+      var time = document.getElementById(id + '-time');
+      if (!audio.duration) return;
+      if (fill) fill.style.width = ((audio.currentTime / audio.duration) * 100) + '%';
+      if (time) time.textContent = fmtTime(audio.currentTime) + ' / ' + fmtTime(audio.duration);
+    });
+    audio.addEventListener('ended', function() {
+      setPlay(id, false);
+      var fill = document.getElementById(id + '-fill');
+      if (fill) fill.style.width = '0%';
+    });
+  }
+
+  var p = players[id];
+  if (p.playing) {
+    p.audio.pause(); setPlay(id, false);
+  } else {
+    Object.keys(players).forEach(function(pid) {
+      if (pid !== id && players[pid].playing) {
+        players[pid].audio.pause(); setPlay(pid, false);
+      }
+    });
+    p.audio.play(); setPlay(id, true);
+  }
+}
+
+function setPlay(id, playing) {
+  if (players[id]) players[id].playing = playing;
+  var btn = document.getElementById(id + '-btn');
+  if (!btn) return;
+  btn.innerHTML = playing
+    ? '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="1" width="4" height="12" rx="1" fill="currentColor"/><rect x="8" y="1" width="4" height="12" rx="1" fill="currentColor"/></svg>'
+    : '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 1.5L12 7L3 12.5V1.5Z" fill="currentColor"/></svg>';
+}
+
+function seekAudio(e, id) {
+  var p = players[id];
+  if (!p || !p.audio.duration) return;
+  var rect = e.currentTarget.getBoundingClientRect();
+  p.audio.currentTime = ((e.clientX - rect.left) / rect.width) * p.audio.duration;
+}
+
+function fmtTime(s) {
+  var m = Math.floor(s / 60);
+  return m + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+}
+
+function toggleProtocol(id) {
+  var card = document.getElementById(id);
+  var body = document.getElementById(id + '-body');
+  var isOpen = card.classList.contains('open');
+  document.querySelectorAll('.protocol-preview').forEach(function(c) {
+    c.classList.remove('open');
+    var b = document.getElementById(c.id + '-body');
+    if (b) b.style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    card.classList.add('open');
+    body.style.maxHeight = body.scrollHeight + 'px';
+    setTimeout(function() { card.scrollIntoView({behavior:'smooth',block:'start'}); }, 80);
+  }
+}
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+// ── Firebase config ───────────────────────────────────────
+const firebaseConfig = {
+  apiKey:            "AIzaSyBcXnFJV-ID_7dYxWAQBLs_DVYj_U_X_UQ",
+  authDomain:        "meridian-caf0d.firebaseapp.com",
+  projectId:         "meridian-caf0d",
+  storageBucket:     "meridian-caf0d.firebasestorage.app",
+  messagingSenderId: "1009618698372",
+  appId:             "1:1009618698372:web:a1d558cc120ce3da2fc2d1"
+};
+if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+
+// ── Worker URL — replace with your deployed Worker URL ────
+const WORKER_URL = 'https://meridian-worker.architectmeridian.workers.dev';
+
+// ── Auth state — wait for Firebase to restore session ──
+var currentUser = null;
+var authReadyResolve;
+var authReady = new Promise(function(resolve) { authReadyResolve = resolve; });
+
+firebase.auth().onAuthStateChanged(function(user) {
+  currentUser = user;
+  authReadyResolve();
+  document.querySelectorAll('.full-track-link').forEach(function(el) {
+    el.style.display = user ? 'none' : 'inline-flex';
+  });
+});
+
+// ── Audio player (auth required) ────────────────────
+var fullAudio = null;
+var currentFullId = null;
+
+async function playFull(trackFile, protocolName, protocolId) {
+  var btn = document.getElementById(protocolId + '-full-btn');
+
+  // Stop if already playing this track
+  if (currentFullId === protocolId && fullAudio && !fullAudio.paused) {
+    fullAudio.pause();
+    setFullState(protocolId, false);
+    return;
+  }
+
+  // Stop any currently playing full track
+  if (fullAudio) { fullAudio.pause(); fullAudio.src = ''; }
+  if (currentFullId && currentFullId !== protocolId) {
+    setFullState(currentFullId, false);
+  }
+
+  if (btn) btn.textContent = 'Loading...';
+
+  try {
+    // Wait for Firebase to restore session, then check auth
+    await authReady;
+    var user = currentUser;
+    if (!user) { window.location.href = 'meridian-community.html?return=meridian-protocols-al.html'; return; }
+    var token = await user.getIdToken();
+
+    // Request signed URL from Worker
+    var res = await fetch(WORKER_URL + '/api/audio-url?track=' + encodeURIComponent(trackFile), {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+
+    if (!res.ok) throw new Error('Could not get audio URL');
+    var data = await res.json();
+
+    // Create audio element
+    fullAudio = new Audio(data.url);
+    currentFullId = protocolId;
+
+    fullAudio.addEventListener('timeupdate', function() {
+      var fill = document.getElementById(protocolId + '-full-fill');
+      var time = document.getElementById(protocolId + '-full-time');
+      if (!fullAudio.duration) return;
+      if (fill) fill.style.width = (fullAudio.currentTime / fullAudio.duration * 100) + '%';
+      if (time) time.textContent = fmtTime(fullAudio.currentTime) + ' / ' + fmtTime(fullAudio.duration);
+    });
+
+    fullAudio.addEventListener('ended', function() {
+      setFullState(protocolId, false);
+      var fill = document.getElementById(protocolId + '-full-fill');
+      if (fill) fill.style.width = '0%';
+      if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'none';
+    });
+
+    await fullAudio.play();
+    setFullState(protocolId, true);
+
+    // ── Media Session (lock screen controls) ─────────────
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title:  protocolName,
+        artist: 'The Meridian',
+        album:  'Neuro-Acoustic Protocols',
+      });
+      navigator.mediaSession.setActionHandler('play', function() {
+        fullAudio.play();
+        setFullState(protocolId, true);
+        navigator.mediaSession.playbackState = 'playing';
+      });
+      navigator.mediaSession.setActionHandler('pause', function() {
+        fullAudio.pause();
+        setFullState(protocolId, false);
+        navigator.mediaSession.playbackState = 'paused';
+      });
+      navigator.mediaSession.setActionHandler('seekto', function(details) {
+        if (details.seekTime !== undefined) fullAudio.currentTime = details.seekTime;
+      });
+      navigator.mediaSession.playbackState = 'playing';
+    }
+
+  } catch(e) {
+    if (btn) btn.textContent = '↗ Listen in Full';
+    console.error('Full track error:', e);
+  }
+}
+
+function setFullState(id, playing) {
+  var btn = document.getElementById(id + '-full-btn');
+  if (btn) btn.textContent = playing ? '⏸ Pause' : '↗ Listen in Full';
+}
+
+function seekFull(e, id) {
+  if (!fullAudio || !fullAudio.duration || currentFullId !== id) return;
+  var rect = e.currentTarget.getBoundingClientRect();
+  fullAudio.currentTime = ((e.clientX - rect.left) / rect.width) * fullAudio.duration;
+}
+
+function fmtTime(s) {
+  var m = Math.floor(s / 60);
+  return m + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+}
+</script>
+</body>
+</html>
