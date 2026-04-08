@@ -436,6 +436,7 @@
           <p>Effects may be subtle at first and vary by person. Some experience easier focus, less mental wandering, improved comprehension, and a smoother flow of attention. Regular use may help your mind associate this sound environment with a focused state.</p>
           <div class="audio-player" style="margin-top:8px;background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.15);">
             <div class="ap-label" style="color:var(--gold);opacity:.7;">🎧 Listen</div>
+            <a class="full-track-link" href="meridian-community.html?return=meridian-protocols-al.html"><span class="ftl-icon">🔒</span> Sign in to listen</a>
             <div class="ap-controls">
               <button class="play-btn" id="al001-full-btn"
                 onclick="playFull('al001-14hz.mp3', 'AL-001 — Reading & Focus', 'al001')"
@@ -523,6 +524,7 @@
           <div class="notice-block">Let the sound hold the space while the truth writes itself.</div>
           <div class="audio-player" style="margin-top:8px;background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.15);">
             <div class="ap-label" style="color:var(--gold);opacity:.7;">🎧 Listen</div>
+            <a class="full-track-link" href="meridian-community.html?return=meridian-protocols-al.html"><span class="ftl-icon">🔒</span> Sign in to listen</a>
             <div class="ap-controls">
               <button class="play-btn" id="al002-full-btn"
                 onclick="playFull('al002-9hz.mp3', 'AL-002 — Journaling & Inner Dialogue', 'al002')"
@@ -671,7 +673,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   currentUser = user;
   authReadyResolve();
   document.querySelectorAll('.full-track-link').forEach(function(el) {
-    el.style.display = user ? 'inline-flex' : 'none';
+    el.style.display = user ? 'none' : 'inline-flex';
   });
 });
 

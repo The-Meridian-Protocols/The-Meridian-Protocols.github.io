@@ -403,6 +403,7 @@
           </div>
           <div class="audio-player" style="margin-top:8px;background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.15);">
             <div class="ap-label" style="color:var(--gold);opacity:.7;">🎧 Listen</div>
+            <a class="full-track-link" href="meridian-community.html?return=meridian-protocols-rl.html"><span class="ftl-icon">🔒</span> Sign in to listen</a>
             <div class="ap-controls">
               <button class="play-btn" id="rl001-full-btn"
                 onclick="playFull('rl001-7.83hz.mp3', 'RL-001 — Heart Coherence', 'rl001')"
@@ -503,6 +504,7 @@
           </div>
           <div class="audio-player" style="margin-top:8px;background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.15);">
             <div class="ap-label" style="color:var(--gold);opacity:.7;">🎧 Listen</div>
+            <a class="full-track-link" href="meridian-community.html?return=meridian-protocols-rl.html"><span class="ftl-icon">🔒</span> Sign in to listen</a>
             <div class="ap-controls">
               <button class="play-btn" id="rl002-full-btn"
                 onclick="playFull('rl002-6.5hz.mp3', 'RL-002 — Theta Portal', 'rl002')"
@@ -598,6 +600,7 @@
           </div>
           <div class="audio-player" style="margin-top:8px;background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.15);">
             <div class="ap-label" style="color:var(--gold);opacity:.7;">🎧 Listen</div>
+            <a class="full-track-link" href="meridian-community.html?return=meridian-protocols-rl.html"><span class="ftl-icon">🔒</span> Sign in to listen</a>
             <div class="ap-controls">
               <button class="play-btn" id="rl003-full-btn"
                 onclick="playFull('rl003-6.82hz.mp3', 'RL-003 — Multi-Layered Theta Harmonics', 'rl003')"
@@ -691,6 +694,7 @@
           </div>
           <div class="audio-player" style="margin-top:8px;background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.15);">
             <div class="ap-label" style="color:var(--gold);opacity:.7;">🎧 Listen</div>
+            <a class="full-track-link" href="meridian-community.html?return=meridian-protocols-rl.html"><span class="ftl-icon">🔒</span> Sign in to listen</a>
             <div class="ap-controls">
               <button class="play-btn" id="rl004-full-btn"
                 onclick="playFull('rl004-42.37hz.mp3', 'RL-004 — Oxygen', 'rl004')"
@@ -788,6 +792,7 @@
           </div>
           <div class="audio-player" style="margin-top:8px;background:rgba(201,168,76,0.04);border-color:rgba(201,168,76,0.15);">
             <div class="ap-label" style="color:var(--gold);opacity:.7;">🎧 Listen</div>
+            <a class="full-track-link" href="meridian-community.html?return=meridian-protocols-rl.html"><span class="ftl-icon">🔒</span> Sign in to listen</a>
             <div class="ap-controls">
               <button class="play-btn" id="rl005-full-btn"
                 onclick="playFull('rl005-2.5hz.mp3', 'RL-005 — Delta-Theta Bridge', 'rl005')"
@@ -940,7 +945,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   currentUser = user;
   authReadyResolve();
   document.querySelectorAll('.full-track-link').forEach(function(el) {
-    el.style.display = user ? 'inline-flex' : 'none';
+    el.style.display = user ? 'none' : 'inline-flex';
   });
 });
 
