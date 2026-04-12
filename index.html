@@ -336,6 +336,118 @@
     text-align: center;
   }
 
+  /* ── Binaural frequency explainer ── */
+  .binaural-explainer h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 24px 0 8px;
+  }
+  .binaural-example {
+    background: var(--card-bg);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 16px 0;
+  }
+  .binaural-example p { margin-bottom: 6px; font-size: 0.88rem; color: #9a9288; }
+  .binaural-example strong { color: var(--ink); }
+  .freq-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+    font-size: 0.84rem;
+  }
+  .freq-table td {
+    padding: 7px 12px;
+    border-bottom: 1px solid var(--rule);
+    color: #9a9288;
+  }
+  .freq-table td:first-child { color: var(--gold); font-weight: 500; white-space: nowrap; }
+  .freq-table tr:last-child td { border-bottom: none; }
+
+  /* ── Protocol chooser cards ── */
+  .chooser {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 8px;
+  }
+  @media (max-width: 520px) { .chooser { grid-template-columns: 1fr; } }
+  .chooser-card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 28px 24px;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.25s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .chooser-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .chooser-card:hover { border-color: #4a4035; transform: translateY(-2px); }
+  .chooser-card:hover::before { opacity: 0.6; }
+  .chooser-card .badge {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .chooser-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .chooser-card .tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .chooser-card p { font-size: 0.84rem; color: #9a9288; margin-bottom: 20px; line-height: 1.65; }
+  .chooser-card .reqs {
+    list-style: none;
+    font-size: 0.8rem;
+    color: #7a7268;
+    border-top: 1px solid var(--rule);
+    padding-top: 14px;
+  }
+  .chooser-card .reqs li { padding: 3px 0 3px 16px; position: relative; }
+  .chooser-card .reqs li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    opacity: 0.4;
+  }
+  .chooser-card .cta {
+    display: inline-block;
+    margin-top: 18px;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+  .chooser-card:hover .cta { opacity: 1; }
+
   /* ── Safety block ── */
   .safety-box {
     background: var(--card-bg);
@@ -509,6 +621,65 @@
     </ul>
 
     <p>Rather than offering belief systems or promises, The Meridian offers <strong>structured listening experiences</strong> that users can explore and evaluate for themselves. It is offered as a tool — not a belief system.</p>
+  </section>
+
+  <!-- What Is a Binaural Frequency -->
+  <section class="binaural-explainer">
+    <h2>What Is a Binaural Frequency</h2>
+    <p>Binaural frequencies encourage synchronization between the left and right hemispheres of the brain, allowing analytical (left-brain) and creative (right-brain) processes to work together more coherently.</p>
+
+    <h3>The Science</h3>
+    <p>When each ear receives a slightly different tone, the brain blends them into a single rhythmic pulse — a "phantom" frequency created by the difference between the two tones. This is known as a <strong>binaural frequency</strong>.</p>
+    <p>That internal rhythm can guide brain activity into a more synchronized and receptive state.</p>
+
+    <div class="binaural-example">
+      <p><strong>Example:</strong></p>
+      <p>Right ear: 256 Hz</p>
+      <p>Left ear: 242 Hz</p>
+      <p><strong>Brain perceives: 14 Hz</strong></p>
+      <p style="margin-top:10px;">Your brain naturally aligns with this perceived frequency through a process called <strong>entrainment</strong>, allowing you to guide your mental state intentionally.</p>
+    </div>
+
+    <table class="freq-table">
+      <tr><td>Delta (0.5–4 Hz)</td><td>Deep sleep, healing</td></tr>
+      <tr><td>Theta (4–8 Hz)</td><td>Meditation, creativity, subconscious access</td></tr>
+      <tr><td>Alpha (8–12 Hz)</td><td>Relaxed awareness, flow</td></tr>
+      <tr><td>Beta (12–30 Hz)</td><td>Focus, active thinking</td></tr>
+      <tr><td>Gamma (30–100 Hz)</td><td>Peak states, integration</td></tr>
+    </table>
+  </section>
+
+  <!-- Choose Your Protocol -->
+  <section>
+    <h2>Choose Your Protocol</h2>
+    <div class="chooser">
+      <a class="chooser-card" href="meridian-protocols-al.html">
+        <div class="badge">AL</div>
+        <h3>Active Listening</h3>
+        <div class="tagline">For focused, upright activity</div>
+        <p>Use while actively doing something — reading, writing, journaling, or working. Your body is upright, your mind is engaged.</p>
+        <ul class="reqs">
+          <li>Seated or standing</li>
+          <li>Eyes open</li>
+          <li>Active mental engagement</li>
+          <li>Stereo headphones recommended</li>
+        </ul>
+        <span class="cta">Explore AL →</span>
+      </a>
+      <a class="chooser-card" href="meridian-protocols-rl.html">
+        <div class="badge">RL</div>
+        <h3>Relaxed Listening</h3>
+        <div class="tagline">For meditation &amp; deep internal states</div>
+        <p>Use while lying down or sitting in meditation. Your body is still, your focus is internal, and the protocol guides you deeper.</p>
+        <ul class="reqs">
+          <li>Lying down or meditation posture</li>
+          <li>Eyes closed or eye mask</li>
+          <li>No active tasks</li>
+          <li>Stereo headphones required</li>
+        </ul>
+        <span class="cta">Explore RL →</span>
+      </a>
+    </div>
   </section>
 
   <!-- How It Works -->
