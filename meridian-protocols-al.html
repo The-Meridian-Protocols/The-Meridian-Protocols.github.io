@@ -631,32 +631,12 @@ function toggleProtocol(id) {
 }
 </script>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-<script>
-// ── Firebase config ───────────────────────────────────────
-const firebaseConfig = {
-  apiKey:            "AIzaSyBcXnFJV-ID_7dYxWAQBLs_DVYj_U_X_UQ",
-  authDomain:        "meridian-caf0d.firebaseapp.com",
-  projectId:         "meridian-caf0d",
-  storageBucket:     "meridian-caf0d.firebasestorage.app",
-  messagingSenderId: "1009618698372",
-  appId:             "1:1009618698372:web:a1d558cc120ce3da2fc2d1"
-};
-if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-
-// ── Auth state ────────────────────────────────────────────
-// Audio delivery is coming soon. Firebase auth is retained here
-// for future use when the distribution source is connected.
-// ============================================================
-// TO RESTORE AUDIO: replace the [AUDIO_PLACEHOLDER] blocks in
-// the HTML above with the player markup, then reinstate the
-// worker URL, playFull(), seekFull(), fmtTime(), and
-// setFullState() functions from git history (commit b84ec80).
-// ============================================================
-firebase.auth().onAuthStateChanged(function(user) {
-  // Auth listener retained — no audio UI to update while placeholders are active
-});
-</script>
+<!-- ============================================================
+     AUDIO — COMING SOON
+     Firebase auth and Cloudflare Worker scripts removed.
+     TO RESTORE AUDIO: see git commit b84ec80 for the full
+     Firebase + Worker + audio player implementation.
+     Replace [AUDIO_PLACEHOLDER] blocks in the HTML above.
+     ============================================================ -->
 </body>
 </html>
