@@ -85,12 +85,39 @@
   .page { max-width: 900px; margin: 0 auto; padding: 60px 40px 60px; position: relative; z-index: 1; }
   @media (max-width: 600px) { .page { padding: 40px 24px 60px; } }
 
-  /* ── Header ── */
-  header { text-align: center; margin-bottom: 64px; animation: fadeUp 1s ease both; }
-  .wordmark { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 300; letter-spacing: 0.12em; line-height: 1.2; }
+/* ── Header ── */
+  header {
+    text-align: center;
+    margin-bottom: 64px;
+    animation: fadeUp 1s ease both;
+  }
+  .wordmark {
+    font-family: 'Jost', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+  }
   .wordmark em { font-style: italic; color: var(--gold); }
-  .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--muted); margin-top: 10px; }
-  .rule-ornament { display: flex; align-items: center; gap: 16px; margin: 24px auto 0; width: fit-content; }
+  .subtitle {
+    font-family: 'Jost', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.8;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .rule-ornament {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 24px auto 0;
+    width: fit-content;
+  }
   .rule-ornament span { display: block; height: 1px; width: 60px; background: var(--gold); opacity: 0.4; }
   .rule-ornament i { color: var(--gold); font-style: normal; font-size: 0.85rem; opacity: 0.6; }
 
@@ -101,7 +128,7 @@
 
   h2 {
     font-family: 'Jost', sans-serif;
-    font-size: 0.82rem;
+    font-size: 0.93rem;
     font-weight: 500;
     letter-spacing: 0.26em;
     text-transform: uppercase;
@@ -332,7 +359,8 @@
 
   <header>
     <div class="wordmark">The <em>Meridian</em></div>
-    <div class="rule-ornament"><span></span><i>◆</i><span></span></div>
+            <div class="rule-ornament">
+    </div>
     <div class="subtitle">Active Listening Protocols</div>
     
   </header>

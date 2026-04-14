@@ -177,14 +177,14 @@
   }
   @media (max-width: 600px) { .page { padding: 40px 24px 60px; } }
 
-  /* ── Header ── */
+ /* ── Header ── */
   header {
     text-align: center;
     margin-bottom: 64px;
     animation: fadeUp 1s ease both;
   }
   .wordmark {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Jost', sans-serif;
     font-size: clamp(2.2rem, 5vw, 3.4rem);
     font-weight: 300;
     letter-spacing: 0.12em;
@@ -192,12 +192,16 @@
   }
   .wordmark em { font-style: italic; color: var(--gold); }
   .subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-style: italic;
-    color: var(--muted);
-    margin-top: 10px;
-    letter-spacing: 0.05em;
+    font-family: 'Jost', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.8;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
   }
   .rule-ornament {
     display: flex;
@@ -208,7 +212,6 @@
   }
   .rule-ornament span { display: block; height: 1px; width: 60px; background: var(--gold); opacity: 0.4; }
   .rule-ornament i { color: var(--gold); font-style: normal; font-size: 0.85rem; opacity: 0.6; }
-
   /* ── Sections ── */
   section {
     margin-bottom: 52px;
@@ -482,9 +485,6 @@
   <header>
     <div class="wordmark">The <em>Meridian</em></div>
         <div class="rule-ornament">
-      <span></span>
-      <i>◆</i>
-      <span></span>
     </div>
     <div class="subtitle">Terms of Use &amp; License</div>
 
