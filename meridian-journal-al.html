@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="favicon-apple.png">
+  <link rel="icon" type="image/png" href="meridian-logo.png">
+  <link rel="apple-touch-icon" href="meridian-logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Meridian™ — AL Session Journal</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
     font-family: 'Jost', sans-serif;
     font-weight: 400;
     line-height: 1.8;
-    font-size: 16px;
+    font-size: 17px;
   }
 
   /* ── Nav ── */
@@ -38,7 +38,7 @@
     z-index: 10;
   }
   .nav-inner {
-    max-width: 720px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 0 24px;
     display: flex;
@@ -135,7 +135,7 @@
   }
 
   .page {
-    max-width: 720px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 60px 40px 80px;
     position: relative;
@@ -355,35 +355,35 @@
 </head>
 <body>
 <nav class="site-nav">
-    <div class="nav-inner">
+  <div class="nav-inner">
     <a class="nav-logo" href="index.html">The Meridian™</a>
-    <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+    <button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
     <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="meridian-origin.html">Origin</a>
-      <a href="meridian-ethics.html">Ethics</a>
+      <a href="index.html" class="active">About</a>
       <div class="nav-dropdown">
-        <a href="meridian-protocols.html" class="active">Protocols</a>
+        <a href="meridian-protocols.html">Protocols</a>
         <div class="dropdown-menu">
           <a href="meridian-protocols-al.html">Active Listening (AL)</a>
           <a href="meridian-protocols-rl.html">Relaxed Listening (RL)</a>
         </div>
       </div>
-      <div class="nav-dropdown">
-        <a href="meridian-community.html">Community</a>
-        <div class="dropdown-menu">
-          <a href="meridian-discussions.html">Discussion</a>
-          <a href="meridian-writings.html">Writings</a>
-        </div>
-      </div>
+      <a href="meridian-origin.html">Origin</a>
+      <a href="meridian-ethics.html">Ethics</a>
       <a href="meridian-support.html">Support</a>
       <a href="meridian-license.html">License</a>
     </div>
   </div>
 </nav>
-
+<!-- ── Hero ── -->
+<div class="hero">
+ 
+  <div class="hero-wordmark">The <em>Meridian</em><sup style="font-size:0.4em;vertical-align:top;color:var(--gold);opacity:0.7;margin-left:2px;">™</sup></div>
+  <div class="hero-ornament">
+    <span></span><i>◆</i><span></span>
+  </div>
+  <div class="hero-tagline">Active Listening — Session Journal</div>
 
 <div class="page">
 

@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="favicon-apple.png">
+  <link rel="icon" type="image/png" href="meridian-logo.png">
+  <link rel="apple-touch-icon" href="meridian-logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Meridian™ — Protocols</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
     font-family: 'Jost', sans-serif;
     font-weight: 400;
     line-height: 1.8;
-    font-size: 16px;
+    font-size: 17px;
   }
 
   /* ── Nav ── */
@@ -34,11 +34,12 @@
     width: 100%;
     border-bottom: 1px solid var(--rule);
     background: rgba(22, 19, 15, 0.96);
-    position: relative;
-    z-index: 10;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
   .nav-inner {
-    max-width: 720px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 0 24px;
     display: flex;
@@ -168,7 +169,7 @@
   }
 
   .page {
-    max-width: 720px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 60px 40px 60px;
     position: relative;
@@ -218,17 +219,19 @@
   section:nth-child(4) { animation-delay: 0.3s; }
 
   h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    letter-spacing: 0.04em;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
     color: var(--ink);
-    margin-bottom: 20px;
-    padding-bottom: 10px;
+    opacity: 0.8;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
     border-bottom: 1px solid var(--rule);
   }
 
-  p { margin-bottom: 14px; color: #cec8be; }
+  p { margin-bottom: 14px; color: #ccc6bc; }
   strong { font-weight: 500; color: var(--ink); }
 
   .lead {
@@ -393,6 +396,12 @@
   footer a { color: #4a4640; text-decoration: none; border-bottom: 1px solid #2e2a24; }
   footer a:hover { color: var(--gold); border-color: var(--gold); transition: color 0.2s; }
 
+    /* ── Footer ── */
+  footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--rule); font-size: 0.78rem; color: var(--muted); }
+  footer a { color: #4a4640; text-decoration: none; border-bottom: 1px solid #2e2a24; }
+  footer a:hover { color: var(--gold); border-bottom-color: var(--gold); transition: color 0.2s; }
+  .footer-rabbit { display: block; width: 28px; height: 28px; margin: 0 auto 12px; opacity: 0.12; filter: grayscale(1) brightness(1.4); border-radius: 50%; }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -402,15 +411,13 @@
 <body>
 
 <nav class="site-nav">
-    <div class="nav-inner">
+  <div class="nav-inner">
     <a class="nav-logo" href="index.html">The Meridian™</a>
-    <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+    <button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
     <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="meridian-origin.html">Origin</a>
-      <a href="meridian-ethics.html">Ethics</a>
+      <a href="index.html">About</a>
       <div class="nav-dropdown">
         <a href="meridian-protocols.html" class="active">Protocols</a>
         <div class="dropdown-menu">
@@ -418,13 +425,8 @@
           <a href="meridian-protocols-rl.html">Relaxed Listening (RL)</a>
         </div>
       </div>
-      <div class="nav-dropdown">
-        <a href="meridian-community.html">Community</a>
-        <div class="dropdown-menu">
-          <a href="meridian-discussions.html">Discussion</a>
-          <a href="meridian-writings.html">Writings</a>
-        </div>
-      </div>
+      <a href="meridian-origin.html">Origin</a>
+      <a href="meridian-ethics.html">Ethics</a>
       <a href="meridian-support.html">Support</a>
       <a href="meridian-license.html">License</a>
     </div>

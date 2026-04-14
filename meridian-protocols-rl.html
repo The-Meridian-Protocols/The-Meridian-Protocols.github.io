@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="favicon-apple.png">
+  <link rel="icon" type="image/png" href="meridian-logo.png">
+  <link rel="apple-touch-icon" href="meridian-logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Meridian™ — Relaxed Listening Protocols</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -20,11 +20,11 @@
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body { background: var(--parchment); color: var(--ink); font-family: 'Jost', sans-serif; font-weight: 300; line-height: 1.8; font-size: 16px; }
+  body { background: var(--parchment); color: var(--ink); font-family: 'Jost', sans-serif; font-weight: 300; line-height: 1.8; font-size: 17px; }
 
   /* ── Nav ── */
   .site-nav { width: 100%; border-bottom: 1px solid var(--rule); background: rgba(22, 19, 15, 0.96); position: relative; z-index: 10; }
-  .nav-inner { max-width: 720px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 52px; }
   .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--gold); letter-spacing: 0.06em; white-space: nowrap; text-decoration: none; opacity: 0.85; }
   .nav-links { display: flex; align-items: center; }
   .nav-links a { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 16px 10px; transition: color 0.2s; white-space: nowrap; }
@@ -52,7 +52,7 @@
 
   body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
 
-  .page { max-width: 720px; margin: 0 auto; padding: 60px 40px 60px; position: relative; z-index: 1; }
+  .page { max-width: 900px; margin: 0 auto; padding: 60px 40px 60px; position: relative; z-index: 1; }
   @media (max-width: 600px) { .page { padding: 40px 24px 60px; } }
 
   header { text-align: center; margin-bottom: 64px; animation: fadeUp 1s ease both; }
@@ -68,7 +68,18 @@
   section:nth-child(3) { animation-delay: 0.16s; }
   section:nth-child(4) { animation-delay: 0.24s; }
 
-  h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; letter-spacing: 0.04em; color: var(--ink); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+  h2 {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.8;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
   h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); margin: 26px 0 10px; }
   p { margin-bottom: 14px; color: #ccc6bc; }
   strong { font-weight: 500; color: var(--ink); }
@@ -76,7 +87,7 @@
 
   /* Overview */
   .overview-card { background: var(--card-bg); border: 1px solid var(--rule); border-radius: 8px; padding: 24px 28px; margin-bottom: 20px; }
-  .overview-card .tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: #a09890; margin-bottom: 14px; }
+  .overview-card .tagline { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--ink); opacity: .8; margin-bottom: 14px; }
   .req-list { list-style: none; font-size: 0.85rem; color: #9a9288; }
   .req-list li { padding: 4px 0 4px 18px; position: relative; }
   .req-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); opacity: 0.5; }
@@ -160,6 +171,12 @@
   footer { margin-top: 60px; padding-top: 20px; text-align: center; font-size: 0.72rem; color: #4a4640; letter-spacing: 0.06em; }
   footer a { color: #4a4640; text-decoration: none; border-bottom: 1px solid #2e2a24; }
   footer a:hover { color: var(--gold); }
+
+    /* ── Footer ── */
+  footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--rule); font-size: 0.78rem; color: var(--muted); }
+  footer a { color: #4a4640; text-decoration: none; border-bottom: 1px solid #2e2a24; }
+  footer a:hover { color: var(--gold); border-bottom-color: var(--gold); transition: color 0.2s; }
+  .footer-rabbit { display: block; width: 28px; height: 28px; margin: 0 auto 12px; opacity: 0.12; filter: grayscale(1) brightness(1.4); border-radius: 50%; }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -268,15 +285,13 @@
 <body>
 
 <nav class="site-nav">
-    <div class="nav-inner">
+  <div class="nav-inner">
     <a class="nav-logo" href="index.html">The Meridian™</a>
-    <button class="nav-toggle" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+    <button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
     <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="meridian-origin.html">Origin</a>
-      <a href="meridian-ethics.html">Ethics</a>
+      <a href="index.html">About</a>
       <div class="nav-dropdown">
         <a href="meridian-protocols.html" class="active">Protocols</a>
         <div class="dropdown-menu">
@@ -284,13 +299,8 @@
           <a href="meridian-protocols-rl.html">Relaxed Listening (RL)</a>
         </div>
       </div>
-      <div class="nav-dropdown">
-        <a href="meridian-community.html">Community</a>
-        <div class="dropdown-menu">
-          <a href="meridian-discussions.html">Discussion</a>
-          <a href="meridian-writings.html">Writings</a>
-        </div>
-      </div>
+      <a href="meridian-origin.html">Origin</a>
+      <a href="meridian-ethics.html">Ethics</a>
       <a href="meridian-support.html">Support</a>
       <a href="meridian-license.html">License</a>
     </div>
@@ -789,9 +799,9 @@
   </section>
 
   <footer>
-    <p>© 2026 The Meridian™ · M.J. Cooper, LLC · All rights reserved · Personal, non-commercial use only</p>
-    <p style="margin-top:6px;"><a href="mailto:architectmeridian@outlook.com">architectmeridian@outlook.com</a></p>
-  </footer>
+  <img src="favicon-512.png" alt="" class="footer-rabbit" aria-hidden="true">
+  <p>© 2026 The Meridian™ · M.J. Cooper, LLC · All rights reserved · Personal, non-commercial use only</p>
+</footer>
 
 </div>
 

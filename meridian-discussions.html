@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Meridian™ — Discussions</title>
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="apple-touch-icon" href="favicon-apple.png">
+<link rel="icon" type="image/png" href="meridian-logo.png">
+<link rel="apple-touch-icon" href="meridian-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{--ink:#e8e2d8;--parchment:#16130f;--gold:#c9a84c;--gold-light:#dfc278;--muted:#8a8278;--rule:#2e2a24;--card-bg:#1e1a15}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--parchment);color:var(--ink);font-family:'Jost',sans-serif;font-weight:400;line-height:1.8;font-size:16px}
+  body{background:var(--parchment);color:var(--ink);font-family:'Jost',sans-serif;font-weight:400;line-height:1.8;font-size:17px}
   .site-nav{width:100%;border-bottom:1px solid var(--rule);background:rgba(22,19,15,.96);position:relative;z-index:10}
-  .nav-inner{max-width:720px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px}
+  .nav-inner{max-width:900px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px}
   .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--gold);letter-spacing:.06em;white-space:nowrap;text-decoration:none;opacity:.85}
   .nav-links{display:flex;align-items:center}
   .nav-links a{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:16px 10px;transition:color .2s;white-space:nowrap}
@@ -35,12 +35,12 @@
     .dropdown-menu a{padding-left:40px!important;font-size:.72rem!important;background:rgba(0,0,0,.15)}
   }
   body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
-  .page{max-width:720px;margin:0 auto;padding:60px 40px 80px;position:relative;z-index:1}
+  .page{max-width:900px;margin:0 auto;padding:60px 40px 80px;position:relative;z-index:1}
   @media(max-width:600px){.page{padding:40px 24px 80px}}
   header{text-align:center;margin-bottom:56px;animation:fadeUp 1s ease both}
   .wordmark{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:300;letter-spacing:.12em;line-height:1.2}
   .wordmark em{font-style:italic;color:var(--gold)}
-  .subtitle{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--muted);margin-top:10px}
+  .subtitle{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--ink);opacity:.8;margin-top:10px}
   .rule-ornament{display:flex;align-items:center;gap:16px;margin:24px auto 0;width:fit-content}
   .rule-ornament span{display:block;height:1px;width:60px;background:var(--gold);opacity:.4}
   .rule-ornament i{color:var(--gold);font-style:normal;font-size:.85rem;opacity:.6}
