@@ -143,6 +143,15 @@
     animation: fadeUp 1s ease 0.1s both;
   }
   .hero-wordmark em { font-style: italic; color: var(--gold); }
+  .hero-wordmark::after {
+    content: '';
+    display: block;
+    width: 540px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.5;
+    margin: 6px auto 0;
+  }
   .hero-ornament {
     display: flex;
     align-items: center;

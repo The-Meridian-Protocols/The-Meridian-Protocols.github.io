@@ -326,6 +326,16 @@
   .contact-link::after  { content: ' ]'; opacity: 0.5; }
   .contact-link { color: var(--muted); text-decoration: none; letter-spacing: 0.1em; font-size: 0.78rem; transition: color 0.2s; }
   .contact-link:hover { color: var(--gold); }
+  .wordmark::after, .hero-wordmark::after {
+    content: "";
+    display: block;
+    width: 540px;
+    max-width: 90vw;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.5;
+    margin: 6px auto 0;
+  }
 </style>
 </head>
 <body>
