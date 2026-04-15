@@ -188,7 +188,7 @@
 
   <footer>
     <p>© 2026 The Meridian™ · M.J. Cooper, LLC · All rights reserved · Personal, non-commercial use only</p>
-    <p style="margin-top:6px"><a href="mailto:architectmeridian@outlook.com">architectmeridian@outlook.com</a></p>
+    <p style="margin-top:6px"><a href="#" class="contact-link" onclick="window.location.href='mail'+'to:'+atob('YXJjaGl0ZWN0bWVyaWRpYW5Ab3V0bG9vay5jb20=');return false;">Contact The Meridian</a></p>
   </footer>
 </div>
 
@@ -308,4 +308,4 @@ function makeCard(id, data) {
 }
 
 function showErr(e,m){e.textContent=m;e.classList.add('show');}
-function esc(s){return String(s
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}

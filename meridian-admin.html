@@ -127,7 +127,7 @@
 </div>
 
 <script type="module">
-const ADMIN_EMAIL = 'architectmeridian@outlook.com';
+const ADMIN_EMAIL = atob('YXJjaGl0ZWN0bWVyaWRpYW5Ab3V0bG9vay5jb20='); // encoded — do not replace with plain text
 
 import { auth, db } from './meridian-firebase.js';
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -207,8 +207,8 @@ function flaggedRow(id,d){
     <td><div class="post-preview">${esc(d.body)}</div></td>
     <td><div class="action-row">
       <button class="btn btn-restore" onclick="window._admin.restorePost('${id}')">Restore</button>
-      <button class="btn btn-remove" onclick="window._admin.deletePost('${id}')">Remove</button>
-      <button class="btn btn-ban" onclick="window._admin.banUser('${esc(d.authorUid)}','${id}')">Ban User</button>
+      <button class="btn btn-remove" onclick="window._admin.deletePost('${esc(id)}')">Remove</button>
+      <button class="btn btn-ban" onclick="window._admin.banUser('${esc(d.authorUid)}','${esc(id)}')">Ban User</button>
     </div></td>
   </tr>`;
 }
@@ -226,7 +226,7 @@ async function loadAllPosts(){
         <td><strong style="color:var(--ink)">${esc(data.authorName)}</strong><div style="font-size:.72rem;color:var(--muted)">${date}</div></td>
         <td style="font-size:.75rem;color:var(--gold)">${esc(data.protocol||'—')}</td>
         <td><div class="post-preview">${esc(data.body)}</div></td>
-        <td><div class="action-row"><button class="btn btn-remove" onclick="window._admin.deletePost('${d.id}')">Remove</button></div></td>
+        <td><div class="action-row"><button class="btn btn-remove" onclick="window._admin.deletePost('${esc(d.id)}')">Remove</button></div></td>
       </tr>`;
     }).join('');
     wrap.innerHTML=`<table><thead><tr><th>Author</th><th>Protocol</th><th>Content</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table>`;
@@ -248,8 +248,8 @@ async function loadUsers(){
         <td>${u.banned?'<span class="badge banned">Banned</span>':'<span class="badge approved">Active</span>'}</td>
         <td><div class="action-row">
           ${u.banned
-            ?`<button class="btn btn-unban" onclick="window._admin.unbanUser('${d.id}')">Unban</button>`
-            :`<button class="btn btn-ban" onclick="window._admin.banUserById('${d.id}')">Ban</button>`}
+            ?`<button class="btn btn-unban" onclick="window._admin.unbanUser('${esc(d.id)}')">Unban</button>`
+            :`<button class="btn btn-ban" onclick="window._admin.banUserById('${esc(d.id)}')">Ban</button>`}
         </div></td>
       </tr>`;
     }).join('');

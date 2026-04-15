@@ -278,7 +278,7 @@
 
   <footer>
     <p>© 2026 The Meridian™ · M.J. Cooper, LLC · All rights reserved · Personal, non-commercial use only</p>
-    <p style="margin-top:6px"><a href="mailto:architectmeridian@outlook.com">architectmeridian@outlook.com</a></p>
+    <p style="margin-top:6px"><a href="#" class="contact-link" onclick="window.location.href='mail'+'to:'+atob('YXJjaGl0ZWN0bWVyaWRpYW5Ab3V0bG9vay5jb20=');return false;">Contact The Meridian</a></p>
   </footer>
 </div>
 
@@ -288,7 +288,9 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, on
 import { collection, addDoc, getDocs, doc, setDoc, getDoc, query, orderBy, where, serverTimestamp, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 let cu=null, cd=null;
-const returnTo=new URLSearchParams(window.location.search).get('return');
+const _raw=new URLSearchParams(window.location.search).get('return');
+// Security: only allow same-origin redirects — blocks open redirect attacks
+const returnTo=_raw && (_raw.startsWith('/') || _raw.startsWith(window.location.origin)) && !_raw.startsWith('//') ? _raw : null;
 
 onAuthStateChanged(auth, async u => {
   if(u){
@@ -427,7 +429,7 @@ window.doContact=()=>{
   if(!message) return showErr(err,'Please write a message before sending.');
   const name=(cd?.firstName||'')+' '+(cd?.lastName||'');
   const body=`From: ${name}\nEmail: ${cu?.email||''}\nSubject: ${subject||'General'}\n\n${message}`;
-  window.location.href=`mailto:architectmeridian@outlook.com?subject=The Meridian — ${encodeURIComponent(subject||'Contact')}&body=${encodeURIComponent(body)}`;
+  window.location.href='mail'+'to:'+atob('YXJjaGl0ZWN0bWVyaWRpYW5Ab3V0bG9vay5jb20=')+'?subject='+encodeURIComponent(subject||'Contact')+'&body='+encodeURIComponent(body);
   el('contact-form').style.display='none';
   el('contact-success').style.display='block';
 };
@@ -435,7 +437,7 @@ window.doContact=()=>{
 function v(id){return document.getElementById(id).value.trim();}
 function el(id){return document.getElementById(id);}
 function showErr(e,m){e.textContent=m;e.classList.add('show');}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function friendlyErr(code){
   const m={
     'auth/email-already-in-use':'That email is already registered. Please sign in instead.',
