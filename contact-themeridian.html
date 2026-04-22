@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Meridian™ — Thank You</title>
+  <link rel="icon" type="image/png" href="meridian-logo.png">
+  <link rel="apple-touch-icon" href="meridian-logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#e8e2d8;--parchment:#16130f;--gold:#c9a84c;--gold-light:#dfc278;--muted:#8a8278;--rule:#2e2a24;--card-bg:#1e1a15}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--parchment);color:var(--ink);font-family:'Jost',sans-serif;font-weight:400;line-height:1.8;font-size:17px;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.6}
+  .wrap{position:relative;z-index:1;text-align:center;padding:40px 24px;max-width:520px;animation:fadeUp 1s ease both}
+  .ripple{width:96px;height:96px;margin:0 auto 32px;display:block;color:var(--gold);animation:fadeUp 1s ease .1s both, ripplePulse 6s ease-in-out 1.2s infinite}
+  .eyebrow{font-family:'Cormorant Garamond',serif;font-size:.75rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);opacity:.6;margin-bottom:16px;animation:fadeUp 1s ease .15s both}
+  .headline{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:300;letter-spacing:.06em;color:var(--ink);line-height:1.2;margin-bottom:22px;animation:fadeUp 1s ease .2s both}
+  .headline em{font-style:italic;color:var(--gold)}
+  .body-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:#a09890;line-height:1.85;margin-bottom:36px;animation:fadeUp 1s ease .25s both}
+  .rule-ornament{display:flex;align-items:center;gap:16px;margin:0 auto 36px;width:fit-content;animation:fadeUp 1s ease .3s both}
+  .rule-ornament span{display:block;height:1px;width:50px;background:var(--gold);opacity:.35}
+  .rule-ornament i{color:var(--gold);font-style:normal;font-size:.8rem;opacity:.5}
+  .home-link{display:inline-flex;align-items:center;gap:10px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid rgba(201,168,76,.35);border-radius:8px;padding:13px 28px;transition:all .25s;animation:fadeUp 1s ease .35s both}
+  .home-link:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.6);transform:translateY(-1px)}
+  .home-link::before{content:'←';font-size:.9rem;opacity:.7}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes ripplePulse{0%,100%{opacity:.55}50%{opacity:.9}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <svg class="ripple" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="40" cy="40" r="34" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.3"/>
+    <circle cx="40" cy="40" r="24" fill="none" stroke="currentColor" stroke-width="0.7" opacity="0.5"/>
+    <circle cx="40" cy="40" r="14" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.7"/>
+    <circle cx="40" cy="40" r="2.8" fill="currentColor" opacity="0.95"/>
+  </svg>
+  <div class="eyebrow">Received</div>
+  <div class="headline">Your message <em>has arrived.</em></div>
+  <div class="rule-ornament"><span></span><i>◆</i><span></span></div>
+  <p class="body-text">
+    Thank you for reaching out.<br>
+    Your words are welcomed here,<br>
+    and every note is read with care.
+  </p>
+  <a class="home-link" href="index.html">Return to The Meridian</a>
+</div>
+</body>
+</html>
