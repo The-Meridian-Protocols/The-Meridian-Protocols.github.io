@@ -427,6 +427,13 @@
   }
   .sn-body { font-size: .87rem; color: #9a9288; line-height: 1.75; margin: 0; }
   .sn-body strong { color: var(--ink); font-weight: 500; }
+  .sn-handles { list-style: none; margin: 22px 0 18px; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+  .sn-handles li { font-size: 0.92rem; color: #ccc6bc; line-height: 1.7; }
+  .sn-platform { font-family: 'Jost', sans-serif; font-size: 0.66rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); opacity: 0.85; margin-right: 10px; }
+  .sn-sep { color: var(--gold); opacity: 0.35; margin-right: 10px; }
+  .sn-handles a { color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.25); padding-bottom: 1px; transition: border-color 0.2s; }
+  .sn-handles a:hover { border-color: rgba(201,168,76,0.7); }
+  .sn-body-warn { margin-top: 16px !important; font-size: 0.84rem; }
 
   /* ── Footer ── */
   footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--rule); font-size: 0.78rem; color: var(--muted); }
@@ -582,9 +589,15 @@
   <!-- Social notice -->
   <section>
     <div class="social-notice">
-      <span class="sn-label">Important Notice</span>
-      <div class="sn-headline">The Meridian™ is not on social media.</div>
-      <p class="sn-body">I am not present on any social media platform. I utilize Spotify, Apple Music, Amazon Music to distribute my work. <strong>Any account bearing my name or The Meridian™ is not affiliated with this work and should be considered fake.</strong> This website is the only place The Meridian™ exists online.</p>
+      <span class="sn-label">Official Channels</span>
+      <div class="sn-headline">Where to find The Meridian™.</div>
+      <p class="sn-body">These accounts have been created solely to combat impersonation. They are held for verified presence only — comments and sharing are closed, and there is no active engagement here.</p>
+      <ul class="sn-handles">
+        <li><span class="sn-platform">Facebook</span><span class="sn-sep">·</span><a href="https://www.facebook.com/themeridianprotocols" target="_blank" rel="noopener">M.J. Cooper</a></li>
+        <li><span class="sn-platform">Instagram</span><span class="sn-sep">·</span><a href="https://www.instagram.com/themeridianprotocols/" target="_blank" rel="noopener">@themeridianprotocols</a></li>
+        <li><span class="sn-platform">TikTok</span><span class="sn-sep">·</span><a href="https://www.tiktok.com/@meridian.protocols" target="_blank" rel="noopener">@meridian.protocols</a></li>
+      </ul>
+      <p class="sn-body sn-body-warn"><strong>Any account bearing my name or The Meridian™ outside of these is not affiliated with this work and should be considered fake.</strong></p>
     </div>
   </section>
 
