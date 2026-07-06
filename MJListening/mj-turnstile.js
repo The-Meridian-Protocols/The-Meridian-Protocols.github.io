@@ -78,7 +78,7 @@
       'margin-bottom:22px',
       'text-align:center'
     ].join(';'));
-    status.textContent = 'One moment before the music…';
+    status.textContent = 'Before the music we will verify that you are human…';
 
     /* ── Turnstile widget container ── */
     var widgetWrap = document.createElement('div');
