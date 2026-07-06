@@ -10,19 +10,18 @@
 <meta name="description" content="A ticketed listening event in Tulsa: 28 seats, one record, played front to back with full attention.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<!-- Swapped to Syne for a striking, ultra-modern geometric heading aesthetic -->
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --room:#2B2E31;        /* dark/medium grey */
-    --room-deep:#232629;   /* deeper alcove */
-    --lamp:#E9EAE7;        /* soft off-white text */
-    --lamp-dim:#A6ABAF;    /* dimmed text */
-    --card:#F0EDE3;        /* the one lit thing: the catalog card */
-    --card-ink:#26282A;
-    --sage:#8FB3CC;        /* dusty blue accent (links) */
-    --brass:#7FA6C6;       /* primary blue accent */
-    --rule:#3D4145;        /* hairlines in the dark */
-    --card-rule:#D9D4C5;
+    --room: #12161a;         
+    --room-deep: #0a0d10;    
+    --lamp: #e4e7eb;         
+    --lamp-dim: #7c8691;     
+    --card: #171d24;         
+    --gold: #bfa373;         
+    --rule: #222a33;         
+    --card-rule: #29333e;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -33,354 +32,366 @@
   body{
     background:var(--room);
     color:var(--lamp);
-    font-family:'Lora', Georgia, serif;
-    font-size:1.12rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:1.02rem;
+    font-weight: 300;
     line-height:1.75;
     -webkit-font-smoothing:antialiased;
+    overflow-x: hidden;
   }
-  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 40px}
+  
   .eyebrow{
-    font-family:'Karla', sans-serif;
-    font-size:.9rem;
-    letter-spacing:.26em;
+    font-family:'Montserrat', sans-serif;
+    font-size:.7rem;
+    letter-spacing:.4em;
     text-transform:uppercase;
-    color:var(--brass);
-    font-weight:700;
+    color:var(--gold);
+    font-weight:500;
+    margin-bottom: 1.2rem;
   }
-  h1,h2,h3{font-family:'Karla', sans-serif;font-weight:600;line-height:1.1;color:var(--lamp);letter-spacing:.01em}
-  a{color:var(--sage)}
-  ::selection{background:var(--brass);color:var(--room)}
+  /* Modern geometric typeface configuration */
+  h1,h2,h3{font-family:'Syne', sans-serif;font-weight:700;line-height:1.1;color:var(--lamp);letter-spacing:-0.02em}
+  a{color:var(--gold);text-decoration:none;transition:color 0.3s ease;}
+  a:hover{color:var(--lamp);}
+  ::selection{background:var(--gold);color:var(--room)}
 
-  /* ---------- Hero ---------- */
+  /* ---------- Hero Section ---------- */
   .hero{
-    min-height:94vh;
-    min-height:94svh;
+    min-height:100vh;
+    min-height:100svh;
     display:flex;
     flex-direction:column;
     justify-content:center;
     position:relative;
     overflow:hidden;
+    border-bottom: 1px solid var(--rule);
+    background-image: linear-gradient(to right, rgba(18, 22, 26, 1) 40%, rgba(18, 22, 26, 0.4) 70%, rgba(18, 22, 26, 0.1) 100%), url('mjl.recordplay.png');
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
   }
-  .groove{
-    position:absolute;
-    right:-160px;
-    top:50%;
-    transform:translateY(-50%);
-    width:620px;height:620px;
-    opacity:.45;
-    pointer-events:none;
+
+  .hero-inner{position:relative;z-index:2; width: 100%;}
+  .hero h1 {
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    font-weight: 800;
+    margin: .2em 0 .3em;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    line-height: 1.05;
   }
-  .hero-inner{position:relative;z-index:1}
-  .hero h1{
-    font-size:clamp(2.9rem, 9.5vw, 5.8rem);
-    margin:.4em 0 .3em;
-    letter-spacing:-0.015em;
-    font-weight:700;
+  .hero h1 .name{
+    color: transparent;
+    -webkit-text-stroke: 1px var(--gold);
   }
-  .hero h1 .name{font-style:italic;color:var(--brass)}
   .hero .tag{
-    font-family:'Lora', serif;
-    font-style:italic;
-    font-size:clamp(1.2rem, 4vw, 1.65rem);
+    font-family:'Montserrat', sans-serif;
+    font-size:clamp(1.1rem, 2.5vw, 1.35rem);
     color:var(--lamp-dim);
-    max-width:30ch;
+    max-width:42ch;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    line-height: 1.7;
   }
   .hero .loc{
-    margin-top:2.2rem;
-    font-family:'Karla', sans-serif;
-    font-size:.76rem;
-    letter-spacing:.18em;
+    margin-top:4rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:.7rem;
+    letter-spacing:.35em;
     text-transform:uppercase;
-    color:var(--lamp-dim);
+    color:var(--gold);
+    font-weight: 400;
   }
   .scroll-cue{
     position:absolute;
-    bottom:30px;left:22px;
-    font-family:'Karla', sans-serif;
-    font-size:.7rem;
-    letter-spacing:.2em;
+    bottom:40px;left:40px;
+    font-family:'Montserrat', sans-serif;
+    font-size:.65rem;
+    letter-spacing:.3em;
     text-transform:uppercase;
     color:var(--lamp-dim);
-    display:flex;align-items:center;gap:10px;
-    text-decoration:none;
+    display:flex;align-items:center;gap:15px;
     padding:10px 0;
   }
-  .scroll-cue::after{content:"";display:block;width:44px;height:1px;background:var(--brass)}
+  .scroll-cue::after{content:"";display:block;width:60px;height:1px;background:var(--gold)}
 
   /* ---------- Sections ---------- */
-  section{padding:5.2rem 0}
-  h2{font-size:clamp(2.1rem, 7vw, 3.1rem);margin:.5rem 0 1.5rem}
-  .lede{max-width:56ch;font-size:1.16rem}
+  section{padding:8rem 0}
+  h2{font-size:clamp(1.8rem, 4.5vw, 2.8rem); margin:.5rem 0 2.5rem; text-transform: uppercase; letter-spacing: -0.02em; font-weight: 700;}
+  .lede{max-width:65ch;font-size:1.15rem; line-height: 1.9; font-weight: 200;}
   .quiet{color:var(--lamp-dim)}
 
-  /* Order of the evening */
-  .programme{margin-top:2.4rem}
-  .programme .row{
-    display:grid;
-    grid-template-columns:160px 1fr;
-    gap:22px;
-    padding:1.4rem 0;
-    border-top:1px solid var(--rule);
+  /* Program Layout Blocks */
+  .programme{
+    margin-top:5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
   }
-  .programme .row:last-child{border-bottom:1px solid var(--rule)}
+  .programme .row {
+    border: 1px solid var(--rule);
+    padding: 2.5rem 2rem;
+    background: var(--room-deep);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
+  }
   .programme .when{
-    font-family:'Karla', sans-serif;
-    font-size:.73rem;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--brass);padding-top:.5rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold);font-weight: 500;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.75rem;
   }
-  .programme h3{font-size:1.4rem;margin-bottom:.3rem}
-  .programme p{max-width:52ch;color:var(--lamp-dim);font-size:1.02rem}
+  .programme h3{font-size:1.15rem; margin-bottom:.8rem; text-transform: uppercase; font-weight: 600; letter-spacing: -0.01em;}
+  .programme p{color:var(--lamp-dim);font-size:0.9rem; line-height: 1.65;}
 
-  /* House rules epigraph */
+  /* House rules banner */
   .rules{
     text-align:center;
-    padding:4.6rem 0;
+    padding:7rem 0;
     background:var(--room-deep);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
   }
   .rules blockquote{
-    font-family:'Lora', serif;
-    font-style:italic;
-    font-size:clamp(1.4rem, 5vw, 2rem);
-    max-width:26ch;
+    font-family:'Syne', sans-serif;
+    font-size:clamp(1.3rem, 4vw, 2.2rem);
+    font-weight: 700;
+    max-width:32ch;
     margin:0 auto;
-    line-height:1.5;
+    line-height:1.4;
     color:var(--lamp);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
   }
   .rules .attr{
-    margin-top:1.2rem;
-    font-family:'Karla', sans-serif;
-    font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
-    color:var(--lamp-dim);
+    margin-top:2.5rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;
+    color:var(--gold);
   }
 
-  /* ---------- Catalog card (signature — the one lit thing) ---------- */
+  /* ---------- Catalog Box Details ---------- */
   .catalog{
-    margin-top:2.4rem;
-    background:var(--card);
-    color:var(--card-ink);
-    border-radius:3px;
-    box-shadow:0 0 0 1px rgba(0,0,0,.25), 0 30px 70px -30px rgba(0,0,0,.8), 0 0 90px -20px rgba(127,166,198,.16);
-    padding:2rem 2.2rem 1.7rem;
-    position:relative;
-    max-width:620px;
-  }
-  .catalog::before{
-    content:"";
-    position:absolute;
-    bottom:14px;left:50%;
-    transform:translateX(-50%);
-    width:16px;height:16px;
-    border-radius:50%;
-    background:var(--room);
-    box-shadow:inset 0 1px 2px rgba(0,0,0,.5);
+    background-image: linear-gradient(rgba(23, 29, 36, 0.92), rgba(23, 29, 36, 0.92)), url('mjl.recordcover.png');
+    background-size: cover;
+    background-position: center;
+    color: var(--lamp);
+    border: 1px solid rgba(191, 163, 115, 0.3);
+    padding: 3rem;
+    position: relative;
+    width: 100%;
+    box-shadow: 0 30px 70px -20px rgba(0,0,0,0.8);
   }
   .catalog .call-no{
-    font-family:'Karla', sans-serif;
-    font-size:.7rem;letter-spacing:.12em;
-    color:#75797D;
+    font-family:'Montserrat', sans-serif;
+    font-size:.65rem;letter-spacing:.25em;
+    color:var(--gold);
     display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
-    border-bottom:1px solid var(--card-ink);
-    padding-bottom:.7rem;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    padding-bottom:1.2rem;
   }
   .catalog dl{
     display:grid;
-    grid-template-columns:120px 1fr;
+    grid-template-columns:150px 1fr;
     row-gap:0;
-    margin-top:.4rem;
+    margin-top:.8rem;
   }
   .catalog dt, .catalog dd{
-    border-bottom:1px solid var(--card-rule);
-    padding-bottom:.85rem;
-    padding-top:.85rem;
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    padding-bottom:1.1rem;
+    padding-top:1.1rem;
   }
   .catalog dt:last-of-type, .catalog dd:last-of-type{border-bottom:none}
   .catalog dt{
-    font-family:'Karla', sans-serif;
-    font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
-    color:#75797D;
+    font-family:'Montserrat', sans-serif;
+    font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--lamp-dim);
+    font-weight: 500;
   }
-  .catalog dd{font-size:1.05rem;color:var(--card-ink)}
-  .catalog dd em{font-family:'Lora', serif;font-size:1.15rem}
+  .catalog dd{font-size:0.95rem;color:var(--lamp)}
+  .catalog dd em{font-family:'Syne', sans-serif;font-size:1.05rem; font-weight:600; font-style: normal; color: var(--gold); text-transform: uppercase;}
+  
   .stamp{
     display:inline-block;
-    font-family:'Karla', sans-serif;
-    font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-    color:#41708F;
-    border:1.5px solid #41708F;
-    border-radius:2px;
-    padding:.3rem .6rem;
-    transform:rotate(-2deg);
-    opacity:.9;
+    font-family:'Montserrat', sans-serif;
+    font-size:.6rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--gold);
+    border:1px solid var(--gold);
+    padding:.3rem .9rem;
   }
+  
   .btn{
     display:inline-block;
-    margin-top:1.8rem;
-    background:var(--card-ink);
-    color:var(--card);
+    margin-top:2.5rem;
+    background: transparent;
+    color:var(--gold);
     text-decoration:none;
-    font-family:'Karla', sans-serif;
-    font-size:.82rem;font-weight:600;
-    letter-spacing:.14em;text-transform:uppercase;
-    padding:1rem 1.7rem;
-    border:none;border-radius:2px;
+    font-family:'Montserrat', sans-serif;
+    font-size:.7rem;font-weight:500;
+    letter-spacing:.3em;text-transform:uppercase;
+    padding:1.1rem 2.2rem;
+    border:1px solid var(--gold);
     cursor:pointer;
-    transition:background .25s ease;
+    transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .catalog .btn:hover{background:#3a3d40}
-  .btn:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+  .btn:hover{background:var(--gold); color: var(--room-deep); transform: translateY(-2px);}
+  .btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  
   .catalog .fine{
-    margin-top:1rem;
-    font-family:'Karla', sans-serif;
-    font-size:.76rem;color:#75797D;
+    margin-top:1.8rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:.75rem;color:var(--lamp-dim);
+    line-height: 1.7;
   }
 
-  /* ---------- Events ---------- */
+  /* ---------- Poster Layout Elements ---------- */
   .event-grid{
-    margin-top:2.4rem;
+    margin-top:5rem;
     display:grid;
-    grid-template-columns:300px 1fr;
-    gap:2.2rem;
-    align-items:start;
+    grid-template-columns:1fr 1.3fr;
+    gap:4rem;
+    align-items:stretch;
   }
   .poster{
-    background:linear-gradient(160deg, #33373B 0%, #26292C 70%);
+    background-image: linear-gradient(to top, rgba(10, 13, 16, 0.95) 20%, rgba(10, 13, 16, 0.6) 60%, rgba(10, 13, 16, 0.2) 100%), url('mjl.chair.png');
+    background-size: cover;
+    background-position: center;
     border:1px solid var(--rule);
-    border-radius:3px;
-    aspect-ratio:3/4;
     position:relative;
     overflow:hidden;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-    padding:1.4rem 1.3rem;
-    box-shadow:0 24px 50px -30px rgba(0,0,0,.7);
-  }
-  .poster svg{
-    position:absolute;
-    top:-30%;
-    right:-40%;
-    width:130%;
-    opacity:.5;
-    pointer-events:none;
+    padding:3rem;
+    box-shadow: 0 25px 60px -25px rgba(0,0,0,0.6);
   }
   .poster .p-top{position:relative;z-index:1}
   .poster .p-no{
-    font-family:'Karla', sans-serif;
-    font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--brass);font-weight:700;
+    font-family:'Montserrat', sans-serif;
+    font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold);font-weight:500;
   }
   .poster .p-title{
-    font-family:'Karla', sans-serif;
+    font-family:'Syne', sans-serif;
     font-weight:700;
     font-size:2.4rem;
-    line-height:1.05;
+    line-height:1.1;
     color:var(--lamp);
-    margin-top:.5rem;
-    letter-spacing:-.01em;
+    margin-top:2rem;
+    letter-spacing:-0.02em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
   }
   .poster .p-bottom{position:relative;z-index:1}
   .poster .p-soon{
     display:inline-block;
-    font-family:'Karla', sans-serif;
-    font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-    color:var(--room);
-    background:var(--brass);
-    padding:.4rem .7rem;
-    border-radius:2px;
-    margin-bottom:.9rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:.6rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--room-deep);
+    background:var(--gold);
+    padding:.4rem .9rem;
+    margin-bottom:2rem;
   }
   .poster .p-meta{
-    font-family:'Karla', sans-serif;
-    font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--lamp-dim);
-    line-height:2;
+    font-family:'Montserrat', sans-serif;
+    font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--lamp);
+    line-height:2.3;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.6);
   }
-  @media (max-width:720px){
+  @media (max-width:920px){
     .event-grid{grid-template-columns:1fr}
-    .poster{max-width:340px;margin:0 auto}
+    .poster{aspect-ratio: 3/4; padding: 2.5rem;}
   }
 
-  /* ---------- Vision / founding member ---------- */
-  .vision{background:var(--room-deep)}
+  /* ---------- The Future Lounge Layout ---------- */
+  .vision{background:var(--room-deep); border-top: 1px solid var(--rule);}
   .rooms{
-    margin:2.4rem 0 0;
-    columns:2;column-gap:3rem;
+    margin:5rem 0 0;
+    columns:2;column-gap:4.5rem;
   }
   .rooms li{
     list-style:none;
     break-inside:avoid;
-    padding:1.05rem 0;
+    padding:1.8rem 0;
     border-top:1px solid var(--rule);
   }
   .rooms li strong{
-    font-family:'Karla', sans-serif;
+    font-family:'Syne', sans-serif;
     font-weight:600;font-size:1.2rem;
-    display:block;margin-bottom:.2rem;
+    display:block;margin-bottom:.6rem;
     color:var(--lamp);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
   }
-  .rooms li span{color:var(--lamp-dim);font-size:.98rem}
+  .rooms li span{color:var(--lamp-dim);font-size:.92rem; line-height: 1.7;}
 
-  .signup{margin-top:3rem;max-width:560px}
-  .signup h3{font-size:1.65rem;margin-bottom:.5rem}
-  .signup p{color:var(--lamp-dim);font-size:1rem;max-width:48ch}
-  .field-row{display:flex;gap:10px;margin-top:1.4rem;flex-wrap:wrap}
+  .signup{margin-top:6rem;max-width:600px}
+  .signup h3{font-size:1.5rem;margin-bottom:.6rem; text-transform: uppercase; letter-spacing: -0.01em;}
+  .signup p{color:var(--lamp-dim);font-size:0.95rem;max-width:50ch}
+  
+  .field-row{display:flex;gap:15px;margin-top:2.5rem;flex-wrap:wrap}
   .field-row input{
-    flex:1;min-width:220px;
-    font-family:'Lora', serif;
-    font-size:1.02rem;
-    padding:1rem;
+    flex:1;min-width:280px;
+    font-family:'Montserrat', sans-serif;
+    font-size:0.95rem;
+    padding:1.1rem;
     background:var(--room);
     border:1px solid var(--rule);
-    border-radius:2px;
     color:var(--lamp);
+    letter-spacing: 0.05em;
   }
-  .field-row input::placeholder{color:#82878b}
-  .field-row input:focus-visible{outline:3px solid var(--brass);outline-offset:1px}
+  .field-row input::placeholder{color:#4e5864}
+  .field-row input:focus-visible{outline:1px solid var(--gold);outline-offset:1px}
+  
   .signup .btn{
     margin-top:0;
-    background:var(--brass);
-    color:var(--room);
+    background:var(--gold);
+    color:var(--room-deep);
   }
-  .signup .btn:hover{background:#93b8d6}
+  .signup .btn:hover{background: transparent; color: var(--gold);}
   .signup .ok{
     display:none;
-    margin-top:1rem;
-    font-family:'Karla', sans-serif;
-    font-size:.9rem;color:var(--sage);font-weight:600;
+    margin-top:1.5rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:.85rem;color:var(--gold);font-weight:500;letter-spacing: 0.05em;
   }
-  .give{margin-top:2.6rem;font-size:1rem;color:var(--lamp-dim);max-width:52ch}
+  .give{margin-top:3.5rem;font-size:0.9rem;color:var(--lamp-dim);max-width:55ch}
 
   /* ---------- Footer ---------- */
-  footer{padding:3.4rem 0 3rem;text-align:center;border-top:1px solid var(--rule)}
-  footer .mark{font-family:'Lora', serif;font-style:italic;font-size:1.25rem;color:var(--lamp)}
+  footer{padding:5rem 0;text-align:center;border-top:1px solid var(--rule); background: var(--room-deep);}
+  footer .mark{font-family:'Syne', sans-serif;font-weight: 700; font-size:1.3rem;color:var(--lamp); letter-spacing: -0.02em; text-transform: uppercase;}
   footer .small{
-    margin-top:.7rem;
-    font-family:'Karla', sans-serif;
-    font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+    margin-top:1.2rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;
     color:var(--lamp-dim);
   }
 
-  /* ---------- Reveal on scroll ---------- */
-  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease, transform .7s ease}
+  /* ---------- Reveal Elements ---------- */
+  .reveal{opacity:0;transform:translateY(25px);transition:opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1)}
   .reveal.in{opacity:1;transform:none}
 
-  /* ---------- Mobile ---------- */
+  /* ---------- Mobile Optimization ---------- */
   @media (max-width:640px){
-    body{font-size:1.05rem}
-    section{padding:3.8rem 0}
-    .hero{min-height:88svh}
-    .programme .row{grid-template-columns:1fr;gap:4px;padding:1.2rem 0}
-    .programme .when{padding-top:0}
-    .rooms{columns:1}
-    .catalog{padding:1.5rem 1.15rem 1.6rem}
+    .wrap {padding: 0 24px;}
+    body{font-size:1rem}
+    section{padding:5.5rem 0}
+    .hero{min-height:95svh; background-position: 75% center;}
+    .programme{grid-template-columns: 1fr; gap: 15px;}
+    .programme .row {min-height: auto; padding: 2rem 1.5rem;}
+    .rooms{columns:1; margin-top: 3rem;}
+    .catalog{padding:2rem 1.5rem}
     .catalog dl{grid-template-columns:1fr;row-gap:0}
-    .catalog dt{border-bottom:none;padding-bottom:.15rem}
+    .catalog dt{border-bottom:none;padding-bottom:.2rem}
     .catalog dd{padding-top:0}
-    .catalog .call-no{font-size:.62rem}
-    .groove{width:440px;height:440px;right:-240px;opacity:.3}
     .field-row .btn{width:100%;text-align:center}
     .field-row input{min-width:100%}
-    .scroll-cue{bottom:18px}
   }
 </style>
 </head>
@@ -388,17 +399,6 @@
 
 <!-- ============ HERO ============ -->
 <header class="hero">
-  <svg class="groove" viewBox="0 0 640 640" aria-hidden="true">
-    <g fill="none" stroke="#43484D" stroke-width="1">
-      <circle cx="320" cy="320" r="60"/><circle cx="320" cy="320" r="90"/>
-      <circle cx="320" cy="320" r="120"/><circle cx="320" cy="320" r="150"/>
-      <circle cx="320" cy="320" r="180"/><circle cx="320" cy="320" r="210"/>
-      <circle cx="320" cy="320" r="240"/><circle cx="320" cy="320" r="270"/>
-      <circle cx="320" cy="320" r="300"/>
-    </g>
-    <circle cx="320" cy="320" r="26" fill="#34383C"/>
-    <circle cx="320" cy="320" r="3.5" fill="#7FA6C6"/>
-  </svg>
   <div class="wrap hero-inner">
     <p class="eyebrow">A listening event · Tulsa, Oklahoma</p>
     <h1><span class="name">M.J.'s</span><br>Listening Sessions</h1>
@@ -417,10 +417,10 @@
 
     <div class="programme">
       <div class="row reveal">
-        <div class="when">Doors · 30 min before</div>
+        <div class="when">Doors · 30m Before</div>
         <div>
           <h3>Settle in</h3>
-          <p>Low light, quiet room. Find your seat, put the phone away, let the day come off your shoulders. This part matters.</p>
+          <p>Low light, quiet room. Find your seat, put the phone away, let the day come off your shoulders.</p>
         </div>
       </div>
       <div class="row reveal">
@@ -433,7 +433,7 @@
       <div class="row reveal">
         <div class="when">The main event</div>
         <div>
-          <h3>Side A to the runout</h3>
+          <h3>Side A to Runout</h3>
           <p>The album, uninterrupted. Most run 35 to 55 minutes. It's longer than you think, and shorter than you'll want.</p>
         </div>
       </div>
@@ -441,7 +441,7 @@
         <div class="when">Afterward</div>
         <div>
           <h3>Decompress</h3>
-          <p>Stay a few minutes if you like. Talk about what you heard, or don't. Some records need a quiet walk home instead.</p>
+          <p>Stay a few minutes if you like. Talk about what you heard, or don't. Some records need a quiet walk home.</p>
         </div>
       </div>
     </div>
@@ -464,18 +464,8 @@
 
     <div class="event-grid">
 
-      <!-- Event poster -->
+      <!-- Event poster with the custom chair image configuration -->
       <div class="poster reveal" role="img" aria-label="Session 001 poster — coming soon">
-        <svg viewBox="0 0 640 640" aria-hidden="true">
-          <g fill="none" stroke="#4A5056" stroke-width="1">
-            <circle cx="320" cy="320" r="60"/><circle cx="320" cy="320" r="95"/>
-            <circle cx="320" cy="320" r="130"/><circle cx="320" cy="320" r="165"/>
-            <circle cx="320" cy="320" r="200"/><circle cx="320" cy="320" r="235"/>
-            <circle cx="320" cy="320" r="270"/><circle cx="320" cy="320" r="305"/>
-          </g>
-          <circle cx="320" cy="320" r="26" fill="#3A3E43"/>
-          <circle cx="320" cy="320" r="3.5" fill="#7FA6C6"/>
-        </svg>
         <div class="p-top">
           <div class="p-no">Session · 001</div>
           <div class="p-title">One record.<br>28 seats.<br>No phones.</div>
@@ -490,7 +480,7 @@
         </div>
       </div>
 
-      <!-- Catalog card details -->
+      <!-- Catalog box configured with the record cover backdrop overlay -->
       <div class="catalog reveal" role="group" aria-label="Session details">
         <div class="call-no">
           <span>M.J.'S LISTENING SESSIONS — CATALOG NO. 001</span>
@@ -560,9 +550,6 @@
   },{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // Founding list — relays to your inbox via Web3Forms (your address never appears in this file).
-  // SETUP: get your access key at web3forms.com using the inbox you want signups sent to,
-  // then paste it below in place of YOUR_WEB3FORMS_ACCESS_KEY.
   const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
 
   const join = document.getElementById('join');
