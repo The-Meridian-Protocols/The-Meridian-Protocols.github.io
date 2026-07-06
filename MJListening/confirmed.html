@@ -9,314 +9,28 @@
 <meta name="description" content="Founding list confirmation — M.J.'s Listening Sessions, Tulsa.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --room:#2B2E31;        /* dark/medium grey */
-    --room-deep:#232629;   /* deeper alcove */
-    --lamp:#E9EAE7;        /* soft off-white text */
-    --lamp-dim:#A6ABAF;    /* dimmed text */
-    --card:#F0EDE3;        /* the one lit thing: the catalog card */
-    --card-ink:#26282A;
-    --sage:#8FB3CC;        /* dusty blue accent (links) */
-    --brass:#7FA6C6;       /* primary blue accent */
-    --rule:#3D4145;        /* hairlines in the dark */
-    --card-rule:#D9D4C5;
+    --room: #12161a;         
+    --room-deep: #0a0d10;    
+    --lamp: #e4e7eb;         
+    --lamp-dim: #7c8691;     
+    --card: #171d24;         
+    --gold: #bfa373;         
+    --rule: #222a33;         
+    --card-rule: #29333e;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto}
-    .reveal{opacity:1 !important;transform:none !important;transition:none !important}
-  }
   body{
     background:var(--room);
     color:var(--lamp);
-    font-family:'Lora', Georgia, serif;
-    font-size:1.12rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:1.02rem;
+    font-weight: 300;
     line-height:1.75;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
-  .eyebrow{
-    font-family:'Karla', sans-serif;
-    font-size:.9rem;
-    letter-spacing:.26em;
-    text-transform:uppercase;
-    color:var(--brass);
-    font-weight:700;
-  }
-  h1,h2,h3{font-family:'Karla', sans-serif;font-weight:600;line-height:1.1;color:var(--lamp);letter-spacing:.01em}
-  a{color:var(--sage)}
-  ::selection{background:var(--brass);color:var(--room)}
-
-  /* ---------- Hero ---------- */
-  .hero{
-    min-height:94vh;
-    min-height:94svh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    position:relative;
-    overflow:hidden;
-  }
-  .groove{
-    position:absolute;
-    right:-160px;
-    top:50%;
-    transform:translateY(-50%);
-    width:620px;height:620px;
-    opacity:.45;
-    pointer-events:none;
-  }
-  .hero-inner{position:relative;z-index:1}
-  .hero h1{
-    font-size:clamp(2.9rem, 9.5vw, 5.8rem);
-    margin:.4em 0 .3em;
-    letter-spacing:-0.015em;
-    font-weight:700;
-  }
-  .hero h1 .name{font-style:italic;color:var(--brass)}
-  .hero .tag{
-    font-family:'Lora', serif;
-    font-style:italic;
-    font-size:clamp(1.2rem, 4vw, 1.65rem);
-    color:var(--lamp-dim);
-    max-width:30ch;
-  }
-  .hero .loc{
-    margin-top:2.2rem;
-    font-family:'Karla', sans-serif;
-    font-size:.76rem;
-    letter-spacing:.18em;
-    text-transform:uppercase;
-    color:var(--lamp-dim);
-  }
-  .scroll-cue{
-    position:absolute;
-    bottom:30px;left:22px;
-    font-family:'Karla', sans-serif;
-    font-size:.7rem;
-    letter-spacing:.2em;
-    text-transform:uppercase;
-    color:var(--lamp-dim);
-    display:flex;align-items:center;gap:10px;
-    text-decoration:none;
-    padding:10px 0;
-  }
-  .scroll-cue::after{content:"";display:block;width:44px;height:1px;background:var(--brass)}
-
-  /* ---------- Sections ---------- */
-  section{padding:5.2rem 0}
-  h2{font-size:clamp(2.1rem, 7vw, 3.1rem);margin:.5rem 0 1.5rem}
-  .lede{max-width:56ch;font-size:1.16rem}
-  .quiet{color:var(--lamp-dim)}
-
-  /* Order of the evening */
-  .programme{margin-top:2.4rem}
-  .programme .row{
-    display:grid;
-    grid-template-columns:160px 1fr;
-    gap:22px;
-    padding:1.4rem 0;
-    border-top:1px solid var(--rule);
-  }
-  .programme .row:last-child{border-bottom:1px solid var(--rule)}
-  .programme .when{
-    font-family:'Karla', sans-serif;
-    font-size:.73rem;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--brass);padding-top:.5rem;
-  }
-  .programme h3{font-size:1.4rem;margin-bottom:.3rem}
-  .programme p{max-width:52ch;color:var(--lamp-dim);font-size:1.02rem}
-
-  /* House rules epigraph */
-  .rules{
-    text-align:center;
-    padding:4.6rem 0;
-    background:var(--room-deep);
-  }
-  .rules blockquote{
-    font-family:'Lora', serif;
-    font-style:italic;
-    font-size:clamp(1.4rem, 5vw, 2rem);
-    max-width:26ch;
-    margin:0 auto;
-    line-height:1.5;
-    color:var(--lamp);
-  }
-  .rules .attr{
-    margin-top:1.2rem;
-    font-family:'Karla', sans-serif;
-    font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
-    color:var(--lamp-dim);
-  }
-
-  /* ---------- Catalog card (signature — the one lit thing) ---------- */
-  .catalog{
-    margin-top:2.4rem;
-    background:var(--card);
-    color:var(--card-ink);
-    border-radius:3px;
-    box-shadow:0 0 0 1px rgba(0,0,0,.25), 0 30px 70px -30px rgba(0,0,0,.8), 0 0 90px -20px rgba(127,166,198,.16);
-    padding:2rem 2.2rem 1.7rem;
-    position:relative;
-    max-width:620px;
-  }
-  .catalog::before{
-    content:"";
-    position:absolute;
-    bottom:14px;left:50%;
-    transform:translateX(-50%);
-    width:16px;height:16px;
-    border-radius:50%;
-    background:var(--room);
-    box-shadow:inset 0 1px 2px rgba(0,0,0,.5);
-  }
-  .catalog .call-no{
-    font-family:'Karla', sans-serif;
-    font-size:.7rem;letter-spacing:.12em;
-    color:#75797D;
-    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
-    border-bottom:1px solid var(--card-ink);
-    padding-bottom:.7rem;
-  }
-  .catalog dl{
-    display:grid;
-    grid-template-columns:120px 1fr;
-    row-gap:0;
-    margin-top:.4rem;
-  }
-  .catalog dt, .catalog dd{
-    border-bottom:1px solid var(--card-rule);
-    padding-bottom:.85rem;
-    padding-top:.85rem;
-  }
-  .catalog dt:last-of-type, .catalog dd:last-of-type{border-bottom:none}
-  .catalog dt{
-    font-family:'Karla', sans-serif;
-    font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
-    color:#75797D;
-  }
-  .catalog dd{font-size:1.05rem;color:var(--card-ink)}
-  .catalog dd em{font-family:'Lora', serif;font-size:1.15rem}
-  .stamp{
-    display:inline-block;
-    font-family:'Karla', sans-serif;
-    font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-    color:#41708F;
-    border:1.5px solid #41708F;
-    border-radius:2px;
-    padding:.3rem .6rem;
-    transform:rotate(-2deg);
-    opacity:.9;
-  }
-  .btn{
-    display:inline-block;
-    margin-top:1.8rem;
-    background:var(--card-ink);
-    color:var(--card);
-    text-decoration:none;
-    font-family:'Karla', sans-serif;
-    font-size:.82rem;font-weight:600;
-    letter-spacing:.14em;text-transform:uppercase;
-    padding:1rem 1.7rem;
-    border:none;border-radius:2px;
-    cursor:pointer;
-    transition:background .25s ease;
-  }
-  .catalog .btn:hover{background:#3a3d40}
-  .btn:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
-  .catalog .fine{
-    margin-top:1rem;
-    font-family:'Karla', sans-serif;
-    font-size:.76rem;color:#75797D;
-  }
-
-  /* ---------- Vision / founding member ---------- */
-  .vision{background:var(--room-deep)}
-  .rooms{
-    margin:2.4rem 0 0;
-    columns:2;column-gap:3rem;
-  }
-  .rooms li{
-    list-style:none;
-    break-inside:avoid;
-    padding:1.05rem 0;
-    border-top:1px solid var(--rule);
-  }
-  .rooms li strong{
-    font-family:'Karla', sans-serif;
-    font-weight:600;font-size:1.2rem;
-    display:block;margin-bottom:.2rem;
-    color:var(--lamp);
-  }
-  .rooms li span{color:var(--lamp-dim);font-size:.98rem}
-
-  .signup{margin-top:3rem;max-width:560px}
-  .signup h3{font-size:1.65rem;margin-bottom:.5rem}
-  .signup p{color:var(--lamp-dim);font-size:1rem;max-width:48ch}
-  .field-row{display:flex;gap:10px;margin-top:1.4rem;flex-wrap:wrap}
-  .field-row input{
-    flex:1;min-width:220px;
-    font-family:'Lora', serif;
-    font-size:1.02rem;
-    padding:1rem;
-    background:var(--room);
-    border:1px solid var(--rule);
-    border-radius:2px;
-    color:var(--lamp);
-  }
-  .field-row input::placeholder{color:#82878b}
-  .field-row input:focus-visible{outline:3px solid var(--brass);outline-offset:1px}
-  .signup .btn{
-    margin-top:0;
-    background:var(--brass);
-    color:var(--room);
-  }
-  .signup .btn:hover{background:#93b8d6}
-  .signup .ok{
-    display:none;
-    margin-top:1rem;
-    font-family:'Karla', sans-serif;
-    font-size:.9rem;color:var(--sage);font-weight:600;
-  }
-  .give{margin-top:2.6rem;font-size:1rem;color:var(--lamp-dim);max-width:52ch}
-
-  /* ---------- Footer ---------- */
-  footer{padding:3.4rem 0 3rem;text-align:center;border-top:1px solid var(--rule)}
-  footer .mark{font-family:'Lora', serif;font-style:italic;font-size:1.25rem;color:var(--lamp)}
-  footer .small{
-    margin-top:.7rem;
-    font-family:'Karla', sans-serif;
-    font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--lamp-dim);
-  }
-
-  /* ---------- Reveal on scroll ---------- */
-  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease, transform .7s ease}
-  .reveal.in{opacity:1;transform:none}
-
-  /* ---------- Mobile ---------- */
-  @media (max-width:640px){
-    body{font-size:1.05rem}
-    section{padding:3.8rem 0}
-    .hero{min-height:88svh}
-    .programme .row{grid-template-columns:1fr;gap:4px;padding:1.2rem 0}
-    .programme .when{padding-top:0}
-    .rooms{columns:1}
-    .catalog{padding:1.5rem 1.15rem 1.6rem}
-    .catalog dl{grid-template-columns:1fr;row-gap:0}
-    .catalog dt{border-bottom:none;padding-bottom:.15rem}
-    .catalog dd{padding-top:0}
-    .catalog .call-no{font-size:.62rem}
-    .groove{width:440px;height:440px;right:-240px;opacity:.3}
-    .field-row .btn{width:100%;text-align:center}
-    .field-row input{min-width:100%}
-    .scroll-cue{bottom:18px}
-  }
-</style>
-<style>
   .confirm{
     min-height:100vh;
     min-height:100svh;
@@ -329,62 +43,94 @@
     position:relative;
     overflow:hidden;
   }
-  .confirm .groove{
-    right:auto;left:50%;
+  .groove{
+    position:absolute;
+    left:50%;top:50%;
     transform:translate(-50%,-50%);
-    top:50%;
-    opacity:.25;
+    width:620px;height:620px;
+    opacity:.15;
+    pointer-events:none;
   }
   .confirm-card{
     position:relative;z-index:1;
-    background:var(--card);
-    color:var(--card-ink);
-    border-radius:3px;
-    box-shadow:0 0 0 1px rgba(0,0,0,.25), 0 30px 70px -30px rgba(0,0,0,.8), 0 0 90px -20px rgba(127,166,198,.16);
-    padding:2.6rem 2.4rem 2.4rem;
-    max-width:460px;
+    background:var(--room-deep);
+    border: 1px solid var(--rule);
+    padding:3rem 2.5rem;
+    max-width:480px;
     width:100%;
+    box-shadow: 0 30px 70px -20px rgba(0,0,0,0.8);
   }
   .confirm-card .call-no{
-    font-family:'Karla', sans-serif;
-    font-size:.68rem;letter-spacing:.12em;
-    color:#75797D;
+    font-family:'Montserrat', sans-serif;
+    font-size:.65rem;letter-spacing:.25em;
+    color:var(--gold);
     display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
-    border-bottom:1px solid var(--card-ink);
-    padding-bottom:.7rem;
-    margin-bottom:1.6rem;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:1.2rem;
+    margin-bottom:2rem;
     text-align:left;
   }
   .confirm-card h1{
-    font-family:'Karla', sans-serif;
-    font-weight:700;
-    font-size:clamp(1.7rem, 6vw, 2.2rem);
-    color:var(--card-ink);
-    line-height:1.15;
-    margin-bottom:.8rem;
+    font-family:'Syne', sans-serif;
+    font-weight:800;
+    font-size:clamp(1.8rem, 6vw, 2.4rem);
+    color:var(--lamp);
+    line-height:1.1;
+    margin-bottom:1rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
   }
   .confirm-card p{
-    font-size:1.02rem;
-    color:#4A4D50;
+    font-size:0.95rem;
+    color:var(--lamp-dim);
     max-width:36ch;
     margin:0 auto;
+    line-height: 1.7;
   }
-  .confirm-card .stamp{margin-top:1.6rem}
-  .confirm-card .btn{margin-top:2rem}
+  .stamp{
+    display:inline-block;
+    font-family:'Montserrat', sans-serif;
+    font-size:.6rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;
+    color:var(--gold);
+    border:1px solid var(--gold);
+    padding:.3rem .9rem;
+    margin-top:2rem;
+  }
+  .btn{
+    display:inline-block;
+    margin-top:2.5rem;
+    background: var(--gold);
+    color:var(--room-deep);
+    text-decoration:none;
+    font-family:'Montserrat', sans-serif;
+    font-size:.7rem;font-weight:500;
+    letter-spacing:.3em;text-transform:uppercase;
+    padding:1.1rem 2.2rem;
+    border:1px solid var(--gold);
+    cursor:pointer;
+    transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn:hover{background:transparent; color: var(--gold); transform: translateY(-2px);}
+  .btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  @media (max-width:640px){
+    .confirm-card{padding:2rem 1.5rem}
+    .groove{width:440px;height:440px;}
+  }
 </style>
 </head>
 <body>
 <main class="confirm">
   <svg class="groove" viewBox="0 0 640 640" aria-hidden="true">
-    <g fill="none" stroke="#43484D" stroke-width="1">
+    <g fill="none" stroke="#222a33" stroke-width="1">
       <circle cx="320" cy="320" r="60"/><circle cx="320" cy="320" r="90"/>
       <circle cx="320" cy="320" r="120"/><circle cx="320" cy="320" r="150"/>
       <circle cx="320" cy="320" r="180"/><circle cx="320" cy="320" r="210"/>
       <circle cx="320" cy="320" r="240"/><circle cx="320" cy="320" r="270"/>
       <circle cx="320" cy="320" r="300"/>
     </g>
-    <circle cx="320" cy="320" r="26" fill="#34383C"/>
-    <circle cx="320" cy="320" r="3.5" fill="#7FA6C6"/>
+    <circle cx="320" cy="320" r="26" fill="#0a0d10"/>
+    <circle cx="320" cy="320" r="3.5" fill="#bfa373"/>
   </svg>
 
   <div class="confirm-card">
@@ -394,8 +140,7 @@
     </div>
     <h1>You're on the list.</h1>
     <p>Welcome to the first chapter. You'll hear about sessions before anyone else — and you'll be first through the door when the Lounge opens.</p>
-    <span class="stamp">Founding member</span>
-    <br>
+    <div><span class="stamp">Founding member</span></div>
     <a class="btn" href="index.html">Back to the sessions</a>
   </div>
 </main>
