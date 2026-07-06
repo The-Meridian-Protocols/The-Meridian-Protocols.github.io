@@ -2,400 +2,413 @@
 <html lang="en">
 <head>
   <!-- Favicon Configuration -->
-<link rel="icon" type="image/svg+xml" href="mjl.favicon.svg">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.web3forms.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'">
-<meta name="referrer" content="strict-origin-when-cross-origin">
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-<title>M.J.'s Listening Sessions — One record. Full attention.</title>
-<meta name="description" content="A ticketed listening event in Tulsa: 28 seats, one record, played front to back with full attention.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Swapped to Syne for a striking, ultra-modern geometric heading aesthetic -->
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --room: #12161a;         
-    --room-deep: #0a0d10;    
-    --lamp: #e4e7eb;         
-    --lamp-dim: #7c8691;     
-    --card: #171d24;         
-    --gold: #bfa373;         
-    --rule: #222a33;         
-    --card-rule: #29333e;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto}
-    .reveal{opacity:1 !important;transform:none !important;transition:none !important}
-  }
-  body{
-    background:var(--room);
-    color:var(--lamp);
-    font-family:'Montserrat', sans-serif;
-    font-size:1.02rem;
-    font-weight: 300;
-    line-height:1.75;
-    -webkit-font-smoothing:antialiased;
-    overflow-x: hidden;
-  }
-  .wrap{max-width:1040px;margin:0 auto;padding:0 40px}
-  
-  .eyebrow{
-    font-family:'Montserrat', sans-serif;
-    font-size:.7rem;
-    letter-spacing:.4em;
-    text-transform:uppercase;
-    color:var(--gold);
-    font-weight:500;
-    margin-bottom: 1.2rem;
-  }
-  /* Modern geometric typeface configuration */
-  h1,h2,h3{font-family:'Syne', sans-serif;font-weight:700;line-height:1.1;color:var(--lamp);letter-spacing:-0.02em}
-  a{color:var(--gold);text-decoration:none;transition:color 0.3s ease;}
-  a:hover{color:var(--lamp);}
-  ::selection{background:var(--gold);color:var(--room)}
+  <link rel="icon" type="image/svg+xml" href="mjl.favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.web3forms.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <title>M.J.'s Listening Sessions — One record. Full attention.</title>
+  <meta name="description" content="A ticketed listening event in Tulsa: 28 seats, one record, played front to back with full attention.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --room: #12161a;         
+      --room-deep: #0a0d10;    
+      --lamp: #e4e7eb;         
+      --lamp-dim: #7c8691;     
+      --card: #171d24;         
+      --gold: #bfa373;         
+      --rule: #222a33;         
+      --card-rule: #29333e;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+    }
+    body{
+      background:var(--room);
+      color:var(--lamp);
+      font-family:'Montserrat', sans-serif;
+      font-size:1.02rem;
+      font-weight: 300;
+      line-height:1.75;
+      -webkit-font-smoothing:antialiased;
+      overflow-x: hidden;
+    }
+    .wrap{max-width:1040px;margin:0 auto;padding:0 40px}
+    
+    .eyebrow{
+      font-family:'Montserrat', sans-serif;
+      font-size:.7rem;
+      letter-spacing:.4em;
+      text-transform:uppercase;
+      color:var(--gold);
+      font-weight:500;
+      margin-bottom: 1.2rem;
+    }
+    h1,h2,h3{font-family:'Syne', sans-serif;font-weight:700;line-height:1.1;color:var(--lamp);letter-spacing:-0.02em}
+    a{color:var(--gold);text-decoration:none;transition:color 0.3s ease;}
+    a:hover{color:var(--lamp);}
+    ::selection{background:var(--gold);color:var(--room)}
 
-  /* ---------- Hero Section ---------- */
-  .hero{
-    min-height:100vh;
-    min-height:100svh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    position:relative;
-    overflow:hidden;
-    border-bottom: 1px solid var(--rule);
-    background-image: linear-gradient(to right, rgba(18, 22, 26, 1) 40%, rgba(18, 22, 26, 0.4) 70%, rgba(18, 22, 26, 0.1) 100%), url('mjl.recordplay.png');
-    background-size: cover;
-    background-position: right center;
-    background-repeat: no-repeat;
-  }
+    /* ---------- Hero Section ---------- */
+    .hero{
+      min-height:100vh;
+      min-height:100svh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+      border-bottom: 1px solid var(--rule);
+      /* Enhanced linear scrim for heavy-duty contrast control across device widths */
+      background-image: linear-gradient(to top, rgba(18,22,26,1) 15%, rgba(18,22,26,0.85) 50%, rgba(18,22,26,0.4) 100%), url('mjl.recordplay.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
-  .hero-inner{position:relative;z-index:2; width: 100%;}
-  .hero h1 {
-    font-size: clamp(2.8rem, 8vw, 5.5rem);
-    font-weight: 800;
-    margin: .2em 0 .3em;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-    line-height: 1.05;
-  }
-  .hero h1 .name{
-    color: transparent;
-    -webkit-text-stroke: 1px var(--gold);
-  }
-  .hero .tag{
-    font-family:'Montserrat', sans-serif;
-    font-size:clamp(1.1rem, 2.5vw, 1.35rem);
-    color:var(--lamp-dim);
-    max-width:42ch;
-    font-weight: 300;
-    letter-spacing: -0.01em;
-    line-height: 1.7;
-  }
-  .hero .loc{
-    margin-top:4rem;
-    font-family:'Montserrat', sans-serif;
-    font-size:.7rem;
-    letter-spacing:.35em;
-    text-transform:uppercase;
-    color:var(--gold);
-    font-weight: 400;
-  }
-  .scroll-cue{
-    position:absolute;
-    bottom:40px;left:40px;
-    font-family:'Montserrat', sans-serif;
-    font-size:.65rem;
-    letter-spacing:.3em;
-    text-transform:uppercase;
-    color:var(--lamp-dim);
-    display:flex;align-items:center;gap:15px;
-    padding:10px 0;
-  }
-  .scroll-cue::after{content:"";display:block;width:60px;height:1px;background:var(--gold)}
+    /* Screen sizes above mobile get standard directional split masks */
+    @media(min-width: 768px) {
+      .hero {
+        background-image: linear-gradient(to right, rgba(18, 22, 26, 1) 45%, rgba(18, 22, 26, 0.5) 75%, rgba(18, 22, 26, 0.1) 100%), url('mjl.recordplay.png');
+        background-position: right center;
+      }
+    }
 
-  /* ---------- Sections ---------- */
-  section{padding:8rem 0}
-  h2{font-size:clamp(1.8rem, 4.5vw, 2.8rem); margin:.5rem 0 2.5rem; text-transform: uppercase; letter-spacing: -0.02em; font-weight: 700;}
-  .lede{max-width:65ch;font-size:1.15rem; line-height: 1.9; font-weight: 200;}
-  .quiet{color:var(--lamp-dim)}
+    .hero-inner{position:relative;z-index:2; width: 100%;}
+    .hero h1 {
+      font-size: clamp(2.4rem, 8vw, 5.5rem);
+      font-weight: 800;
+      margin: .2em 0 .3em;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      line-height: 1.05;
+    }
+    .hero h1 .name{
+      color: transparent;
+      -webkit-text-stroke: 1px var(--gold);
+    }
+    .hero .tag{
+      font-family:'Montserrat', sans-serif;
+      font-size:clamp(1.1rem, 2.5vw, 1.35rem);
+      color:var(--lamp-dim);
+      max-width:42ch;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      line-height: 1.7;
+    }
+    .hero .loc{
+      margin-top:3.5rem;
+      font-family:'Montserrat', sans-serif;
+      font-size:.7rem;
+      letter-spacing:.35em;
+      text-transform:uppercase;
+      color:var(--gold);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+    .scroll-cue{
+      position:absolute;
+      bottom:40px;left:40px;
+      font-family:'Montserrat', sans-serif;
+      font-size:.65rem;
+      letter-spacing:.3em;
+      text-transform:uppercase;
+      color:var(--lamp-dim);
+      display:flex;align-items:center;gap:15px;
+      padding:10px 0;
+    }
+    .scroll-cue::after{content:"";display:block;width:60px;height:1px;background:var(--gold)}
 
-  /* Program Layout Blocks */
-  .programme{
-    margin-top:5rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 25px;
-  }
-  .programme .row {
-    border: 1px solid var(--rule);
-    padding: 2.5rem 2rem;
-    background: var(--room-deep);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 280px;
-  }
-  .programme .when{
-    font-family:'Montserrat', sans-serif;
-    font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
-    color:var(--gold);font-weight: 500;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 0.75rem;
-  }
-  .programme h3{font-size:1.15rem; margin-bottom:.8rem; text-transform: uppercase; font-weight: 600; letter-spacing: -0.01em;}
-  .programme p{color:var(--lamp-dim);font-size:0.9rem; line-height: 1.65;}
+    /* ---------- Sections ---------- */
+    section{padding: clamp(4.5rem, 10vw, 8rem) 0;}
+    h2{font-size:clamp(1.6rem, 4.5vw, 2.8rem); margin:.5rem 0 2.5rem; text-transform: uppercase; letter-spacing: -0.02em; font-weight: 700;}
+    .lede{max-width:65ch;font-size:clamp(1.05rem, 2vw, 1.15rem); line-height: 1.8; font-weight: 200;}
+    .quiet{color:var(--lamp-dim)}
 
-  /* House rules banner */
-  .rules{
-    text-align:center;
-    padding:7rem 0;
-    background:var(--room-deep);
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-  }
-  .rules blockquote{
-    font-family:'Syne', sans-serif;
-    font-size:clamp(1.3rem, 4vw, 2.2rem);
-    font-weight: 700;
-    max-width:32ch;
-    margin:0 auto;
-    line-height:1.4;
-    color:var(--lamp);
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-  }
-  .rules .attr{
-    margin-top:2.5rem;
-    font-family:'Montserrat', sans-serif;
-    font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;
-    color:var(--gold);
-  }
+    /* Program Layout Blocks */
+    .programme{
+      margin-top: clamp(3rem, 6vw, 5rem);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
+    .programme .row {
+      border: 1px solid var(--rule);
+      padding: 2.5rem 2rem;
+      background: var(--room-deep);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 280px;
+    }
+    .programme .when{
+      font-family:'Montserrat', sans-serif;
+      font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
+      color:var(--gold);font-weight: 500;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.75rem;
+    }
+    .programme h3{font-size:1.15rem; margin-bottom:.8rem; text-transform: uppercase; font-weight: 600; letter-spacing: -0.01em;}
+    .programme p{color:var(--lamp-dim);font-size:0.9rem; line-height: 1.65;}
 
-  /* ---------- Catalog Box Details ---------- */
-  .catalog{
-    background-image: linear-gradient(rgba(23, 29, 36, 0.92), rgba(23, 29, 36, 0.92)), url('mjl.recordcover.png');
-    background-size: cover;
-    background-position: center;
-    color: var(--lamp);
-    border: 1px solid rgba(191, 163, 115, 0.3);
-    padding: 3rem;
-    position: relative;
-    width: 100%;
-    box-shadow: 0 30px 70px -20px rgba(0,0,0,0.8);
-  }
-  .catalog .call-no{
-    font-family:'Montserrat', sans-serif;
-    font-size:.65rem;letter-spacing:.25em;
-    color:var(--gold);
-    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
-    border-bottom:1px solid rgba(255,255,255,0.1);
-    padding-bottom:1.2rem;
-  }
-  .catalog dl{
-    display:grid;
-    grid-template-columns:150px 1fr;
-    row-gap:0;
-    margin-top:.8rem;
-  }
-  .catalog dt, .catalog dd{
-    border-bottom:1px solid rgba(255,255,255,0.05);
-    padding-bottom:1.1rem;
-    padding-top:1.1rem;
-  }
-  .catalog dt:last-of-type, .catalog dd:last-of-type{border-bottom:none}
-  .catalog dt{
-    font-family:'Montserrat', sans-serif;
-    font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
-    color:var(--lamp-dim);
-    font-weight: 500;
-  }
-  .catalog dd{font-size:0.95rem;color:var(--lamp)}
-  .catalog dd em{font-family:'Syne', sans-serif;font-size:1.05rem; font-weight:600; font-style: normal; color: var(--gold); text-transform: uppercase;}
-  
-  .stamp{
-    display:inline-block;
-    font-family:'Montserrat', sans-serif;
-    font-size:.6rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;
-    color:var(--gold);
-    border:1px solid var(--gold);
-    padding:.3rem .9rem;
-  }
-  
-  .btn{
-    display:inline-block;
-    margin-top:2.5rem;
-    background: transparent;
-    color:var(--gold);
-    text-decoration:none;
-    font-family:'Montserrat', sans-serif;
-    font-size:.7rem;font-weight:500;
-    letter-spacing:.3em;text-transform:uppercase;
-    padding:1.1rem 2.2rem;
-    border:1px solid var(--gold);
-    cursor:pointer;
-    transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .btn:hover{background:var(--gold); color: var(--room-deep); transform: translateY(-2px);}
-  .btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-  
-  .catalog .fine{
-    margin-top:1.8rem;
-    font-family:'Montserrat', sans-serif;
-    font-size:.75rem;color:var(--lamp-dim);
-    line-height: 1.7;
-  }
+    /* House rules banner */
+    .rules{
+      text-align:center;
+      padding: clamp(5rem, 8vw, 7rem) 0;
+      background:var(--room-deep);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .rules blockquote{
+      font-family:'Syne', sans-serif;
+      font-size:clamp(1.2rem, 4vw, 2.2rem);
+      font-weight: 700;
+      max-width:32ch;
+      margin:0 auto;
+      line-height:1.4;
+      color:var(--lamp);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    .rules .attr{
+      margin-top:2.5rem;
+      font-family:'Montserrat', sans-serif;
+      font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;
+      color:var(--gold);
+    }
 
-  /* ---------- Poster Layout Elements ---------- */
-  .event-grid{
-    margin-top:5rem;
-    display:grid;
-    grid-template-columns:1fr 1.3fr;
-    gap:4rem;
-    align-items:stretch;
-  }
-  .poster{
-    background-image: linear-gradient(to top, rgba(10, 13, 16, 0.95) 20%, rgba(10, 13, 16, 0.6) 60%, rgba(10, 13, 16, 0.2) 100%), url('mjl.chair.png');
-    background-size: cover;
-    background-position: center;
-    border:1px solid var(--rule);
-    position:relative;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    padding:3rem;
-    box-shadow: 0 25px 60px -25px rgba(0,0,0,0.6);
-  }
-  .poster .p-top{position:relative;z-index:1}
-  .poster .p-no{
-    font-family:'Montserrat', sans-serif;
-    font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
-    color:var(--gold);font-weight:500;
-  }
-  .poster .p-title{
-    font-family:'Syne', sans-serif;
-    font-weight:700;
-    font-size:2.4rem;
-    line-height:1.1;
-    color:var(--lamp);
-    margin-top:2rem;
-    letter-spacing:-0.02em;
-    text-transform: uppercase;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-  }
-  .poster .p-bottom{position:relative;z-index:1}
-  .poster .p-soon{
-    display:inline-block;
-    font-family:'Montserrat', sans-serif;
-    font-size:.6rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;
-    color:var(--room-deep);
-    background:var(--gold);
-    padding:.4rem .9rem;
-    margin-bottom:2rem;
-  }
-  .poster .p-meta{
-    font-family:'Montserrat', sans-serif;
-    font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
-    color:var(--lamp);
-    line-height:2.3;
-    text-shadow: 0 1px 8px rgba(0,0,0,0.6);
-  }
-  @media (max-width:920px){
-    .event-grid{grid-template-columns:1fr}
-    .poster{aspect-ratio: 3/4; padding: 2.5rem;}
-  }
+    /* ---------- Catalog Box Details ---------- */
+    .catalog{
+      background-image: linear-gradient(rgba(23, 29, 36, 0.95), rgba(23, 29, 36, 0.95)), url('mjl.recordcover.png');
+      background-size: cover;
+      background-position: center;
+      color: var(--lamp);
+      border: 1px solid rgba(191, 163, 115, 0.3);
+      padding: clamp(1.75rem, 5vw, 3rem);
+      position: relative;
+      width: 100%;
+      box-shadow: 0 30px 70px -20px rgba(0,0,0,0.8);
+    }
+    .catalog .call-no{
+      font-family:'Montserrat', sans-serif;
+      font-size:.65rem;letter-spacing:.25em;
+      color:var(--gold);
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      border-bottom:1px solid rgba(255,255,255,0.1);
+      padding-bottom:1.2rem;
+    }
+    .catalog dl{
+      display:grid;
+      grid-template-columns:140px 1fr;
+      row-gap:0;
+      margin-top:.8rem;
+    }
+    .catalog dt, .catalog dd{
+      border-bottom:1px solid rgba(255,255,255,0.05);
+      padding-bottom:1.1rem;
+      padding-top:1.1rem;
+    }
+    .catalog dt:last-of-type, .catalog dd:last-of-type{border-bottom:none}
+    .catalog dt{
+      font-family:'Montserrat', sans-serif;
+      font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+      color:var(--lamp-dim);
+      font-weight: 500;
+    }
+    .catalog dd{font-size:0.95rem;color:var(--lamp)}
+    .catalog dd em{font-family:'Syne', sans-serif;font-size:1.05rem; font-weight:600; font-style: normal; color: var(--gold); text-transform: uppercase;}
+    
+    .stamp{
+      display:inline-block;
+      font-family:'Montserrat', sans-serif;
+      font-size:.6rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;
+      color:var(--gold);
+      border:1px solid var(--gold);
+      padding:.3rem .9rem;
+    }
+    
+    .btn{
+      display:inline-block;
+      margin-top:2.5rem;
+      background: transparent;
+      color:var(--gold);
+      text-decoration:none;
+      font-family:'Montserrat', sans-serif;
+      font-size:.7rem;font-weight:500;
+      letter-spacing:.3em;text-transform:uppercase;
+      padding:1.1rem 2.2rem;
+      border:1px solid var(--gold);
+      cursor:pointer;
+      text-align: center;
+      transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn:hover{background:var(--gold); color: var(--room-deep); transform: translateY(-2px);}
+    .btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+    
+    .catalog .fine{
+      margin-top:1.8rem;
+      font-family:'Montserrat', sans-serif;
+      font-size:.75rem;color:var(--lamp-dim);
+      line-height: 1.7;
+    }
 
-  /* ---------- The Future Lounge Layout ---------- */
-  .vision{background:var(--room-deep); border-top: 1px solid var(--rule);}
-  .rooms{
-    margin:5rem 0 0;
-    columns:2;column-gap:4.5rem;
-  }
-  .rooms li{
-    list-style:none;
-    break-inside:avoid;
-    padding:1.8rem 0;
-    border-top:1px solid var(--rule);
-  }
-  .rooms li strong{
-    font-family:'Syne', sans-serif;
-    font-weight:600;font-size:1.2rem;
-    display:block;margin-bottom:.6rem;
-    color:var(--lamp);
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-  }
-  .rooms li span{color:var(--lamp-dim);font-size:.92rem; line-height: 1.7;}
+    /* ---------- Poster Layout Elements ---------- */
+    .event-grid{
+      margin-top: clamp(3rem, 6vw, 5rem);
+      display:grid;
+      grid-template-columns:1fr 1.3fr;
+      gap:4rem;
+      align-items:stretch;
+    }
+    .poster{
+      background-image: linear-gradient(to top, rgba(10, 13, 16, 0.98) 15%, rgba(10, 13, 16, 0.7) 60%, rgba(10, 13, 16, 0.2) 100%), url('mjl.chair.png');
+      background-size: cover;
+      background-position: center;
+      border:1px solid var(--rule);
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding: clamp(1.75rem, 5vw, 3rem);
+      box-shadow: 0 25px 60px -25px rgba(0,0,0,0.6);
+    }
+    .poster .p-top{position:relative;z-index:1}
+    .poster .p-no{
+      font-family:'Montserrat', sans-serif;
+      font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
+      color:var(--gold);font-weight:500;
+    }
+    .poster .p-title{
+      font-family:'Syne', sans-serif;
+      font-weight:700;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      line-height:1.1;
+      color:var(--lamp);
+      margin-top:2rem;
+      letter-spacing:-0.02em;
+      text-transform: uppercase;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .poster .p-bottom{position:relative;z-index:1}
+    .poster .p-soon{
+      display:inline-block;
+      font-family:'Montserrat', sans-serif;
+      font-size:.6rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;
+      color:var(--room-deep);
+      background:var(--gold);
+      padding:.4rem .9rem;
+      margin-bottom:2rem;
+    }
+    .poster .p-meta{
+      font-family:'Montserrat', sans-serif;
+      font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--lamp);
+      line-height:2.3;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+    }
+    @media (max-width:920px){
+      .event-grid{grid-template-columns:1fr; gap: 2.5rem;}
+      .poster{aspect-ratio: 4/5;}
+    }
 
-  .signup{margin-top:6rem;max-width:600px}
-  .signup h3{font-size:1.5rem;margin-bottom:.6rem; text-transform: uppercase; letter-spacing: -0.01em;}
-  .signup p{color:var(--lamp-dim);font-size:0.95rem;max-width:50ch}
-  
-  .field-row{display:flex;gap:15px;margin-top:2.5rem;flex-wrap:wrap}
-  .field-row input{
-    flex:1;min-width:280px;
-    font-family:'Montserrat', sans-serif;
-    font-size:0.95rem;
-    padding:1.1rem;
-    background:var(--room);
-    border:1px solid var(--rule);
-    color:var(--lamp);
-    letter-spacing: 0.05em;
-  }
-  .field-row input::placeholder{color:#4e5864}
-  .field-row input:focus-visible{outline:1px solid var(--gold);outline-offset:1px}
-  
-  .signup .btn{
-    margin-top:0;
-    background:var(--gold);
-    color:var(--room-deep);
-  }
-  .signup .btn:hover{background: transparent; color: var(--gold);}
-  .signup .ok{
-    display:none;
-    margin-top:1.5rem;
-    font-family:'Montserrat', sans-serif;
-    font-size:.85rem;color:var(--gold);font-weight:500;letter-spacing: 0.05em;
-  }
-  .give{margin-top:3.5rem;font-size:0.9rem;color:var(--lamp-dim);max-width:55ch}
+    /* ---------- The Future Lounge Layout ---------- */
+    .vision{background:var(--room-deep); border-top: 1px solid var(--rule);}
+    .rooms{
+      margin: clamp(3rem, 6vw, 5rem) 0 0;
+      columns:2;column-gap:4.5rem;
+    }
+    .rooms li{
+      list-style:none;
+      break-inside:avoid;
+      padding:1.8rem 0;
+      border-top:1px solid var(--rule);
+    }
+    .rooms li strong{
+      font-family:'Syne', sans-serif;
+      font-weight:600;font-size:1.2rem;
+      display:block;margin-bottom:.6rem;
+      color:var(--lamp);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+    .rooms li span{color:var(--lamp-dim);font-size:.92rem; line-height: 1.7;}
 
-  /* ---------- Footer ---------- */
-  footer{padding:5rem 0;text-align:center;border-top:1px solid var(--rule); background: var(--room-deep);}
-  footer .mark{font-family:'Syne', sans-serif;font-weight: 700; font-size:1.3rem;color:var(--lamp); letter-spacing: -0.02em; text-transform: uppercase;}
-  footer .small{
-    margin-top:1.2rem;
-    font-family:'Montserrat', sans-serif;
-    font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;
-    color:var(--lamp-dim);
-  }
+    .signup{margin-top:6rem;max-width:600px}
+    .signup h3{font-size:1.5rem;margin-bottom:.6rem; text-transform: uppercase; letter-spacing: -0.01em;}
+    .signup p{color:var(--lamp-dim);font-size:0.95rem;max-width:50ch}
+    
+    /* Modern mobile input layout framework */
+    .field-row{display:flex; gap:15px; margin-top:2.5rem;}
+    .field-row input{
+      flex:1;
+      font-family:'Montserrat', sans-serif;
+      font-size:1rem; /* 16px to natively prevent iOS safari automatic zoom-on-focus overrides */
+      padding:1.1rem;
+      background:var(--room);
+      border:1px solid var(--rule);
+      color:var(--lamp);
+      letter-spacing: 0.05em;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    .field-row input::placeholder{color:#4e5864}
+    .field-row input:focus-visible{outline:1px solid var(--gold);outline-offset:1px}
+    
+    .signup .btn{
+      margin-top:0;
+      background:var(--gold);
+      color:var(--room-deep);
+    }
+    .signup .btn:hover{background: transparent; color: var(--gold);}
+    .signup .ok{
+      display:none;
+      margin-top:1.5rem;
+      font-family:'Montserrat', sans-serif;
+      font-size:.85rem;color:var(--gold);font-weight:500;letter-spacing: 0.05em;
+    }
+    .give{margin-top:3.5rem;font-size:0.9rem;color:var(--lamp-dim);max-width:55ch}
 
-  /* ---------- Reveal Elements ---------- */
-  .reveal{opacity:0;transform:translateY(25px);transition:opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1)}
-  .reveal.in{opacity:1;transform:none}
+    /* ---------- Footer ---------- */
+    footer{padding:5rem 0;text-align:center;border-top:1px solid var(--rule); background: var(--room-deep);}
+    footer .mark{font-family:'Syne', sans-serif;font-weight: 700; font-size:1.3rem;color:var(--lamp); letter-spacing: -0.02em; text-transform: uppercase;}
+    footer .small{
+      margin-top:1.2rem;
+      font-family:'Montserrat', sans-serif;
+      font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;
+      color:var(--lamp-dim);
+      line-height: 1.8;
+    }
 
-  /* ---------- Mobile Optimization ---------- */
-  @media (max-width:640px){
-    .wrap {padding: 0 24px;}
-    body{font-size:1rem}
-    section{padding:5.5rem 0}
-    .hero{min-height:95svh; background-position: 75% center;}
-    .programme{grid-template-columns: 1fr; gap: 15px;}
-    .programme .row {min-height: auto; padding: 2rem 1.5rem;}
-    .rooms{columns:1; margin-top: 3rem;}
-    .catalog{padding:2rem 1.5rem}
-    .catalog dl{grid-template-columns:1fr;row-gap:0}
-    .catalog dt{border-bottom:none;padding-bottom:.2rem}
-    .catalog dd{padding-top:0}
-    .field-row .btn{width:100%;text-align:center}
-    .field-row input{min-width:100%}
-  }
-</style>
+    /* ---------- Reveal Elements ---------- */
+    .reveal{opacity:0;transform:translateY(25px);transition:opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1)}
+    .reveal.in{opacity:1;transform:none}
+
+    /* ---------- Mobile Optimization Media Query Override ---------- */
+    @media (max-width:640px){
+      .wrap {padding: 0 24px;}
+      body{font-size:1rem}
+      .scroll-cue {left: 24px; bottom: 24px;}
+      .hero{min-height:92svh;}
+      .programme{grid-template-columns: 1fr; gap: 15px;}
+      .programme .row {min-height: auto; padding: 2.2rem 1.75rem;}
+      .rooms{columns:1; margin-top: 3rem;}
+      .catalog dl{grid-template-columns:1fr;row-gap:0}
+      .catalog dt{border-bottom:none;padding-bottom:.1rem; padding-top: 1rem;}
+      .catalog dd{padding-top:0; padding-bottom: 1rem;}
+      .field-row {flex-direction: column; gap: 12px;}
+      .field-row input {width: 100%;}
+      .field-row .btn {width: 100%; margin-top: 4px;}
+    }
+  </style>
 </head>
 <body>
 
@@ -485,7 +498,7 @@
       <!-- Catalog box configured with the record cover backdrop overlay -->
       <div class="catalog reveal" role="group" aria-label="Session details">
         <div class="call-no">
-          <span>M.J.'S LISTENING SESSIONS — CATALOG NO. 001</span>
+          <span>M.J.'s LISTENING SESSIONS — CATALOG NO. 001</span>
           <span>828.28&nbsp;COO</span>
         </div>
         <dl>
