@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.web3forms.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>M.J.'s Listening Sessions — One record. Full attention.</title>
+<meta name="description" content="A ticketed listening event in Tulsa: 28 seats, one record, played front to back with full attention.">
+<script>
+  // Turnstile gate: route first-time visitors through the verify page.
+  // Remove this block if you decide the sessions page should be open.
+  try {
+    if (sessionStorage.getItem('mjls_verified') !== '1') {
+      window.location.replace('verify.html');
+    }
+  } catch(e){}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --room:#2B2E31;        /* dark/medium grey */
+    --room-deep:#232629;   /* deeper alcove */
+    --lamp:#E9EAE7;        /* soft off-white text */
+    --lamp-dim:#A6ABAF;    /* dimmed text */
+    --card:#F0EDE3;        /* the one lit thing: the catalog card */
+    --card-ink:#26282A;
+    --sage:#8FB3CC;        /* dusty blue accent (links) */
+    --brass:#7FA6C6;       /* primary blue accent */
+    --rule:#3D4145;        /* hairlines in the dark */
+    --card-rule:#D9D4C5;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+  }
+  body{
+    background:var(--room);
+    color:var(--lamp);
+    font-family:'Lora', Georgia, serif;
+    font-size:1.12rem;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  .eyebrow{
+    font-family:'Karla', sans-serif;
+    font-size:.9rem;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    color:var(--brass);
+    font-weight:700;
+  }
+  h1,h2,h3{font-family:'Karla', sans-serif;font-weight:600;line-height:1.1;color:var(--lamp);letter-spacing:.01em}
+  a{color:var(--sage)}
+  ::selection{background:var(--brass);color:var(--room)}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:94vh;
+    min-height:94svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .groove{
+    position:absolute;
+    right:-160px;
+    top:50%;
+    transform:translateY(-50%);
+    width:620px;height:620px;
+    opacity:.45;
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:1}
+  .hero h1{
+    font-size:clamp(2.9rem, 9.5vw, 5.8rem);
+    margin:.4em 0 .3em;
+    letter-spacing:-0.015em;
+    font-weight:700;
+  }
+  .hero h1 .name{font-style:italic;color:var(--brass)}
+  .hero .tag{
+    font-family:'Lora', serif;
+    font-style:italic;
+    font-size:clamp(1.2rem, 4vw, 1.65rem);
+    color:var(--lamp-dim);
+    max-width:30ch;
+  }
+  .hero .loc{
+    margin-top:2.2rem;
+    font-family:'Karla', sans-serif;
+    font-size:.76rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--lamp-dim);
+  }
+  .scroll-cue{
+    position:absolute;
+    bottom:30px;left:22px;
+    font-family:'Karla', sans-serif;
+    font-size:.7rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--lamp-dim);
+    display:flex;align-items:center;gap:10px;
+    text-decoration:none;
+    padding:10px 0;
+  }
+  .scroll-cue::after{content:"";display:block;width:44px;height:1px;background:var(--brass)}
+
+  /* ---------- Sections ---------- */
+  section{padding:5.2rem 0}
+  h2{font-size:clamp(2.1rem, 7vw, 3.1rem);margin:.5rem 0 1.5rem}
+  .lede{max-width:56ch;font-size:1.16rem}
+  .quiet{color:var(--lamp-dim)}
+
+  /* Order of the evening */
+  .programme{margin-top:2.4rem}
+  .programme .row{
+    display:grid;
+    grid-template-columns:160px 1fr;
+    gap:22px;
+    padding:1.4rem 0;
+    border-top:1px solid var(--rule);
+  }
+  .programme .row:last-child{border-bottom:1px solid var(--rule)}
+  .programme .when{
+    font-family:'Karla', sans-serif;
+    font-size:.73rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--brass);padding-top:.5rem;
+  }
+  .programme h3{font-size:1.4rem;margin-bottom:.3rem}
+  .programme p{max-width:52ch;color:var(--lamp-dim);font-size:1.02rem}
+
+  /* House rules epigraph */
+  .rules{
+    text-align:center;
+    padding:4.6rem 0;
+    background:var(--room-deep);
+  }
+  .rules blockquote{
+    font-family:'Lora', serif;
+    font-style:italic;
+    font-size:clamp(1.4rem, 5vw, 2rem);
+    max-width:26ch;
+    margin:0 auto;
+    line-height:1.5;
+    color:var(--lamp);
+  }
+  .rules .attr{
+    margin-top:1.2rem;
+    font-family:'Karla', sans-serif;
+    font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--lamp-dim);
+  }
+
+  /* ---------- Catalog card (signature — the one lit thing) ---------- */
+  .catalog{
+    margin-top:2.4rem;
+    background:var(--card);
+    color:var(--card-ink);
+    border-radius:3px;
+    box-shadow:0 0 0 1px rgba(0,0,0,.25), 0 30px 70px -30px rgba(0,0,0,.8), 0 0 90px -20px rgba(127,166,198,.16);
+    padding:2rem 2.2rem 1.7rem;
+    position:relative;
+    max-width:620px;
+  }
+  .catalog::before{
+    content:"";
+    position:absolute;
+    bottom:14px;left:50%;
+    transform:translateX(-50%);
+    width:16px;height:16px;
+    border-radius:50%;
+    background:var(--room);
+    box-shadow:inset 0 1px 2px rgba(0,0,0,.5);
+  }
+  .catalog .call-no{
+    font-family:'Karla', sans-serif;
+    font-size:.7rem;letter-spacing:.12em;
+    color:#75797D;
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    border-bottom:1px solid var(--card-ink);
+    padding-bottom:.7rem;
+  }
+  .catalog dl{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    row-gap:0;
+    margin-top:.4rem;
+  }
+  .catalog dt, .catalog dd{
+    border-bottom:1px solid var(--card-rule);
+    padding-bottom:.85rem;
+    padding-top:.85rem;
+  }
+  .catalog dt:last-of-type, .catalog dd:last-of-type{border-bottom:none}
+  .catalog dt{
+    font-family:'Karla', sans-serif;
+    font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+    color:#75797D;
+  }
+  .catalog dd{font-size:1.05rem;color:var(--card-ink)}
+  .catalog dd em{font-family:'Lora', serif;font-size:1.15rem}
+  .stamp{
+    display:inline-block;
+    font-family:'Karla', sans-serif;
+    font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:#41708F;
+    border:1.5px solid #41708F;
+    border-radius:2px;
+    padding:.3rem .6rem;
+    transform:rotate(-2deg);
+    opacity:.9;
+  }
+  .btn{
+    display:inline-block;
+    margin-top:1.8rem;
+    background:var(--card-ink);
+    color:var(--card);
+    text-decoration:none;
+    font-family:'Karla', sans-serif;
+    font-size:.82rem;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;
+    padding:1rem 1.7rem;
+    border:none;border-radius:2px;
+    cursor:pointer;
+    transition:background .25s ease;
+  }
+  .catalog .btn:hover{background:#3a3d40}
+  .btn:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+  .catalog .fine{
+    margin-top:1rem;
+    font-family:'Karla', sans-serif;
+    font-size:.76rem;color:#75797D;
+  }
+
+  /* ---------- Vision / founding member ---------- */
+  .vision{background:var(--room-deep)}
+  .rooms{
+    margin:2.4rem 0 0;
+    columns:2;column-gap:3rem;
+  }
+  .rooms li{
+    list-style:none;
+    break-inside:avoid;
+    padding:1.05rem 0;
+    border-top:1px solid var(--rule);
+  }
+  .rooms li strong{
+    font-family:'Karla', sans-serif;
+    font-weight:600;font-size:1.2rem;
+    display:block;margin-bottom:.2rem;
+    color:var(--lamp);
+  }
+  .rooms li span{color:var(--lamp-dim);font-size:.98rem}
+
+  .signup{margin-top:3rem;max-width:560px}
+  .signup h3{font-size:1.65rem;margin-bottom:.5rem}
+  .signup p{color:var(--lamp-dim);font-size:1rem;max-width:48ch}
+  .field-row{display:flex;gap:10px;margin-top:1.4rem;flex-wrap:wrap}
+  .field-row input{
+    flex:1;min-width:220px;
+    font-family:'Lora', serif;
+    font-size:1.02rem;
+    padding:1rem;
+    background:var(--room);
+    border:1px solid var(--rule);
+    border-radius:2px;
+    color:var(--lamp);
+  }
+  .field-row input::placeholder{color:#82878b}
+  .field-row input:focus-visible{outline:3px solid var(--brass);outline-offset:1px}
+  .signup .btn{
+    margin-top:0;
+    background:var(--brass);
+    color:var(--room);
+  }
+  .signup .btn:hover{background:#93b8d6}
+  .signup .ok{
+    display:none;
+    margin-top:1rem;
+    font-family:'Karla', sans-serif;
+    font-size:.9rem;color:var(--sage);font-weight:600;
+  }
+  .give{margin-top:2.6rem;font-size:1rem;color:var(--lamp-dim);max-width:52ch}
+
+  /* ---------- Footer ---------- */
+  footer{padding:3.4rem 0 3rem;text-align:center;border-top:1px solid var(--rule)}
+  footer .mark{font-family:'Lora', serif;font-style:italic;font-size:1.25rem;color:var(--lamp)}
+  footer .small{
+    margin-top:.7rem;
+    font-family:'Karla', sans-serif;
+    font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--lamp-dim);
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- Mobile ---------- */
+  @media (max-width:640px){
+    body{font-size:1.05rem}
+    section{padding:3.8rem 0}
+    .hero{min-height:88svh}
+    .programme .row{grid-template-columns:1fr;gap:4px;padding:1.2rem 0}
+    .programme .when{padding-top:0}
+    .rooms{columns:1}
+    .catalog{padding:1.5rem 1.15rem 1.6rem}
+    .catalog dl{grid-template-columns:1fr;row-gap:0}
+    .catalog dt{border-bottom:none;padding-bottom:.15rem}
+    .catalog dd{padding-top:0}
+    .catalog .call-no{font-size:.62rem}
+    .groove{width:440px;height:440px;right:-240px;opacity:.3}
+    .field-row .btn{width:100%;text-align:center}
+    .field-row input{min-width:100%}
+    .scroll-cue{bottom:18px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <svg class="groove" viewBox="0 0 640 640" aria-hidden="true">
+    <g fill="none" stroke="#43484D" stroke-width="1">
+      <circle cx="320" cy="320" r="60"/><circle cx="320" cy="320" r="90"/>
+      <circle cx="320" cy="320" r="120"/><circle cx="320" cy="320" r="150"/>
+      <circle cx="320" cy="320" r="180"/><circle cx="320" cy="320" r="210"/>
+      <circle cx="320" cy="320" r="240"/><circle cx="320" cy="320" r="270"/>
+      <circle cx="320" cy="320" r="300"/>
+    </g>
+    <circle cx="320" cy="320" r="26" fill="#34383C"/>
+    <circle cx="320" cy="320" r="3.5" fill="#7FA6C6"/>
+  </svg>
+  <div class="wrap hero-inner">
+    <p class="eyebrow">A listening event · Tulsa, Oklahoma</p>
+    <h1><span class="name">M.J.'s</span><br>Listening Sessions</h1>
+    <p class="tag">One record. Front to back. Your full attention — and nothing else.</p>
+    <p class="loc">28 seats &nbsp;·&nbsp; $28.28 &nbsp;·&nbsp; Midtown / Downtown</p>
+  </div>
+  <a class="scroll-cue" href="#evening">The evening</a>
+</header>
+
+<!-- ============ THE EVENING ============ -->
+<section id="evening">
+  <div class="wrap">
+    <p class="eyebrow reveal">How it works</p>
+    <h2 class="reveal">An hour that belongs to the record</h2>
+    <p class="lede reveal quiet">No opener. No crowd noise. No screens. Twenty-eight people settle into a quiet room, the lights come down, and one album plays the way it was made to be heard — start to finish, on a proper system, with everyone actually listening.</p>
+
+    <div class="programme">
+      <div class="row reveal">
+        <div class="when">Doors · 30 min before</div>
+        <div>
+          <h3>Settle in</h3>
+          <p>Low light, quiet room. Find your seat, put the phone away, let the day come off your shoulders. This part matters.</p>
+        </div>
+      </div>
+      <div class="row reveal">
+        <div class="when">A few words</div>
+        <div>
+          <h3>The record</h3>
+          <p>M.J. introduces the album — what it is, why this one, what to listen for. Two minutes, no lecture.</p>
+        </div>
+      </div>
+      <div class="row reveal">
+        <div class="when">The main event</div>
+        <div>
+          <h3>Side A to the runout</h3>
+          <p>The album, uninterrupted. Most run 35 to 55 minutes. It's longer than you think, and shorter than you'll want.</p>
+        </div>
+      </div>
+      <div class="row reveal">
+        <div class="when">Afterward</div>
+        <div>
+          <h3>Decompress</h3>
+          <p>Stay a few minutes if you like. Talk about what you heard, or don't. Some records need a quiet walk home instead.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOUSE RULES ============ -->
+<section class="rules">
+  <div class="wrap">
+    <blockquote class="reveal">Phones away. Minimal talking. The record gets the room.</blockquote>
+    <p class="attr reveal">House rules — the same ones the Lounge will keep</p>
+  </div>
+</section>
+
+<!-- ============ NEXT SESSION (catalog card) ============ -->
+<section id="next-session">
+  <div class="wrap">
+    <p class="eyebrow reveal">Next session</p>
+    <h2 class="reveal">Now checking out</h2>
+
+    <div class="catalog reveal" role="group" aria-label="Next session details">
+      <div class="call-no">
+        <span>M.J.'S LISTENING SESSIONS — CATALOG NO. 001</span>
+        <span>828.28&nbsp;COO</span>
+      </div>
+      <dl>
+        <dt>The record</dt>
+        <dd><em>To be revealed at the door</em></dd>
+        <dt>Date</dt>
+        <dd>Coming soon — join the list below to hear first</dd>
+        <dt>Seats</dt>
+        <dd>28, and only 28</dd>
+        <dt>Admission</dt>
+        <dd>$28.28 · online only</dd>
+        <dt>Status</dt>
+        <dd><span class="stamp">Reserve ahead</span></dd>
+      </dl>
+      <a class="btn" href="#founding">Reserve a seat</a>
+      <p class="fine">Tickets are online only. If a session sells out, the next one gets announced to the list first.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE VISION ============ -->
+<section class="vision" id="founding">
+  <div class="wrap">
+    <p class="eyebrow reveal">What's being built</p>
+    <h2 class="reveal">The Listening Lounge</h2>
+    <p class="lede reveal quiet">These sessions are the first chapter of a permanent home — part library, part record store, part reading room. A place in Tulsa built for doing one quiet thing at a time, and doing it well.</p>
+
+    <ul class="rooms">
+      <li class="reveal"><strong>The listening room</strong><span>Tuned so the record sounds right from every single seat. Comfortable, mismatched, chosen chairs.</span></li>
+      <li class="reveal"><strong>The library</strong><span>Built-in shelves of books and records. When no session is on, come read. Phones silent, voices low.</span></li>
+      <li class="reveal"><strong>Creation rooms</strong><span>Small rentable rooms for painting, drawing, charcoal — bring your materials, look up, and the ceiling is the night sky.</span></li>
+      <li class="reveal"><strong>Meditation cubbies</strong><span>Small white rooms, soft light around the floorboards, a clean blanket, and the option to turn everything off.</span></li>
+    </ul>
+
+    <div class="signup reveal">
+      <h3>You're sitting in the first chapter of this</h3>
+      <p>Every ticket goes toward building the room. Leave your email to become a founding member — first word on sessions, first access when the doors open.</p>
+      <input type="checkbox" id="botcheck" name="botcheck" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
+      <div class="field-row">
+        <input type="email" id="email" placeholder="your@email.com" aria-label="Email address" autocomplete="email" inputmode="email" maxlength="254" spellcheck="false" required>
+        <button class="btn" id="join">Join the founding list</button>
+      </div>
+      <p class="ok" id="ok">You're on the list. Welcome to the first chapter.</p>
+      <p class="give">If tonight's session moved you, there's a jar by the door — and everything in it goes to the same place the tickets do.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <p class="mark">M.J.'s Listening Sessions</p>
+    <p class="small">M.J. Cooper, LLC · Tulsa, Oklahoma · Est. 2026</p>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Founding list — relays to your inbox via Web3Forms (your address never appears in this file).
+  // SETUP: get your access key at web3forms.com using the inbox you want signups sent to,
+  // then paste it below in place of YOUR_WEB3FORMS_ACCESS_KEY.
+  const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+
+  const join = document.getElementById('join');
+  const email = document.getElementById('email');
+  const ok = document.getElementById('ok');
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  join.addEventListener('click', async ()=>{
+    const value = (email.value || '').trim().slice(0, 254);
+    if(!EMAIL_RE.test(value)){ email.focus(); return; }
+
+    join.disabled = true;
+    const original = join.textContent;
+    join.textContent = 'Joining…';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: 'Founding list signup — M.J.\'s Listening Sessions',
+          from_name: 'MJListening founding list',
+          botcheck: document.getElementById('botcheck').checked,
+          email: value,
+          message: 'New founding list signup: ' + value
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        ok.style.display = 'block';
+        email.value = '';
+      } else {
+        ok.style.display = 'block';
+        ok.textContent = 'Something went sideways — try again in a moment.';
+      }
+    } catch(err) {
+      ok.style.display = 'block';
+      ok.textContent = 'Something went sideways — try again in a moment.';
+    } finally {
+      join.disabled = false;
+      join.textContent = original;
+    }
+  });
+</script>
+</body>
+</html>
