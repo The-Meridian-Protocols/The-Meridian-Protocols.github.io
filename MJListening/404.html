@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>M.J.'s Listening Sessions — Track Not Found</title>
+<meta name="description" content="404 — This record appears to be missing from our collection.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --room: #12161a;         
+    --room-deep: #0a0d10;    
+    --lamp: #e4e7eb;         
+    --lamp-dim: #7c8691;     
+    --gold: #bfa373;         
+    --rule: #222a33;         
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--room);
+    color:var(--lamp);
+    font-family:'Montserrat', sans-serif;
+    font-size:1.02rem;
+    font-weight: 300;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  .error-page{
+    min-height:100vh;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .groove{
+    position:absolute;
+    left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    width:620px;height:620px;
+    opacity:.12;
+    pointer-events:none;
+  }
+  .error-inner{
+    position:relative;z-index:1;
+    max-width:500px;
+    width:100%;
+  }
+  .eyebrow{
+    font-family:'Montserrat', sans-serif;
+    font-size:.7rem;
+    letter-spacing:.4em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+    margin-bottom: 1.5rem;
+  }
+  h1{
+    font-family:'Syne', sans-serif;
+    font-weight:800;
+    font-size:clamp(3.5rem, 10vw, 6rem);
+    color:transparent;
+    -webkit-text-stroke: 1px var(--lamp);
+    line-height:1;
+    margin-bottom:1.5rem;
+    letter-spacing: -0.03em;
+  }
+  h2{
+    font-family:'Syne', sans-serif;
+    font-weight:700;
+    font-size:1.5rem;
+    color:var(--lamp);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+  }
+  p{
+    font-size:0.95rem;
+    color:var(--lamp-dim);
+    max-width:38ch;
+    margin:0 auto 2.5rem;
+    line-height: 1.7;
+  }
+  .btn{
+    display:inline-block;
+    background: transparent;
+    color:var(--gold);
+    text-decoration:none;
+    font-family:'Montserrat', sans-serif;
+    font-size:.7rem;font-weight:500;
+    letter-spacing:.3em;text-transform:uppercase;
+    padding:1.1rem 2.2rem;
+    border:1px solid var(--gold);
+    cursor:pointer;
+    transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn:hover{background:var(--gold); color: var(--room-deep); transform: translateY(-2px);}
+  .btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  @media (max-width:640px) {
+    .groove{width:440px;height:440px;}
+  }
+</style>
+</head>
+<body>
+<main class="error-page">
+  <svg class="groove" viewBox="0 0 640 640" aria-hidden="true">
+    <g fill="none" stroke="#222a33" stroke-width="1">
+      <circle cx="320" cy="320" r="60"/><circle cx="320" cy="320" r="90"/>
+      <circle cx="320" cy="320" r="120"/><circle cx="320" cy="320" r="150"/>
+      <circle cx="320" cy="320" r="180"/><circle cx="320" cy="320" r="210"/>
+      <circle cx="320" cy="320" r="240"/><circle cx="320" cy="320" r="270"/>
+      <circle cx="320" cy="320" r="300"/>
+    </g>
+    <circle cx="320" cy="320" r="26" fill="#0a0d10"/>
+  </svg>
+
+  <div class="error-inner">
+    <p class="eyebrow">Error 404</p>
+    <h1>Unreleased</h1>
+    <h2>This track is missing from our collection</h2>
+    <p>The page you are looking for has been moved, removed, or never existed in the catalog architecture.</p>
+    <a class="btn" href="index.html">Return to index</a>
+  </div>
+</main>
+</body>
+</html>
