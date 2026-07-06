@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-<title>M.J.'s Listening Sessions — Verification</title>
-<meta name="description" content="Verification — M.J.'s Listening Sessions, Tulsa.">
+<title>M.J.'s Listening Sessions — You're on the list</title>
+<meta name="description" content="Founding list confirmation — M.J.'s Listening Sessions, Tulsa.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -318,7 +317,7 @@
   }
 </style>
 <style>
-  .verify{
+  .confirm{
     min-height:100vh;
     min-height:100svh;
     display:flex;
@@ -330,61 +329,52 @@
     position:relative;
     overflow:hidden;
   }
-  .verify .groove{
+  .confirm .groove{
     right:auto;left:50%;
     transform:translate(-50%,-50%);
     top:50%;
     opacity:.25;
   }
-  .verify-card{
+  .confirm-card{
     position:relative;z-index:1;
     background:var(--card);
     color:var(--card-ink);
     border-radius:3px;
     box-shadow:0 0 0 1px rgba(0,0,0,.25), 0 30px 70px -30px rgba(0,0,0,.8), 0 0 90px -20px rgba(127,166,198,.16);
-    padding:2.4rem 2.2rem 2.2rem;
-    max-width:440px;
+    padding:2.6rem 2.4rem 2.4rem;
+    max-width:460px;
     width:100%;
   }
-  .verify-card .call-no{
+  .confirm-card .call-no{
     font-family:'Karla', sans-serif;
     font-size:.68rem;letter-spacing:.12em;
     color:#75797D;
     display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
     border-bottom:1px solid var(--card-ink);
     padding-bottom:.7rem;
-    margin-bottom:1.5rem;
+    margin-bottom:1.6rem;
     text-align:left;
   }
-  .verify-card h1{
+  .confirm-card h1{
     font-family:'Karla', sans-serif;
     font-weight:700;
-    font-size:clamp(1.6rem, 6vw, 2rem);
+    font-size:clamp(1.7rem, 6vw, 2.2rem);
     color:var(--card-ink);
     line-height:1.15;
-    margin-bottom:.7rem;
+    margin-bottom:.8rem;
   }
-  .verify-card p{
-    font-size:1rem;
+  .confirm-card p{
+    font-size:1.02rem;
     color:#4A4D50;
-    max-width:34ch;
-    margin:0 auto 1.6rem;
+    max-width:36ch;
+    margin:0 auto;
   }
-  .turnstile-holder{
-    display:flex;
-    justify-content:center;
-    min-height:70px;
-  }
-  .verify-card .fine{
-    margin-top:1.4rem;
-    font-family:'Karla', sans-serif;
-    font-size:.72rem;
-    color:#75797D;
-  }
+  .confirm-card .stamp{margin-top:1.6rem}
+  .confirm-card .btn{margin-top:2rem}
 </style>
 </head>
 <body>
-<main class="verify">
+<main class="confirm">
   <svg class="groove" viewBox="0 0 640 640" aria-hidden="true">
     <g fill="none" stroke="#43484D" stroke-width="1">
       <circle cx="320" cy="320" r="60"/><circle cx="320" cy="320" r="90"/>
@@ -397,32 +387,17 @@
     <circle cx="320" cy="320" r="3.5" fill="#7FA6C6"/>
   </svg>
 
-  <div class="verify-card">
+  <div class="confirm-card">
     <div class="call-no">
       <span>M.J.'S LISTENING SESSIONS</span>
-      <span>TULSA, OK</span>
+      <span>FOUNDING LIST</span>
     </div>
-    <h1>One moment before the music.</h1>
-    <p>A quick check to keep the room human. It takes a second — then you're in.</p>
-
-    <div class="turnstile-holder">
-      <!-- Same-domain sitekey: replace with the sitekey from meridian-turnstile.js -->
-      <div class="cf-turnstile"
-           data-sitekey="YOUR_TURNSTILE_SITEKEY"
-           data-callback="onVerified"
-           data-theme="dark"></div>
-    </div>
-
-    <p class="fine">Protected by Cloudflare Turnstile · M.J. Cooper, LLC</p>
+    <h1>You're on the list.</h1>
+    <p>Welcome to the first chapter. You'll hear about sessions before anyone else — and you'll be first through the door when the Lounge opens.</p>
+    <span class="stamp">Founding member</span>
+    <br>
+    <a class="btn" href="index.html">Back to the sessions</a>
   </div>
 </main>
-
-<script>
-  function onVerified(token){
-    // Mark this browser session as verified, then continue to the sessions page.
-    try { sessionStorage.setItem('mjls_verified', '1'); } catch(e){}
-    window.location.replace('index.html');
-  }
-</script>
 </body>
 </html>
