@@ -5,12 +5,14 @@
 <link rel="icon" type="image/svg+xml" href="mjl.favicon.svg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.web3forms.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>M.J.'s Listening Sessions — You're on the list</title>
-<meta name="description" content="Founding list confirmation — M.J.'s Listening Sessions, Tulsa.">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<title>M.J.'s Listening Sessions — One record. Full attention.</title>
+<meta name="description" content="A ticketed listening event in Tulsa: 28 seats, one record, played front to back with full attention.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Swapped to Syne for a striking, ultra-modern geometric heading aesthetic -->
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -24,6 +26,11 @@
     --card-rule: #29333e;
   }
   *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+  }
   body{
     background:var(--room);
     color:var(--lamp);
@@ -32,63 +39,185 @@
     font-weight: 300;
     line-height:1.75;
     -webkit-font-smoothing:antialiased;
+    overflow-x: hidden;
   }
-  .confirm{
+  .wrap{max-width:1040px;margin:0 auto;padding:0 40px}
+  
+  .eyebrow{
+    font-family:'Montserrat', sans-serif;
+    font-size:.7rem;
+    letter-spacing:.4em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:500;
+    margin-bottom: 1.2rem;
+  }
+  /* Modern geometric typeface configuration */
+  h1,h2,h3{font-family:'Syne', sans-serif;font-weight:700;line-height:1.1;color:var(--lamp);letter-spacing:-0.02em}
+  a{color:var(--gold);text-decoration:none;transition:color 0.3s ease;}
+  a:hover{color:var(--lamp);}
+  ::selection{background:var(--gold);color:var(--room)}
+
+  /* ---------- Hero Section ---------- */
+  .hero{
     min-height:100vh;
     min-height:100svh;
     display:flex;
     flex-direction:column;
     justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:24px;
     position:relative;
     overflow:hidden;
+    border-bottom: 1px solid var(--rule);
+    background-image: linear-gradient(to right, rgba(18, 22, 26, 1) 40%, rgba(18, 22, 26, 0.4) 70%, rgba(18, 22, 26, 0.1) 100%), url('mjl.recordplay.png');
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
   }
-  .groove{
+
+  .hero-inner{position:relative;z-index:2; width: 100%;}
+  .hero h1 {
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    font-weight: 800;
+    margin: .2em 0 .3em;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+  .hero h1 .name{
+    color: transparent;
+    -webkit-text-stroke: 1px var(--gold);
+  }
+  .hero .tag{
+    font-family:'Montserrat', sans-serif;
+    font-size:clamp(1.1rem, 2.5vw, 1.35rem);
+    color:var(--lamp-dim);
+    max-width:42ch;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    line-height: 1.7;
+  }
+  .hero .loc{
+    margin-top:4rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:.7rem;
+    letter-spacing:.35em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight: 400;
+  }
+  .scroll-cue{
     position:absolute;
-    left:50%;top:50%;
-    transform:translate(-50%,-50%);
-    width:620px;height:620px;
-    opacity:.15;
-    pointer-events:none;
+    bottom:40px;left:40px;
+    font-family:'Montserrat', sans-serif;
+    font-size:.65rem;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--lamp-dim);
+    display:flex;align-items:center;gap:15px;
+    padding:10px 0;
   }
-  .confirm-card{
-    position:relative;z-index:1;
-    background:var(--room-deep);
+  .scroll-cue::after{content:"";display:block;width:60px;height:1px;background:var(--gold)}
+
+  /* ---------- Sections ---------- */
+  section{padding:8rem 0}
+  h2{font-size:clamp(1.8rem, 4.5vw, 2.8rem); margin:.5rem 0 2.5rem; text-transform: uppercase; letter-spacing: -0.02em; font-weight: 700;}
+  .lede{max-width:65ch;font-size:1.15rem; line-height: 1.9; font-weight: 200;}
+  .quiet{color:var(--lamp-dim)}
+
+  /* Program Layout Blocks */
+  .programme{
+    margin-top:5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+  }
+  .programme .row {
     border: 1px solid var(--rule);
-    padding:3rem 2.5rem;
-    max-width:480px;
-    width:100%;
+    padding: 2.5rem 2rem;
+    background: var(--room-deep);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
+  }
+  .programme .when{
+    font-family:'Montserrat', sans-serif;
+    font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold);font-weight: 500;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.75rem;
+  }
+  .programme h3{font-size:1.15rem; margin-bottom:.8rem; text-transform: uppercase; font-weight: 600; letter-spacing: -0.01em;}
+  .programme p{color:var(--lamp-dim);font-size:0.9rem; line-height: 1.65;}
+
+  /* House rules banner */
+  .rules{
+    text-align:center;
+    padding:7rem 0;
+    background:var(--room-deep);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .rules blockquote{
+    font-family:'Syne', sans-serif;
+    font-size:clamp(1.3rem, 4vw, 2.2rem);
+    font-weight: 700;
+    max-width:32ch;
+    margin:0 auto;
+    line-height:1.4;
+    color:var(--lamp);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .rules .attr{
+    margin-top:2.5rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  /* ---------- Catalog Box Details ---------- */
+  .catalog{
+    background-image: linear-gradient(rgba(23, 29, 36, 0.92), rgba(23, 29, 36, 0.92)), url('mjl.recordcover.png');
+    background-size: cover;
+    background-position: center;
+    color: var(--lamp);
+    border: 1px solid rgba(191, 163, 115, 0.3);
+    padding: 3rem;
+    position: relative;
+    width: 100%;
     box-shadow: 0 30px 70px -20px rgba(0,0,0,0.8);
   }
-  .confirm-card .call-no{
+  .catalog .call-no{
     font-family:'Montserrat', sans-serif;
     font-size:.65rem;letter-spacing:.25em;
     color:var(--gold);
-    display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
-    border-bottom:1px solid var(--rule);
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    border-bottom:1px solid rgba(255,255,255,0.1);
     padding-bottom:1.2rem;
-    margin-bottom:2rem;
-    text-align:left;
   }
-  .confirm-card h1{
-    font-family:'Syne', sans-serif;
-    font-weight:800;
-    font-size:clamp(1.8rem, 6vw, 2.4rem);
-    color:var(--lamp);
-    line-height:1.1;
-    margin-bottom:1rem;
-    text-transform: uppercase;
-    letter-spacing: -0.02em;
+  .catalog dl{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    row-gap:0;
+    margin-top:.8rem;
   }
-  .confirm-card p{
-    font-size:0.95rem;
+  .catalog dt, .catalog dd{
+    border-bottom:1px solid rgba(255,255,255,0.05);
+    padding-bottom:1.1rem;
+    padding-top:1.1rem;
+  }
+  .catalog dt:last-of-type, .catalog dd:last-of-type{border-bottom:none}
+  .catalog dt{
+    font-family:'Montserrat', sans-serif;
+    font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
     color:var(--lamp-dim);
-    max-width:36ch;
-    margin:0 auto;
-    line-height: 1.7;
+    font-weight: 500;
   }
+  .catalog dd{font-size:0.95rem;color:var(--lamp)}
+  .catalog dd em{font-family:'Syne', sans-serif;font-size:1.05rem; font-weight:600; font-style: normal; color: var(--gold); text-transform: uppercase;}
+  
   .stamp{
     display:inline-block;
     font-family:'Montserrat', sans-serif;
@@ -96,13 +225,13 @@
     color:var(--gold);
     border:1px solid var(--gold);
     padding:.3rem .9rem;
-    margin-top:2rem;
   }
+  
   .btn{
     display:inline-block;
     margin-top:2.5rem;
-    background: var(--gold);
-    color:var(--room-deep);
+    background: transparent;
+    color:var(--gold);
     text-decoration:none;
     font-family:'Montserrat', sans-serif;
     font-size:.7rem;font-weight:500;
@@ -112,39 +241,362 @@
     cursor:pointer;
     transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .btn:hover{background:transparent; color: var(--gold); transform: translateY(-2px);}
+  .btn:hover{background:var(--gold); color: var(--room-deep); transform: translateY(-2px);}
   .btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  
+  .catalog .fine{
+    margin-top:1.8rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:.75rem;color:var(--lamp-dim);
+    line-height: 1.7;
+  }
 
+  /* ---------- Poster Layout Elements ---------- */
+  .event-grid{
+    margin-top:5rem;
+    display:grid;
+    grid-template-columns:1fr 1.3fr;
+    gap:4rem;
+    align-items:stretch;
+  }
+  .poster{
+    background-image: linear-gradient(to top, rgba(10, 13, 16, 0.95) 20%, rgba(10, 13, 16, 0.6) 60%, rgba(10, 13, 16, 0.2) 100%), url('mjl.chair.png');
+    background-size: cover;
+    background-position: center;
+    border:1px solid var(--rule);
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:3rem;
+    box-shadow: 0 25px 60px -25px rgba(0,0,0,0.6);
+  }
+  .poster .p-top{position:relative;z-index:1}
+  .poster .p-no{
+    font-family:'Montserrat', sans-serif;
+    font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold);font-weight:500;
+  }
+  .poster .p-title{
+    font-family:'Syne', sans-serif;
+    font-weight:700;
+    font-size:2.4rem;
+    line-height:1.1;
+    color:var(--lamp);
+    margin-top:2rem;
+    letter-spacing:-0.02em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+  .poster .p-bottom{position:relative;z-index:1}
+  .poster .p-soon{
+    display:inline-block;
+    font-family:'Montserrat', sans-serif;
+    font-size:.6rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--room-deep);
+    background:var(--gold);
+    padding:.4rem .9rem;
+    margin-bottom:2rem;
+  }
+  .poster .p-meta{
+    font-family:'Montserrat', sans-serif;
+    font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--lamp);
+    line-height:2.3;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+  }
+  @media (max-width:920px){
+    .event-grid{grid-template-columns:1fr}
+    .poster{aspect-ratio: 3/4; padding: 2.5rem;}
+  }
+
+  /* ---------- The Future Lounge Layout ---------- */
+  .vision{background:var(--room-deep); border-top: 1px solid var(--rule);}
+  .rooms{
+    margin:5rem 0 0;
+    columns:2;column-gap:4.5rem;
+  }
+  .rooms li{
+    list-style:none;
+    break-inside:avoid;
+    padding:1.8rem 0;
+    border-top:1px solid var(--rule);
+  }
+  .rooms li strong{
+    font-family:'Syne', sans-serif;
+    font-weight:600;font-size:1.2rem;
+    display:block;margin-bottom:.6rem;
+    color:var(--lamp);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .rooms li span{color:var(--lamp-dim);font-size:.92rem; line-height: 1.7;}
+
+  .signup{margin-top:6rem;max-width:600px}
+  .signup h3{font-size:1.5rem;margin-bottom:.6rem; text-transform: uppercase; letter-spacing: -0.01em;}
+  .signup p{color:var(--lamp-dim);font-size:0.95rem;max-width:50ch}
+  
+  .field-row{display:flex;gap:15px;margin-top:2.5rem;flex-wrap:wrap}
+  .field-row input{
+    flex:1;min-width:280px;
+    font-family:'Montserrat', sans-serif;
+    font-size:0.95rem;
+    padding:1.1rem;
+    background:var(--room);
+    border:1px solid var(--rule);
+    color:var(--lamp);
+    letter-spacing: 0.05em;
+  }
+  .field-row input::placeholder{color:#4e5864}
+  .field-row input:focus-visible{outline:1px solid var(--gold);outline-offset:1px}
+  
+  .signup .btn{
+    margin-top:0;
+    background:var(--gold);
+    color:var(--room-deep);
+  }
+  .signup .btn:hover{background: transparent; color: var(--gold);}
+  .signup .ok{
+    display:none;
+    margin-top:1.5rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:.85rem;color:var(--gold);font-weight:500;letter-spacing: 0.05em;
+  }
+  .give{margin-top:3.5rem;font-size:0.9rem;color:var(--lamp-dim);max-width:55ch}
+
+  /* ---------- Footer ---------- */
+  footer{padding:5rem 0;text-align:center;border-top:1px solid var(--rule); background: var(--room-deep);}
+  footer .mark{font-family:'Syne', sans-serif;font-weight: 700; font-size:1.3rem;color:var(--lamp); letter-spacing: -0.02em; text-transform: uppercase;}
+  footer .small{
+    margin-top:1.2rem;
+    font-family:'Montserrat', sans-serif;
+    font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--lamp-dim);
+  }
+
+  /* ---------- Reveal Elements ---------- */
+  .reveal{opacity:0;transform:translateY(25px);transition:opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- Mobile Optimization ---------- */
   @media (max-width:640px){
-    .confirm-card{padding:2rem 1.5rem}
-    .groove{width:440px;height:440px;}
+    .wrap {padding: 0 24px;}
+    body{font-size:1rem}
+    section{padding:5.5rem 0}
+    .hero{min-height:95svh; background-position: 75% center;}
+    .programme{grid-template-columns: 1fr; gap: 15px;}
+    .programme .row {min-height: auto; padding: 2rem 1.5rem;}
+    .rooms{columns:1; margin-top: 3rem;}
+    .catalog{padding:2rem 1.5rem}
+    .catalog dl{grid-template-columns:1fr;row-gap:0}
+    .catalog dt{border-bottom:none;padding-bottom:.2rem}
+    .catalog dd{padding-top:0}
+    .field-row .btn{width:100%;text-align:center}
+    .field-row input{min-width:100%}
   }
 </style>
 </head>
 <body>
-<main class="confirm">
-  <svg class="groove" viewBox="0 0 640 640" aria-hidden="true">
-    <g fill="none" stroke="#222a33" stroke-width="1">
-      <circle cx="320" cy="320" r="60"/><circle cx="320" cy="320" r="90"/>
-      <circle cx="320" cy="320" r="120"/><circle cx="320" cy="320" r="150"/>
-      <circle cx="320" cy="320" r="180"/><circle cx="320" cy="320" r="210"/>
-      <circle cx="320" cy="320" r="240"/><circle cx="320" cy="320" r="270"/>
-      <circle cx="320" cy="320" r="300"/>
-    </g>
-    <circle cx="320" cy="320" r="26" fill="#0a0d10"/>
-    <circle cx="320" cy="320" r="3.5" fill="#bfa373"/>
-  </svg>
 
-  <div class="confirm-card">
-    <div class="call-no">
-      <span>M.J.'S LISTENING SESSIONS</span>
-      <span>FOUNDING LIST</span>
-    </div>
-    <h1>You're on the list.</h1>
-    <p>Welcome to the first chapter. You'll hear about sessions before anyone else — and you'll be first through the door when the Lounge opens.</p>
-    <div><span class="stamp">Founding member</span></div>
-    <a class="btn" href="index.html">Back to the sessions</a>
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">A listening event · Tulsa, Oklahoma</p>
+    <h1><span class="name">M.J.'s</span><br>Listening Sessions</h1>
+    <p class="tag">One record. Front to back. Your full attention — and nothing else.</p>
+    <p class="loc">28 seats &nbsp;·&nbsp; $28.28 &nbsp;·&nbsp; Midtown / Downtown</p>
   </div>
-</main>
+  <a class="scroll-cue" href="#evening">The evening</a>
+</header>
+
+<!-- ============ THE EVENING ============ -->
+<section id="evening">
+  <div class="wrap">
+    <p class="eyebrow reveal">How it works</p>
+    <h2 class="reveal">An hour that belongs to the record</h2>
+    <p class="lede reveal quiet">No opener. No crowd noise. No screens. Twenty-eight people settle into a quiet room, the lights come down, and one album plays the way it was made to be heard — start to finish, on a proper system, with everyone actually listening.</p>
+
+    <div class="programme">
+      <div class="row reveal">
+        <div class="when">Doors · 30m Before</div>
+        <div>
+          <h3>Settle in</h3>
+          <p>Low light, quiet room. Find your seat, put the phone away, let the day come off your shoulders.</p>
+        </div>
+      </div>
+      <div class="row reveal">
+        <div class="when">A few words</div>
+        <div>
+          <h3>The record</h3>
+          <p>M.J. introduces the album — what it is, why this one, what to listen for. Two minutes, no lecture.</p>
+        </div>
+      </div>
+      <div class="row reveal">
+        <div class="when">The main event</div>
+        <div>
+          <h3>Side A to Runout</h3>
+          <p>The album, uninterrupted. Most run 35 to 55 minutes. It's longer than you think, and shorter than you'll want.</p>
+        </div>
+      </div>
+      <div class="row reveal">
+        <div class="when">Afterward</div>
+        <div>
+          <h3>Decompress</h3>
+          <p>Stay a few minutes if you like. Talk about what you heard, or don't. Some records need a quiet walk home.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOUSE RULES ============ -->
+<section class="rules">
+  <div class="wrap">
+    <blockquote class="reveal">Phones away. Minimal talking. The record gets the room.</blockquote>
+    <p class="attr reveal">House rules — the same ones the Lounge will keep</p>
+  </div>
+</section>
+
+<!-- ============ EVENTS ============ -->
+<section id="events">
+  <div class="wrap">
+    <p class="eyebrow reveal">Events</p>
+    <h2 class="reveal">Now checking out</h2>
+
+    <div class="event-grid">
+
+      <!-- Event poster with the custom chair image configuration -->
+      <div class="poster reveal" role="img" aria-label="Session 001 poster — coming soon">
+        <div class="p-top">
+          <div class="p-no">Session · 001</div>
+          <div class="p-title">One record.<br>28 seats.<br>No phones.</div>
+        </div>
+        <div class="p-bottom">
+          <span class="p-soon">Coming soon</span>
+          <div class="p-meta">
+            Record · to be revealed<br>
+            Midtown / Downtown · Tulsa<br>
+            Evening · $28.28
+          </div>
+        </div>
+      </div>
+
+      <!-- Catalog box configured with the record cover backdrop overlay -->
+      <div class="catalog reveal" role="group" aria-label="Session details">
+        <div class="call-no">
+          <span>M.J.'S LISTENING SESSIONS — CATALOG NO. 001</span>
+          <span>828.28&nbsp;COO</span>
+        </div>
+        <dl>
+          <dt>The record</dt>
+          <dd><em>To be revealed at the door</em></dd>
+          <dt>Date &amp; time</dt>
+          <dd>Coming soon — doors 30 minutes before</dd>
+          <dt>Location</dt>
+          <dd>Midtown / Downtown Tulsa — announced with the date</dd>
+          <dt>Seats</dt>
+          <dd>28, and only 28</dd>
+          <dt>Admission</dt>
+          <dd>$28.28 · online only</dd>
+          <dt>Status</dt>
+          <dd><span class="stamp">Coming soon</span></dd>
+        </dl>
+        <a class="btn" href="#founding">Hear about it first</a>
+        <p class="fine">Tickets are online only. The founding list gets the date, the location, and first access before anyone else.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE VISION ============ -->
+<section class="vision" id="founding">
+  <div class="wrap">
+    <p class="eyebrow reveal">What's being built</p>
+    <h2 class="reveal">The Listening Lounge</h2>
+    <p class="lede reveal quiet">These sessions are the first chapter of a permanent home — part library, part record store, part reading room. A place in Tulsa built for doing one quiet thing at a time, and doing it well.</p>
+
+    <ul class="rooms">
+      <li class="reveal"><strong>The listening room</strong><span>Tuned so the record sounds right from every single seat. Comfortable, mismatched, chosen chairs.</span></li>
+      <li class="reveal"><strong>The library</strong><span>Built-in shelves of books and records. When no session is on, come read. Phones silent, voices low.</span></li>
+      <li class="reveal"><strong>Creation rooms</strong><span>Small rentable rooms for painting, drawing, charcoal — bring your materials and creativity!</span></li>
+      <li class="reveal"><strong>Meditation cubbies</strong><span>Small white rooms, soft light around the floorboards, a blanket, and the option to turn everything off.</span></li>
+    </ul>
+
+    <div class="signup reveal">
+      <h3>You're sitting in the first chapter of this</h3>
+      <p>Every ticket goes toward building the room. Leave your email to become a founding member — first word on sessions, first access when the doors open.</p>
+      <input type="checkbox" id="botcheck" name="botcheck" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
+      <div class="field-row">
+        <input type="email" id="email" placeholder="your@email.com" aria-label="Email address" autocomplete="email" inputmode="email" maxlength="254" spellcheck="false" required>
+        <button class="btn" id="join">Join the founding list</button>
+      </div>
+      <p class="ok" id="ok">You're on the list. Welcome to the first chapter.</p>
+      <p class="give">If tonight's session moved you, there's a jar by the door — and everything in it goes to the same place the tickets do.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <p class="mark">M.J.'s Listening Sessions</p>
+    <p class="small">· © Est. 2026 · M.J. Cooper, LLC · Tulsa, Oklahoma ·</p>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+
+  const join = document.getElementById('join');
+  const email = document.getElementById('email');
+  const ok = document.getElementById('ok');
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  join.addEventListener('click', async ()=>{
+    const value = (email.value || '').trim().slice(0, 254);
+    if(!EMAIL_RE.test(value)){ email.focus(); return; }
+
+    join.disabled = true;
+    const original = join.textContent;
+    join.textContent = 'Joining…';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: 'Founding list signup — M.J.\'s Listening Sessions',
+          from_name: 'MJListening founding list',
+          botcheck: document.getElementById('botcheck').checked,
+          email: value,
+          message: 'New founding list signup: ' + value
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        window.location.href = 'confirmed.html';
+        return;
+      } else {
+        ok.style.display = 'block';
+        ok.textContent = 'Something went sideways — try again in a moment.';
+      }
+    } catch(err) {
+      ok.style.display = 'block';
+      ok.textContent = 'Something went sideways — try again in a moment.';
+    } finally {
+      join.disabled = false;
+      join.textContent = original;
+    }
+  });
+</script>
+  <script src="mj-turnstile.js"></script>
 </body>
 </html>
