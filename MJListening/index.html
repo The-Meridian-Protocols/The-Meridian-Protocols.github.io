@@ -3,19 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.web3forms.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://api.web3forms.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <title>M.J.'s Listening Sessions — One record. Full attention.</title>
 <meta name="description" content="A ticketed listening event in Tulsa: 28 seats, one record, played front to back with full attention.">
-<script>
-  // Turnstile gate: route first-time visitors through the verify page.
-  // Remove this block if you decide the sessions page should be open.
-  try {
-    if (sessionStorage.getItem('mjls_verified') !== '1') {
-      window.location.replace('verify.html');
-    }
-  } catch(e){}
-</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -242,6 +234,72 @@
     font-size:.76rem;color:#75797D;
   }
 
+  /* ---------- Events ---------- */
+  .event-grid{
+    margin-top:2.4rem;
+    display:grid;
+    grid-template-columns:300px 1fr;
+    gap:2.2rem;
+    align-items:start;
+  }
+  .poster{
+    background:linear-gradient(160deg, #33373B 0%, #26292C 70%);
+    border:1px solid var(--rule);
+    border-radius:3px;
+    aspect-ratio:3/4;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:1.4rem 1.3rem;
+    box-shadow:0 24px 50px -30px rgba(0,0,0,.7);
+  }
+  .poster svg{
+    position:absolute;
+    top:-30%;
+    right:-40%;
+    width:130%;
+    opacity:.5;
+    pointer-events:none;
+  }
+  .poster .p-top{position:relative;z-index:1}
+  .poster .p-no{
+    font-family:'Karla', sans-serif;
+    font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--brass);font-weight:700;
+  }
+  .poster .p-title{
+    font-family:'Karla', sans-serif;
+    font-weight:700;
+    font-size:2.4rem;
+    line-height:1.05;
+    color:var(--lamp);
+    margin-top:.5rem;
+    letter-spacing:-.01em;
+  }
+  .poster .p-bottom{position:relative;z-index:1}
+  .poster .p-soon{
+    display:inline-block;
+    font-family:'Karla', sans-serif;
+    font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--room);
+    background:var(--brass);
+    padding:.4rem .7rem;
+    border-radius:2px;
+    margin-bottom:.9rem;
+  }
+  .poster .p-meta{
+    font-family:'Karla', sans-serif;
+    font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--lamp-dim);
+    line-height:2;
+  }
+  @media (max-width:720px){
+    .event-grid{grid-template-columns:1fr}
+    .poster{max-width:340px;margin:0 auto}
+  }
+
   /* ---------- Vision / founding member ---------- */
   .vision{background:var(--room-deep)}
   .rooms{
@@ -398,31 +456,64 @@
   </div>
 </section>
 
-<!-- ============ NEXT SESSION (catalog card) ============ -->
-<section id="next-session">
+<!-- ============ EVENTS ============ -->
+<section id="events">
   <div class="wrap">
-    <p class="eyebrow reveal">Next session</p>
+    <p class="eyebrow reveal">Events</p>
     <h2 class="reveal">Now checking out</h2>
 
-    <div class="catalog reveal" role="group" aria-label="Next session details">
-      <div class="call-no">
-        <span>M.J.'S LISTENING SESSIONS — CATALOG NO. 001</span>
-        <span>828.28&nbsp;COO</span>
+    <div class="event-grid">
+
+      <!-- Event poster -->
+      <div class="poster reveal" role="img" aria-label="Session 001 poster — coming soon">
+        <svg viewBox="0 0 640 640" aria-hidden="true">
+          <g fill="none" stroke="#4A5056" stroke-width="1">
+            <circle cx="320" cy="320" r="60"/><circle cx="320" cy="320" r="95"/>
+            <circle cx="320" cy="320" r="130"/><circle cx="320" cy="320" r="165"/>
+            <circle cx="320" cy="320" r="200"/><circle cx="320" cy="320" r="235"/>
+            <circle cx="320" cy="320" r="270"/><circle cx="320" cy="320" r="305"/>
+          </g>
+          <circle cx="320" cy="320" r="26" fill="#3A3E43"/>
+          <circle cx="320" cy="320" r="3.5" fill="#7FA6C6"/>
+        </svg>
+        <div class="p-top">
+          <div class="p-no">Session · 001</div>
+          <div class="p-title">One record.<br>28 seats.<br>No phones.</div>
+        </div>
+        <div class="p-bottom">
+          <span class="p-soon">Coming soon</span>
+          <div class="p-meta">
+            Record · to be revealed<br>
+            Midtown / Downtown · Tulsa<br>
+            Evening · $28.28
+          </div>
+        </div>
       </div>
-      <dl>
-        <dt>The record</dt>
-        <dd><em>To be revealed at the door</em></dd>
-        <dt>Date</dt>
-        <dd>Coming soon — join the list below to hear first</dd>
-        <dt>Seats</dt>
-        <dd>28, and only 28</dd>
-        <dt>Admission</dt>
-        <dd>$28.28 · online only</dd>
-        <dt>Status</dt>
-        <dd><span class="stamp">Reserve ahead</span></dd>
-      </dl>
-      <a class="btn" href="#founding">Reserve a seat</a>
-      <p class="fine">Tickets are online only. If a session sells out, the next one gets announced to the list first.</p>
+
+      <!-- Catalog card details -->
+      <div class="catalog reveal" role="group" aria-label="Session details">
+        <div class="call-no">
+          <span>M.J.'S LISTENING SESSIONS — CATALOG NO. 001</span>
+          <span>828.28&nbsp;COO</span>
+        </div>
+        <dl>
+          <dt>The record</dt>
+          <dd><em>To be revealed at the door</em></dd>
+          <dt>Date &amp; time</dt>
+          <dd>Coming soon — doors 30 minutes before</dd>
+          <dt>Location</dt>
+          <dd>Midtown / Downtown Tulsa — announced with the date</dd>
+          <dt>Seats</dt>
+          <dd>28, and only 28</dd>
+          <dt>Admission</dt>
+          <dd>$28.28 · online only</dd>
+          <dt>Status</dt>
+          <dd><span class="stamp">Coming soon</span></dd>
+        </dl>
+        <a class="btn" href="#founding">Hear about it first</a>
+        <p class="fine">Tickets are online only. The founding list gets the date, the location, and first access before anyone else.</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -502,8 +593,8 @@
       });
       const data = await res.json();
       if (data.success) {
-        ok.style.display = 'block';
-        email.value = '';
+        window.location.href = 'confirmed.html';
+        return;
       } else {
         ok.style.display = 'block';
         ok.textContent = 'Something went sideways — try again in a moment.';
@@ -517,5 +608,6 @@
     }
   });
 </script>
+  <script src="mj-turnstile.js"></script>
 </body>
 </html>
