@@ -33,7 +33,7 @@
       'flex-direction:column',
       'align-items:center',
       'justify-content:center',
-      'background:#2B2E31',
+      'background:#12161a',
       'transition:opacity 0.5s ease',
       'opacity:1',
       'padding:24px'
@@ -42,38 +42,39 @@
     /* ── Branding ── */
     var brand = document.createElement('div');
     brand.setAttribute('style', [
-      "font-family:'Karla',sans-serif",
-      'font-size:clamp(1.5rem,4.5vw,2.3rem)',
+      "font-family:'Syne',sans-serif",
+      'font-size:clamp(1.4rem,4.5vw,2.1rem)',
       'font-weight:700',
-      'letter-spacing:0.01em',
-      'color:#E9EAE7',
+      'letter-spacing:-0.02em',
+      'text-transform:uppercase',
+      'color:#e4e7eb',
       'margin-bottom:6px',
       'text-align:center'
     ].join(';'));
-    var brandName = document.createElement('em');
-    brandName.setAttribute('style', 'color:#7FA6C6;font-style:italic;font-family:Lora,serif;font-weight:500');
+    var brandName = document.createElement('span');
+    brandName.setAttribute('style', 'color:transparent;-webkit-text-stroke:1px #bfa373;margin-right:8px');
     brandName.textContent = "M.J.'s";
     brand.appendChild(brandName);
-    brand.appendChild(document.createTextNode(' Listening Sessions'));
+    brand.appendChild(document.createTextNode('Listening Sessions'));
 
-    /* ── Blue rule ── */
+    /* ── Gold rule ── */
     var rule = document.createElement('div');
     rule.setAttribute('style', [
       'width:200px',
       'height:1px',
-      'background:linear-gradient(to right,transparent,#7FA6C6,transparent)',
-      'opacity:0.5',
+      'background:linear-gradient(to right,transparent,#bfa373,transparent)',
+      'opacity:0.4',
       'margin:0 auto 26px'
     ].join(';'));
 
     /* ── Status text ── */
     var status = document.createElement('div');
     status.setAttribute('style', [
-      "font-family:'Karla',sans-serif",
-      'font-size:0.72rem',
-      'letter-spacing:0.24em',
+      "font-family:'Montserrat',sans-serif",
+      'font-size:0.65rem',
+      'letter-spacing:0.35em',
       'text-transform:uppercase',
-      'color:#A6ABAF',
+      'color:#7c8691',
       'margin-bottom:22px',
       'text-align:center'
     ].join(';'));
@@ -110,7 +111,7 @@
     function onSuccess() {
       sessionStorage.setItem(SESSION_KEY, '1');
       status.textContent = 'Verified — welcome in.';
-      status.style.color = '#7FA6C6';
+      status.style.color = '#bfa373';
       overlay.style.opacity = '0';
       setTimeout(function () {
         overlay.remove();
@@ -120,12 +121,12 @@
 
     function onError() {
       status.textContent = 'Verification failed — please refresh the page.';
-      status.style.color = '#B0785A';
+      status.style.color = '#ff6b6b';
     }
 
     function onExpired() {
       status.textContent = 'Verification expired — please refresh the page.';
-      status.style.color = '#B0785A';
+      status.style.color = '#ff6b6b';
     }
   }
 
