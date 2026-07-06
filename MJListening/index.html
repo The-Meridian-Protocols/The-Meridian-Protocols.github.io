@@ -19,7 +19,7 @@
       --room-deep: #0a0d10;    
       --lamp: #e4e7eb;         
       --lamp-dim: #7c8691;     
-      --lamp-readable: #cbd5e1; /* New brighter, higher-contrast shade for body copy */
+      --lamp-readable: #cbd5e1;
       --card: #171d24;         
       --gold: #bfa373;         
       --rule: #222a33;         
@@ -98,7 +98,7 @@
       font-size:clamp(1.1rem, 2.5vw, 1.35rem);
       color:var(--lamp-readable);
       max-width:42ch;
-      font-weight: 500; /* Bold/medium weight for tag phrase readability */
+      font-weight: 500;
       letter-spacing: -0.01em;
       line-height: 1.7;
     }
@@ -143,8 +143,7 @@
       background: var(--room-deep);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      min-height: 280px;
+      justify-content: flex-start;
     }
     .programme .when{
       font-family:'Montserrat', sans-serif;
@@ -153,6 +152,9 @@
       margin-bottom: 2rem;
       border-bottom: 1px solid var(--rule);
       padding-bottom: 0.75rem;
+      min-height: 1.5rem; /* Standardized label baseline constraints */
+      display: flex;
+      align-items: flex-end;
     }
     .programme h3{font-size:1.15rem; margin-bottom:.8rem; text-transform: uppercase; font-weight: 600; letter-spacing: -0.01em;}
     .programme p{color:var(--lamp-readable); font-size:0.9rem; line-height: 1.65; font-weight: 500;}
@@ -399,6 +401,7 @@
       .hero{min-height:92svh;}
       .programme{grid-template-columns: 1fr; gap: 15px;}
       .programme .row {min-height: auto; padding: 2.2rem 1.75rem;}
+      .programme .when {min-height: auto; margin-bottom: 1.2rem;}
       .rooms{columns:1; margin-top: 3rem;}
       .catalog dl{grid-template-columns:1fr;row-gap:0}
       .catalog dt{border-bottom:none;padding-bottom:.1rem; padding-top: 1rem;}
@@ -431,7 +434,7 @@
 
     <div class="programme">
       <div class="row reveal">
-        <div class="when">Doors · 30m Before</div>
+        <div class="when">Doors Open</div>
         <div>
           <h3>Settle in</h3>
           <p>Low light, quiet room. Find your seat, put the phone away, let the day come off your shoulders.</p>
@@ -445,9 +448,9 @@
         </div>
       </div>
       <div class="row reveal">
-        <div class="when">The main event</div>
+        <div class="when">Relax/Listen</div>
         <div>
-          <h3>Relax/Listen</h3>
+          <h3>Side A to Runout</h3>
           <p>The album, uninterrupted. Most run 35 to 55 minutes. It's longer than you think, and shorter than you'll want.</p>
         </div>
       </div>
