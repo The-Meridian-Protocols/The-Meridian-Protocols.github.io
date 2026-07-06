@@ -12,13 +12,14 @@
   <meta name="description" content="A ticketed listening event in Tulsa: 28 seats, one record, played front to back with full attention.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root{
       --room: #12161a;         
       --room-deep: #0a0d10;    
       --lamp: #e4e7eb;         
       --lamp-dim: #7c8691;     
+      --lamp-readable: #cbd5e1; /* New brighter, higher-contrast shade for body copy */
       --card: #171d24;         
       --gold: #bfa373;         
       --rule: #222a33;         
@@ -66,14 +67,12 @@
       position:relative;
       overflow:hidden;
       border-bottom: 1px solid var(--rule);
-      /* Enhanced linear scrim for heavy-duty contrast control across device widths */
       background-image: linear-gradient(to top, rgba(18,22,26,1) 15%, rgba(18,22,26,0.85) 50%, rgba(18,22,26,0.4) 100%), url('mjl.recordplay.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
     }
 
-    /* Screen sizes above mobile get standard directional split masks */
     @media(min-width: 768px) {
       .hero {
         background-image: linear-gradient(to right, rgba(18, 22, 26, 1) 45%, rgba(18, 22, 26, 0.5) 75%, rgba(18, 22, 26, 0.1) 100%), url('mjl.recordplay.png');
@@ -97,9 +96,9 @@
     .hero .tag{
       font-family:'Montserrat', sans-serif;
       font-size:clamp(1.1rem, 2.5vw, 1.35rem);
-      color:var(--lamp-dim);
+      color:var(--lamp-readable);
       max-width:42ch;
-      font-weight: 300;
+      font-weight: 500; /* Bold/medium weight for tag phrase readability */
       letter-spacing: -0.01em;
       line-height: 1.7;
     }
@@ -110,7 +109,7 @@
       letter-spacing:.35em;
       text-transform:uppercase;
       color:var(--gold);
-      font-weight: 400;
+      font-weight: 500;
       line-height: 1.6;
     }
     .scroll-cue{
@@ -129,8 +128,7 @@
     /* ---------- Sections ---------- */
     section{padding: clamp(4.5rem, 10vw, 8rem) 0;}
     h2{font-size:clamp(1.6rem, 4.5vw, 2.8rem); margin:.5rem 0 2.5rem; text-transform: uppercase; letter-spacing: -0.02em; font-weight: 700;}
-    .lede{max-width:65ch;font-size:clamp(1.05rem, 2vw, 1.15rem); line-height: 1.8; font-weight: 200;}
-    .quiet{color:var(--lamp-dim)}
+    .lede{max-width:65ch; font-size:clamp(1.05rem, 2vw, 1.15rem); line-height: 1.8; font-weight: 500; color: var(--lamp-readable);}
 
     /* Program Layout Blocks */
     .programme{
@@ -157,7 +155,7 @@
       padding-bottom: 0.75rem;
     }
     .programme h3{font-size:1.15rem; margin-bottom:.8rem; text-transform: uppercase; font-weight: 600; letter-spacing: -0.01em;}
-    .programme p{color:var(--lamp-dim);font-size:0.9rem; line-height: 1.65;}
+    .programme p{color:var(--lamp-readable); font-size:0.9rem; line-height: 1.65; font-weight: 500;}
 
     /* House rules banner */
     .rules{
@@ -223,7 +221,7 @@
       color:var(--lamp-dim);
       font-weight: 500;
     }
-    .catalog dd{font-size:0.95rem;color:var(--lamp)}
+    .catalog dd{font-size:0.95rem; color:var(--lamp-readable); font-weight: 500;}
     .catalog dd em{font-family:'Syne', sans-serif;font-size:1.05rem; font-weight:600; font-style: normal; color: var(--gold); text-transform: uppercase;}
     
     .stamp{
@@ -242,7 +240,7 @@
       color:var(--gold);
       text-decoration:none;
       font-family:'Montserrat', sans-serif;
-      font-size:.7rem;font-weight:500;
+      font-size:.7rem;font-weight:600;
       letter-spacing:.3em;text-transform:uppercase;
       padding:1.1rem 2.2rem;
       border:1px solid var(--gold);
@@ -256,8 +254,9 @@
     .catalog .fine{
       margin-top:1.8rem;
       font-family:'Montserrat', sans-serif;
-      font-size:.75rem;color:var(--lamp-dim);
+      font-size:.75rem; color:var(--lamp-readable);
       line-height: 1.7;
+      font-weight: 500;
     }
 
     /* ---------- Poster Layout Elements ---------- */
@@ -314,6 +313,7 @@
       color:var(--lamp);
       line-height:2.3;
       text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+      font-weight: 500;
     }
     @media (max-width:920px){
       .event-grid{grid-template-columns:1fr; gap: 2.5rem;}
@@ -340,18 +340,17 @@
       text-transform: uppercase;
       letter-spacing: -0.01em;
     }
-    .rooms li span{color:var(--lamp-dim);font-size:.92rem; line-height: 1.7;}
+    .rooms li span{color:var(--lamp-readable); font-size:.92rem; line-height: 1.7; font-weight: 500;}
 
     .signup{margin-top:6rem;max-width:600px}
     .signup h3{font-size:1.5rem;margin-bottom:.6rem; text-transform: uppercase; letter-spacing: -0.01em;}
-    .signup p{color:var(--lamp-dim);font-size:0.95rem;max-width:50ch}
+    .signup p{color:var(--lamp-readable); font-size:0.95rem; max-width:50ch; font-weight: 500;}
     
-    /* Modern mobile input layout framework */
     .field-row{display:flex; gap:15px; margin-top:2.5rem;}
     .field-row input{
       flex:1;
       font-family:'Montserrat', sans-serif;
-      font-size:1rem; /* 16px to natively prevent iOS safari automatic zoom-on-focus overrides */
+      font-size:1rem; 
       padding:1.1rem;
       background:var(--room);
       border:1px solid var(--rule);
@@ -375,7 +374,7 @@
       font-family:'Montserrat', sans-serif;
       font-size:.85rem;color:var(--gold);font-weight:500;letter-spacing: 0.05em;
     }
-    .give{margin-top:3.5rem;font-size:0.9rem;color:var(--lamp-dim);max-width:55ch}
+    .give{margin-top:3.5rem; color:var(--lamp-readable); font-size:0.9rem; max-width:55ch; font-weight: 500;}
 
     /* ---------- Footer ---------- */
     footer{padding:5rem 0;text-align:center;border-top:1px solid var(--rule); background: var(--room-deep);}
@@ -392,7 +391,7 @@
     .reveal{opacity:0;transform:translateY(25px);transition:opacity .8s cubic-bezier(0.16, 1, 0.3, 1), transform .8s cubic-bezier(0.16, 1, 0.3, 1)}
     .reveal.in{opacity:1;transform:none}
 
-    /* ---------- Mobile Optimization Media Query Override ---------- */
+    /* ---------- Mobile Optimization ---------- */
     @media (max-width:640px){
       .wrap {padding: 0 24px;}
       body{font-size:1rem}
@@ -428,7 +427,7 @@
   <div class="wrap">
     <p class="eyebrow reveal">How it works</p>
     <h2 class="reveal">An hour that belongs to the record</h2>
-    <p class="lede reveal quiet">No opener. No crowd noise. No screens. Twenty-eight people settle into a quiet room, the lights come down, and one album plays the way it was made to be heard — start to finish, on a proper system, with everyone actually listening.</p>
+    <p class="lede reveal">No opener. No crowd noise. No screens. Twenty-eight people settle into a quiet room, the lights come down, and one album plays the way it was made to be heard — start to finish, on a proper system, with everyone actually listening.</p>
 
     <div class="programme">
       <div class="row reveal">
@@ -528,7 +527,7 @@
   <div class="wrap">
     <p class="eyebrow reveal">What's being built</p>
     <h2 class="reveal">The Listening Lounge</h2>
-    <p class="lede reveal quiet">These sessions are the first chapter of a permanent home — part library, part record store, part reading room. A place in Tulsa built for doing one quiet thing at a time, and doing it well.</p>
+    <p class="lede reveal">These sessions are the first chapter of a permanent home — part library, part record store, part reading room. A place in Tulsa built for doing one quiet thing at a time, and doing it well.</p>
 
     <ul class="rooms">
       <li class="reveal"><strong>The listening room</strong><span>Tuned so the record sounds right from every single seat. Comfortable, mismatched, chosen chairs.</span></li>
