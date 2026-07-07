@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="mjl.favicon.svg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="robots" content="noindex">
+  <title>M.J.'s Listening Sessions — Message received</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --room: #12161a;
+      --room-deep: #0a0d10;
+      --lamp: #e4e7eb;
+      --lamp-dim: #7c8691;
+      --lamp-readable: #cbd5e1;
+      --card: #171d24;
+      --gold: #bfa373;
+      --rule: #222a33;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      background:var(--room);
+      color:var(--lamp);
+      font-family:'Montserrat', sans-serif;
+      font-weight:300;
+      line-height:1.75;
+      -webkit-font-smoothing:antialiased;
+      min-height:100vh;
+      min-height:100svh;
+      display:flex;
+      flex-direction:column;
+    }
+    ::selection{background:var(--gold);color:var(--room)}
+    a{color:var(--gold);text-decoration:none;transition:color .3s ease}
+    a:hover{color:var(--lamp)}
+
+    main{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 24px;
+    }
+    .card{
+      max-width:560px;
+      width:100%;
+      text-align:center;
+      animation:fadeUp .8s cubic-bezier(0.16,1,0.3,1) both;
+    }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @media (prefers-reduced-motion: reduce){
+      .card{animation:none}
+    }
+
+    .eyebrow{
+      font-size:.7rem;
+      letter-spacing:.4em;
+      text-transform:uppercase;
+      color:var(--gold);
+      font-weight:500;
+      margin-bottom:1.5rem;
+    }
+    h1{
+      font-family:'Syne', sans-serif;
+      font-weight:800;
+      font-size:clamp(2rem, 7vw, 3.2rem);
+      line-height:1.1;
+      letter-spacing:-0.02em;
+      text-transform:uppercase;
+      margin-bottom:2rem;
+    }
+    h1 .name{
+      color:transparent;
+      -webkit-text-stroke:1px var(--gold);
+    }
+    .divider{
+      width:60px;
+      height:1px;
+      background:var(--gold);
+      margin:0 auto 2rem;
+    }
+    .note{
+      font-size:1rem;
+      font-weight:500;
+      color:var(--lamp-readable);
+      max-width:44ch;
+      margin:0 auto;
+    }
+    .btn{
+      display:inline-block;
+      margin-top:3rem;
+      background:transparent;
+      color:var(--gold);
+      font-size:.7rem;
+      font-weight:600;
+      letter-spacing:.3em;
+      text-transform:uppercase;
+      padding:1.1rem 2.2rem;
+      border:1px solid var(--gold);
+      transition:all .3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn:hover{background:var(--gold);color:var(--room-deep);transform:translateY(-2px)}
+    .btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+    footer{
+      padding:2.5rem 24px;
+      text-align:center;
+      border-top:1px solid var(--rule);
+      background:var(--room-deep);
+    }
+    footer .small{
+      font-size:.6rem;
+      letter-spacing:.3em;
+      text-transform:uppercase;
+      color:var(--lamp-dim);
+      line-height:1.8;
+    }
+  </style>
+</head>
+<body>
+
+<main>
+  <div class="card">
+    <p class="eyebrow">Received</p>
+    <h1><span class="name">Your note</span><br>made it.</h1>
+    <div class="divider" aria-hidden="true"></div>
+    <p class="note">Thanks for writing. Every note gets read — and if it needs an answer, you'll hear back. Until then, keep an ear out.</p>
+    <a class="btn" href="index.html">Back to the sessions</a>
+  </div>
+</main>
+
+<footer>
+  <p class="small">M.J.'s Listening Sessions · © Est. 2026 · M.J. Cooper, LLC · Tulsa, Oklahoma</p>
+</footer>
+
+</body>
+</html>

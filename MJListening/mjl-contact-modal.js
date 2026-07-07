@@ -6,7 +6,7 @@
    ============================================================ */
 (function () {
   var ACCESS_KEY = '9b5d44a1-65e4-4da7-a517-72789aaf225d';
-  var REDIRECT_URL = 'https://the-meridian-protocols.github.io/contact-themeridian.html';
+  var REDIRECT_URL = 'https://the-meridian-protocols.github.io/MJListening/contact-confirmed.html';
 
   // --- Inject styles (MJL theme: Syne / Montserrat, room + gold) ---
   var style = document.createElement('style');
