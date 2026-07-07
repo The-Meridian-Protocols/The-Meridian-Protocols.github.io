@@ -389,6 +389,107 @@
     }
     .give{margin-top:3.5rem; color:var(--lamp-readable); font-size:0.9rem; max-width:55ch; font-weight: 500;}
 
+    /* ---------- Reserve a Seat ---------- */
+    .reserve-card{
+      margin-top: clamp(3rem, 6vw, 4.5rem);
+      max-width: 600px;
+      background: var(--room-deep);
+      border: 1px solid var(--rule);
+      padding: clamp(1.75rem, 5vw, 3rem);
+      box-shadow: 0 30px 70px -20px rgba(0,0,0,0.8);
+    }
+    .seat-strip{
+      display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;
+      font-family:'Montserrat', sans-serif;
+      font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+      color:var(--gold);font-weight:500;
+      margin-bottom:.9rem;
+    }
+    .seat-strip .seat-count{color:var(--lamp);}
+    .seat-bar{
+      height:3px;background:var(--rule);
+      margin-bottom:2.2rem;
+      overflow:hidden;
+    }
+    .seat-fill{
+      height:100%;width:0%;
+      background:var(--gold);
+      transition:width .8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .r-state h3{font-size:1.35rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:-0.01em;}
+    .r-state p{color:var(--lamp-readable);font-size:0.95rem;max-width:50ch;font-weight:500;}
+    .r-state .btn{margin-top:2.2rem;background:var(--gold);color:var(--room-deep);}
+    .r-state .btn:hover{background:transparent;color:var(--gold);}
+    .r-intro{margin-bottom:2.2rem;}
+    .r-fields{display:flex;flex-direction:column;gap:12px;}
+    .r-fields input, .r-qty-row select{
+      font-family:'Montserrat', sans-serif;
+      font-size:1rem;
+      padding:1.1rem;
+      background:var(--room);
+      border:1px solid var(--rule);
+      color:var(--lamp);
+      letter-spacing:0.05em;
+      border-radius:0;
+      -webkit-appearance:none;
+      appearance:none;
+      width:100%;
+    }
+    .r-fields input::placeholder{color:#4e5864}
+    .r-fields input:focus-visible, .r-qty-row select:focus-visible{outline:1px solid var(--gold);outline-offset:1px}
+    .r-qty-row{
+      display:flex;align-items:center;gap:15px;
+    }
+    .r-qty-row label{
+      font-family:'Montserrat', sans-serif;
+      font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+      color:var(--lamp-dim);font-weight:500;
+    }
+    .r-qty-row select{
+      width:auto;min-width:90px;
+      cursor:pointer;
+      background-image:linear-gradient(45deg, transparent 50%, var(--gold) 50%), linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+      background-position:calc(100% - 20px) 50%, calc(100% - 14px) 50%;
+      background-size:6px 6px;
+      background-repeat:no-repeat;
+      padding-right:2.6rem;
+    }
+    .r-qty-row .r-total{
+      margin-left:auto;
+      font-family:'Syne', sans-serif;
+      font-weight:700;font-size:1.1rem;
+      color:var(--gold);
+      letter-spacing:0;
+    }
+    .r-err{
+      display:none;
+      margin-top:1.2rem;
+      font-family:'Montserrat', sans-serif;
+      font-size:.85rem;color:var(--gold);font-weight:500;letter-spacing:0.05em;
+    }
+    .pay-stamp{margin-bottom:1.8rem;}
+    .pay-amt, .pay-tag, .pay-name{color:var(--gold);font-weight:600;}
+    .pay-btn{margin-top:2.2rem;}
+    .pay-fine{
+      margin-top:1.8rem;
+      font-family:'Montserrat', sans-serif;
+      font-size:.75rem;color:var(--lamp-readable);
+      line-height:1.7;font-weight:500;
+    }
+    .pay-again{
+      display:block;
+      margin-top:1.6rem;
+      background:none;border:none;padding:0;
+      font-family:'Montserrat', sans-serif;
+      font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;
+      color:var(--lamp-dim);
+      text-decoration:underline;text-underline-offset:4px;
+      cursor:pointer;
+      transition:color .3s ease;
+    }
+    .pay-again:hover{color:var(--gold);}
+    .pay-again:focus-visible{outline:1px solid var(--gold);outline-offset:2px;}
+
     /* ---------- Founding + Contact Section ---------- */
     .founding{background:var(--room-deep); border-top:1px solid var(--rule);}
     .founding .signup{margin-top:0;}
@@ -431,6 +532,9 @@
       .field-row {flex-direction: column; gap: 12px;}
       .field-row input {width: 100%;}
       .field-row .btn {width: 100%; margin-top: 4px;}
+      .reserve-card {padding: 2rem 1.5rem;}
+      .r-state .btn {width: 100%;}
+      .r-qty-row {flex-wrap: wrap;}
     }
   </style>
 </head>
@@ -442,7 +546,7 @@
     <p class="eyebrow">A listening event · Tulsa, Oklahoma</p>
     <h1><span class="name">M.J.'s</span><br>Listening Sessions</h1>
     <p class="tag">One record. Front to back. Your full attention — and nothing else.</p>
-    <p class="loc">Number of seats (TBD) &nbsp;·&nbsp; $28 &nbsp;·&nbsp; Midtown / Downtown</p>
+    <p class="loc">28 seats &nbsp;·&nbsp; $28 &nbsp;·&nbsp; Midtown / Downtown</p>
   </div>
   <a class="scroll-cue" href="#evening">The evening</a>
 </header>
@@ -510,7 +614,7 @@
       <div class="poster reveal" role="img" aria-label="Session 001 poster — coming soon">
         <div class="p-top">
           <div class="p-no">Session · 001</div>
-          <div class="p-title">One record.<br>seats (TBD).<br>No phones.</div>
+          <div class="p-title">One record.<br>28 seats.<br>No phones.</div>
         </div>
         <div class="p-bottom">
           <span class="p-soon">Coming soon</span>
@@ -535,14 +639,74 @@
           <dt>Location</dt>
           <dd>Midtown / Downtown Tulsa — announced with the date</dd>
           <dt>Seats</dt>
-          <dd>(TBD)</dd>
+          <dd id="catalog-seats">28</dd>
           <dt>Admission</dt>
-          <dd>$28 · Online</dd>
+          <dd>$28 · Cash App</dd>
           <dt>Status</dt>
-          <dd><span class="stamp">Coming soon</span></dd>
+          <dd><span class="stamp" id="catalog-status">Coming soon</span></dd>
         </dl>
-        <a class="btn" href="#founding">Hear about it first</a>
-        <p class="fine">Tickets are online. The founding list gets the date, the location, and first access before anyone else.</p>
+        <a class="btn" href="#reserve">Reserve a seat</a>
+        <p class="fine">Seats are reserved online and paid by Cash App. The founding list gets the date, the location, and first access before anyone else.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESERVE A SEAT ============ -->
+<section class="reserve" id="reserve">
+  <div class="wrap">
+    <p class="eyebrow reveal">Reserve</p>
+    <h2 class="reveal">Hold your seat</h2>
+
+    <div class="reserve-card reveal">
+
+      <!-- Seat counter -->
+      <div class="seat-strip">
+        <span class="seat-label">Session · 001</span>
+        <span class="seat-count" id="seat-count">28 of 28 seats open</span>
+      </div>
+      <div class="seat-bar" aria-hidden="true"><div class="seat-fill" id="seat-fill"></div></div>
+
+      <!-- STATE: reservations not open yet -->
+      <div class="r-state" id="r-closed" hidden>
+        <h3>Not open yet</h3>
+        <p>Reservations open when the date is announced. The founding list hears first — and gets first access to the 28 seats.</p>
+        <a class="btn" href="#founding">Join the founding list</a>
+      </div>
+
+      <!-- STATE: sold out -->
+      <div class="r-state" id="r-soldout" hidden>
+        <h3>Sold out</h3>
+        <p>All 28 seats are spoken for. Join the founding list and you'll hear about the next session before anyone else.</p>
+        <a class="btn" href="#founding">Join the founding list</a>
+      </div>
+
+      <!-- STATE: reservation form -->
+      <div class="r-state" id="r-form" hidden>
+        <p class="r-intro">Reserve below, then pay by Cash App. Your seat is held for 24 hours — once your payment lands, you'll get your confirmation from M.J.</p>
+        <input type="checkbox" id="r-botcheck" name="r-botcheck" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
+        <div class="r-fields">
+          <input type="text" id="r-name" placeholder="Your name" aria-label="Your name" autocomplete="name" maxlength="80" required>
+          <input type="email" id="r-email" placeholder="your@email.com" aria-label="Email address" autocomplete="email" inputmode="email" maxlength="254" spellcheck="false" required>
+          <div class="r-qty-row">
+            <label for="r-qty">Seats</label>
+            <select id="r-qty" aria-label="Number of seats"></select>
+            <span class="r-total">Total · $<span id="r-total">28</span></span>
+          </div>
+        </div>
+        <button class="btn" id="r-submit">Reserve &amp; get payment details</button>
+        <p class="r-err" id="r-err"></p>
+      </div>
+
+      <!-- STATE: payment instructions (shown after reservation) -->
+      <div class="r-state" id="r-pay" hidden>
+        <div class="pay-stamp"><span class="stamp">Seat held — 24 hours</span></div>
+        <h3>One step left</h3>
+        <p>Send <strong class="pay-amt">$<span id="pay-amount">28</span></strong> on Cash App to <strong class="pay-tag">$MJListening</strong> and put <strong class="pay-name" id="pay-name">your name</strong> in the payment note — that's how your payment gets matched to your seat.</p>
+        <a class="btn pay-btn" id="pay-link" href="https://cash.app/$MJListening" target="_blank" rel="noopener">Pay on Cash App</a>
+        <p class="fine pay-fine">Once your payment lands, M.J. confirms your seat by email. Unpaid reservations release after 24 hours so someone else can take the chair.</p>
+        <button type="button" class="pay-again" id="pay-again">Made a mistake? Start a new reservation</button>
       </div>
 
     </div>
@@ -608,7 +772,142 @@
   },{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+  const WEB3FORMS_KEY = '9b5d44a1-65e4-4da7-a517-72789aaf225d';
+
+  /* ============================================================
+     RESERVATION SETTINGS — the only lines you edit day to day.
+     1. When a paid reservation comes in, bump seatsTaken and push.
+     2. Flip reservationsOpen to true when the date is announced.
+     ============================================================ */
+  const MJ = {
+    reservationsOpen: false,   // true = form live, false = "not open yet"
+    totalSeats: 28,
+    seatsTaken: 0,             // update this as payments land
+    pricePerSeat: 28,
+    maxPerReservation: 4,
+    cashtag: 'MJListening'     // no dollar sign
+  };
+
+  /* ---------- Reserve a seat ---------- */
+  const seatsLeft = Math.max(0, MJ.totalSeats - MJ.seatsTaken);
+  const rClosed  = document.getElementById('r-closed');
+  const rSoldout = document.getElementById('r-soldout');
+  const rForm    = document.getElementById('r-form');
+  const rPay     = document.getElementById('r-pay');
+  const seatCount = document.getElementById('seat-count');
+  const seatFill  = document.getElementById('seat-fill');
+  const catalogStatus = document.getElementById('catalog-status');
+  const catalogSeats  = document.getElementById('catalog-seats');
+
+  // Seat counter + progress bar
+  seatCount.textContent = seatsLeft + ' of ' + MJ.totalSeats + ' seats open';
+  seatFill.style.width = ((MJ.seatsTaken / MJ.totalSeats) * 100) + '%';
+  catalogSeats.textContent = MJ.totalSeats + (seatsLeft < MJ.totalSeats && seatsLeft > 0 ? ' · ' + seatsLeft + ' left' : '');
+
+  // Which state shows
+  if (!MJ.reservationsOpen) {
+    rClosed.hidden = false;
+    catalogStatus.textContent = 'Coming soon';
+  } else if (seatsLeft <= 0) {
+    rSoldout.hidden = false;
+    catalogStatus.textContent = 'Sold out';
+    seatCount.textContent = 'Sold out — all ' + MJ.totalSeats + ' seats';
+  } else {
+    rForm.hidden = false;
+    catalogStatus.textContent = seatsLeft + ' seats open';
+  }
+
+  // Payment panel — shown after a reservation, and restored on
+  // refresh so nobody loses their payment instructions mid-flow.
+  const PENDING_KEY = 'mjls_pending';
+
+  function showPayPanel(name, total) {
+    document.getElementById('pay-amount').textContent = total;
+    document.getElementById('pay-name').textContent = '"' + name + '"';
+    document.getElementById('pay-link').href = 'https://cash.app/$' + MJ.cashtag + '/' + total;
+    rForm.hidden = true;
+    rPay.hidden = false;
+  }
+
+  try {
+    const pending = JSON.parse(sessionStorage.getItem(PENDING_KEY) || 'null');
+    if (pending && MJ.reservationsOpen && seatsLeft > 0) {
+      showPayPanel(pending.name, pending.total);
+    }
+  } catch (e) { /* storage unavailable — flow still works, just no restore */ }
+
+  document.getElementById('pay-again').addEventListener('click', () => {
+    try { sessionStorage.removeItem(PENDING_KEY); } catch (e) {}
+    rPay.hidden = true;
+    rForm.hidden = false;
+    document.getElementById('r-name').focus();
+  });
+
+  // Quantity dropdown + live total
+  const rQty = document.getElementById('r-qty');
+  const rTotal = document.getElementById('r-total');
+  const maxQty = Math.min(MJ.maxPerReservation, seatsLeft);
+  for (let i = 1; i <= maxQty; i++) {
+    const opt = document.createElement('option');
+    opt.value = i; opt.textContent = i;
+    rQty.appendChild(opt);
+  }
+  rQty.addEventListener('change', () => {
+    rTotal.textContent = rQty.value * MJ.pricePerSeat;
+  });
+
+  // Submit reservation -> email you -> show Cash App instructions
+  const rSubmit = document.getElementById('r-submit');
+  const rErr = document.getElementById('r-err');
+  const R_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  rSubmit.addEventListener('click', async () => {
+    const name = (document.getElementById('r-name').value || '').trim().slice(0, 80);
+    const mail = (document.getElementById('r-email').value || '').trim().slice(0, 254);
+    const qty = parseInt(rQty.value, 10) || 1;
+    const total = qty * MJ.pricePerSeat;
+
+    rErr.style.display = 'none';
+    if (name.length < 2) { rErr.textContent = 'Add your name — it\'s how your payment gets matched.'; rErr.style.display = 'block'; return; }
+    if (!R_EMAIL_RE.test(mail)) { rErr.textContent = 'That email doesn\'t look right — give it another look.'; rErr.style.display = 'block'; return; }
+
+    rSubmit.disabled = true;
+    const original = rSubmit.textContent;
+    rSubmit.textContent = 'Holding your seat…';
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: 'SEAT RESERVATION — ' + name + ' (' + qty + ' seat' + (qty > 1 ? 's' : '') + ', $' + total + ')',
+          from_name: 'MJListening reservations',
+          botcheck: document.getElementById('r-botcheck').checked,
+          name: name,
+          email: mail,
+          seats: qty,
+          amount_due: '$' + total,
+          message: 'RESERVATION — Session 001\nName: ' + name + '\nEmail: ' + mail + '\nSeats: ' + qty + '\nAmount due: $' + total + '\nExpires: 24 hours from this email.\n\nMatch the Cash App note to the name above, then reply to confirm their seat.'
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        try { sessionStorage.setItem(PENDING_KEY, JSON.stringify({ name: name, total: total })); } catch (e) {}
+        showPayPanel(name, total);
+        rPay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        rErr.textContent = 'Something went sideways — try again in a moment.';
+        rErr.style.display = 'block';
+      }
+    } catch (err) {
+      rErr.textContent = 'Something went sideways — try again in a moment.';
+      rErr.style.display = 'block';
+    } finally {
+      rSubmit.disabled = false;
+      rSubmit.textContent = original;
+    }
+  });
 
   const join = document.getElementById('join');
   const email = document.getElementById('email');
